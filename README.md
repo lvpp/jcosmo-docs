@@ -21,12 +21,27 @@ However, the **JCOSMO software** is distributed under a separate license. For de
 
 We welcome contributions to improve the documentation! If you find errors, have suggestions, or want to contribute new content, feel free to open an issue or submit a pull request.  
 
-## Building the Documentation  
+## Building the Documentation and Contributing
 
-This project uses **MkDocs** to generate and serve the documentation. To view it locally, follow these steps:  
+This project uses **MkDocs** to generate and serve the documentation. To view it locally or to make corrections or additions, follow these steps:  
 
 ### Prerequisites  
-Ensure you have **MkDocs** installed. If not, install it using:
+
+Ensure you have **Python 3** support and **MkDocs** installed.
+
+If you don't have Python installed, please follow these steps:
+
+1. **Download Python**: Visit the [official Python website](https://www.python.org/downloads/) and download the latest version suitable for your operating system.
+2. **Install Python**: Follow the installation instructions. Make sure to check the option to add Python to your system’s PATH during the installation process.
+3. **Verify Installation**: After installation, verify Python is installed correctly by running the following command in your terminal or command prompt:
+
+```sh
+python --version
+```
+
+Make sure you have Python version 3 or newer.
+
+If you don't have **MkDocs** and the other dependencies installed, install it using:
 
 ```sh
 pip install mkdocs python-markdown-math mkdocs-bibtex mkdocs-material pygments
