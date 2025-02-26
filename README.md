@@ -26,31 +26,38 @@ We welcome contributions to improve the documentation! If you find errors, have 
 This project uses **MkDocs** to generate and serve the documentation. To view it locally, follow these steps:  
 
 ### Prerequisites  
-Ensure you have **MkDocs** installed. If not, install it using:  
+Ensure you have **MkDocs** installed. If not, install it using:
 
 ```sh
 pip install mkdocs python-markdown-math mkdocs-bibtex mkdocs-material pygments
 ```  
 
-### Cloning and Serving Locally  
-1. **Clone the repository**:  
-   ```sh
-   git clone https://github.com/your-repo/jcosmo-docs.git
-   cd jcosmo-docs
-   ```  
-2. **Serve the documentation**:  
+### Work on your own fork and test it locally
+
+1. **Create a GitHub account** (if you don’t have one yet) by signing up [here](https://github.com/join).
+2. **Fork the repository**: Navigate to the [JCOSMO Documentation project](https://github.com/lvpp/jcosmo-docs) and click the **Fork** button in the top-right corner.
+3. **Clone your fork**: After forking, clone the repository to your local machine using:
+    ```bash
+    git clone https://github.com/your-username/jcosmo-docs.git
+    ```
+4. **Make your changes**: Edit the documentation files locally as needed. Be sure to follow the repository's style guide and structure.
+5. **Serve the documentation**:  
    ```sh
    mkdocs serve
    ```  
-3. **Open the documentation**:  
+6. **Open the documentation**:  
    - The local development server will start, and you can view the documentation at:  
      **http://127.0.0.1:8000/**  
+7. **Commit your changes**: Once you’re happy with your edits, commit them to your fork using:
+    ```bash
+    git commit -m "Brief description of changes"
+    ```
+8. **Push your changes**: Push the committed changes back to your fork on GitHub:
+    ```bash
+    git push origin main
+    ```
+9. **Submit a pull request**: Go to your forked repository and submit a pull request (PR) with your changes. Make sure to describe the changes you've made and why they are important.
 
-### Building the Site  
-To generate the static site files, run:  
-```sh
-mkdocs build
-```  
 
 ### Deploying on GitHub Pages
 **For staff only**: After merging a pull request or updating the content, deploy the documentation by running:

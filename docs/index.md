@@ -56,23 +56,6 @@ This documentation guides users through installation, usage, theoretical foundat
 
 ## Contributing
 
-We welcome contributions to improve the **JCOSMO documentation!** If you find errors, have suggestions, or want to contribute new content, please follow these steps to submit a pull request:
-
-1. **Create a GitHub account** (if you don’t have one yet) by signing up [here](https://github.com/join).
-2. **Fork the repository**: Navigate to the [JCOSMO Documentation project](https://github.com/lvpp/jcosmo-docs) and click the **Fork** button in the top-right corner.
-3. **Clone your fork**: After forking, clone the repository to your local machine using:
-    ```bash
-    git clone https://github.com/your-username/jcosmo-docs.git
-    ```
-4. **Make your changes**: Edit the documentation files locally as needed. Be sure to follow the repository's style guide and structure.
-5. **Commit your changes**: Once you’re happy with your edits, commit them to your fork using:
-    ```bash
-    git commit -m "Brief description of changes"
-    ```
-6. **Push your changes**: Push the committed changes back to your fork on GitHub:
-    ```bash
-    git push origin main
-    ```
-7. **Submit a pull request**: Go to the original repository and submit a pull request (PR) with your changes. Make sure to describe the changes you've made and why they are important.
+We welcome contributions to improve the **JCOSMO documentation!** If you find errors, have suggestions, or want to contribute new content, please follow the steps detailed at the [JCOSMO Documentation project](https://github.com/lvpp/jcosmo-docs).
 
 Feel free to also [open an issue](https://github.com/lvpp/jcosmo-docs/issues) if you encounter problems or have questions.
