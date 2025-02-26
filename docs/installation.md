@@ -39,4 +39,5 @@ When you first run JCOSMO, the interface appears as shown below. This screenshot
 
 ![JCOSMO Initial Screen](img/jcosmo-start.png)
 
-*This is the initial view where you can select the desired substances and initiate the available calculations within JCOSMO.*
+This is the initial view where you can select the desired substances and initiate the available calculations within JCOSMO.
+Start playing with it, check the [Quick Start Guide](quickstart.md).

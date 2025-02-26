@@ -2,6 +2,8 @@ site_name: JCOSMO Docs
 
 nav:
   - Home: index.md
+  - Installation: installation.md
+  - Quick Start Guide: quickstart.md
   - Theory Basics: basics.md
   - License: license-personal.md
 
