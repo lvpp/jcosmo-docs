@@ -34,6 +34,7 @@ This documentation guides users through installation, usage, theoretical foundat
 
 - [Theory Basics](basics.md)
 - [COSMO-SAC variants](cosmo-sac.md)
+- [F-SAC](f-sac.md)
 - [UNIFAC variants](unifac.md)
 - [Cubic equations of State and mixing rules](cubic.md)
 - [COSMO-SAC-Phi](csp.md)
