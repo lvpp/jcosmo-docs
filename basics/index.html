@@ -63,6 +63,10 @@
 </li>
                                     
 <li>
+    <a href="../f-sac/" class="dropdown-item">F-SAC</a>
+</li>
+                                    
+<li>
     <a href="../unifac/" class="dropdown-item">UNIFAC variants</a>
 </li>
                                     
@@ -161,7 +165,7 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#modern-quasi-chemical-theory-basics" class="nav-link">Modern Quasi-Chemical Theory Basics</a>
+            <li class="nav-item" data-bs-level="1"><a href="#modern-quasi-chemical-theory" class="nav-link">Modern Quasi-Chemical Theory</a>
               <ul class="nav flex-column">
             <li class="nav-item" data-bs-level="2"><a href="#original-quasi-chemical-model" class="nav-link">Original quasi-chemical model</a>
               <ul class="nav flex-column">
@@ -182,39 +186,38 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="modern-quasi-chemical-theory-basics">Modern Quasi-Chemical Theory Basics</h1>
+<h1 id="modern-quasi-chemical-theory">Modern Quasi-Chemical Theory</h1>
 <p>In this section, we will explore the foundations of quasi-chemical theory, starting from its original model to the more advanced and modern formulations, such as COSMO-SAC. We will also delve into semi-empirical approximations of the theory, including well-known models like Wilson, NRTL, UNIQUAC, and others. These models have been pivotal in advancing our understanding of solution thermodynamics and play a key role in various applications, including phase equilibria and mixture property prediction.</p>
 <h2 id="original-quasi-chemical-model">Original quasi-chemical model</h2>
 <p>The <strong>quasi-chemical</strong> model was pioneered by Guggenheim<sup id="fnref:guggenheim1952mixtures"><a class="footnote-ref" href="#fn:guggenheim1952mixtures">1</a></sup> in 1940s as a thermodynamic
 model to describe the <em>non-random</em> arrangement of molecules in a mixture, particularly in liquids.
 In its original version, it is based on a lattice picture of the liquid state assuming interactions only between nearest neighbour compounds.</p>
-<p>In this framework, interactions can be interpreted as <em>chemical reactions</em> at equilibrium. For a binary mixture of compounds A and B, the following reaction holds:</p>
+<p>In this framework, interactions can be interpreted as <em>chemical reactions</em> at equilibrium. For a binary mixture of compounds <em>A</em> and <em>B</em>, the following reaction holds:</p>
 <p>
 <script type="math/tex; mode=display"> AA + BB \rightleftharpoons 2 AB </script>
 </p>
-<p>When either compound A or compound B is pure, they can only <em>interact</em> with other identical molecules, forming AA or BB pairs. However, in mixtures, there exists an equilibrium between AA, BB, and AB complexes.</p>
-<p>Using the notation introduced by Soares and Staudt<sup id="fnref:Soares2023"><a class="footnote-ref" href="#fn:Soares2023">2</a></sup>, there should be Boltzmann factor <script type="math/tex">\Psi_{AB}</script> is a  in terms of the pair formation (or interaction) energy <script type="math/tex">u_{AB} = u_{BA}</script>, given by:
+<p>When either compound <em>A</em> or compound <em>B</em> is pure, they can only <em>interact</em> with other identical molecules, forming AA or BB pairs. However, in mixtures, there exists an equilibrium between <em>AA</em>, <em>BB</em>, and <em>AB</em> complexes.</p>
+<p>Using the notation introduced by Soares and Staudt<sup id="fnref:Soares2023"><a class="footnote-ref" href="#fn:Soares2023">2</a></sup>, there should be Boltzmann factor <script type="math/tex">\Psi_{AB}</script> in terms of the pair formation (or interaction) energy <script type="math/tex">u_{AB} = u_{BA}</script>, given by:
 <script type="math/tex; mode=display">
 \Psi_{AB} = \exp\left(-\frac{u_{AB}}{kT}\right)    
 </script>
 </p>
-<p>Then, the probabylity of find AB pairs would be given by:
+<p>Then, the probabylity of finding <em>AB</em> pairs would be given by:
 <script type="math/tex; mode=display">
     \theta_{AB}^2 = \theta_{AA} \theta_{BB} \frac{\Psi_{AB}^2}{\Psi_{AA} \Psi_{BB}}
 </script>
 </p>
 <blockquote>
-<p><strong>Note:</strong> The above equation is equivalent to the <em>quasi-chemical</em> treatment, Eq.(4.09.1) of Guggenheim<sup id="fnref2:guggenheim1952mixtures"><a class="footnote-ref" href="#fn:guggenheim1952mixtures">1</a></sup>. If the mixture where to be completely random <script type="math/tex">\theta_{AB} = \Theta_{A} \Theta_{B}</script>, where <script type="math/tex">\Theta_{A}</script> is the surface area fraction of compound A in mixture.</p>
+<p><strong>Note:</strong> The above equation is equivalent to the quasi-chemical treatment, Eq.(4.09.1) of Guggenheim<sup id="fnref2:guggenheim1952mixtures"><a class="footnote-ref" href="#fn:guggenheim1952mixtures">1</a></sup>. If the mixture where to be completely random: <script type="math/tex">\theta_{AB} = \Theta_{A} \Theta_{B}</script>, where <script type="math/tex">\Theta_{A}</script> is the surface area fraction of compound <em>A</em> in mixture.</p>
 </blockquote>
 <h2 id="extensions-in-terms-of-groups-or-small-segments">Extensions in terms of groups or small segments</h2>
-<p>When no additional approximations are assumed, quasi-chemical models lack explicit expressions for activity coefficients, requiring the solution of a set of non-linear equations<sup id="fnref:Larsen1986"><a class="footnote-ref" href="#fn:Larsen1986">3</a></sup>.
-In its original and simplest form, the method is given in <strong>molecular</strong> terms which leaves the model with several limitations.
+<p>In its original and simplest form, the quasi-chemical method is expressed in <strong>molecular</strong> terms, which imposes several limitations on the model.
 For instance, the model is unable to describe positive excess entropies (found for instance in the acetone/<em>n</em>-heptane system).
-The simple preference for cross-compound interactions invariably leads to an increase in order within the mixture <sup id="fnref:Egner1997"><a class="footnote-ref" href="#fn:Egner1997">4</a></sup>.</p>
-<p>In a more sophisticated form (assuming the presence of functional groups with different interaction energies), quasi-chemical models becomes quite flexible.
+The simple preference for cross-compound interactions invariably leads to an increase in order within the mixture <sup id="fnref:Egner1997"><a class="footnote-ref" href="#fn:Egner1997">3</a></sup>.</p>
+<p>In a more sophisticated form (assuming the presence of functional groups with different interaction energies), quasi-chemical models become quite flexible.
 However, expressing the problem in terms of groups results in an expanded set of equations that need to be solved.
-Notably, Panayiotou<sup id="fnref:Panayiotou1980"><a class="footnote-ref" href="#fn:Panayiotou1980">5</a></sup> have already presented a formulation in terms of surface area fractions in the 1980s Larsen<sup id="fnref2:Larsen1986"><a class="footnote-ref" href="#fn:Larsen1986">3</a></sup> investigated the numerical solution of the resulting system of euqations.</p>
-<p>The surface fragmentation can be refined to <strong>small surface segments</strong>, as depicted below<sup id="fnref2:Soares2023"><a class="footnote-ref" href="#fn:Soares2023">2</a></sup>:</p>
+Notably, Panayiotou<sup id="fnref:Panayiotou1980"><a class="footnote-ref" href="#fn:Panayiotou1980">4</a></sup> have already presented a formulation in terms of surface area fractions in the 1980s and shortly after Larsen<sup id="fnref:Larsen1986"><a class="footnote-ref" href="#fn:Larsen1986">5</a></sup> investigated the numerical solution of the resulting system of equations.</p>
+<p>The surface fragmentation can be further refined to <strong>small surface segments</strong>, as depicted below<sup id="fnref2:Soares2023"><a class="footnote-ref" href="#fn:Soares2023">2</a></sup>:</p>
 <div style="display: flex; justify-content: space-between;">
   <img src="../img/cosmo-surface.png" alt="First Image" style="width: 45%;"/>
   <img src="../img/cosmo-surface-segments.png" alt="Second Image" style="width: 45%;"/>
@@ -224,9 +227,10 @@ Notably, Panayiotou<sup id="fnref:Panayiotou1980"><a class="footnote-ref" href="
 <p>Elliott <sup id="fnref:elliott2023properties"><a class="footnote-ref" href="#fn:elliott2023properties">11</a></sup> extends this concept by characterizing COSMO-RS/SAC models as Small Segment Quasi-Chemical Theory (SS-QCT), considering them <em>essentially equivalent</em>, despite the absence of an explicit lattice reference. </p>
 <p>We prefer to refer to this category of models simply as <strong>modern quasi-chemical</strong> models.</p>
 <h2 id="semi-empirical-approximations">Semi-empirical approximations</h2>
-<p>Many semi-empirical developments - like Wilson<sup id="fnref:Wilson1964"><a class="footnote-ref" href="#fn:Wilson1964">12</a></sup>, NRTL<sup id="fnref:Renon1968"><a class="footnote-ref" href="#fn:Renon1968">13</a></sup>, and UNIQUAC<sup id="fnref:Abrams1975"><a class="footnote-ref" href="#fn:Abrams1975">14</a></sup> - originate from quasi-chemical theory, but their simplifications allow for explicit expressions for the activity coefficients<sup id="fnref3:Larsen1986"><a class="footnote-ref" href="#fn:Larsen1986">3</a></sup>.
-These models became widely used due to their simplicity and flexibility<sup id="fnref2:Egner1997"><a class="footnote-ref" href="#fn:Egner1997">4</a></sup>.
-UNIFAC (UNIQUAC Functional-group Activity Coefficients) original<sup id="fnref:Fredenslund1975"><a class="footnote-ref" href="#fn:Fredenslund1975">15</a></sup>
+<p>When no additional approximations are assumed, quasi-chemical models lack explicit expressions for activity coefficients, requiring the solution of a set of non-linear equations<sup id="fnref2:Larsen1986"><a class="footnote-ref" href="#fn:Larsen1986">5</a></sup>.
+Many semi-empirical developments - like Wilson<sup id="fnref:Wilson1964"><a class="footnote-ref" href="#fn:Wilson1964">12</a></sup>, NRTL<sup id="fnref:Renon1968"><a class="footnote-ref" href="#fn:Renon1968">13</a></sup>, and UNIQUAC<sup id="fnref:Abrams1975"><a class="footnote-ref" href="#fn:Abrams1975">14</a></sup> - originate from quasi-chemical theory, but their simplifications allow for explicit expressions for the activity coefficients<sup id="fnref3:Larsen1986"><a class="footnote-ref" href="#fn:Larsen1986">5</a></sup>.
+These models became widely used due to their simplicity and flexibility<sup id="fnref2:Egner1997"><a class="footnote-ref" href="#fn:Egner1997">3</a></sup>.</p>
+<p>UNIFAC (UNIQUAC Functional-group Activity Coefficients) original<sup id="fnref:Fredenslund1975"><a class="footnote-ref" href="#fn:Fredenslund1975">15</a></sup>
 and modified versions like the UNIFAC&nbsp;(Do)<sup id="fnref:Lohmann2001"><a class="footnote-ref" href="#fn:Lohmann2001">16</a></sup>.
 are still usually very good options when one needs to predict activity coefficients.</p>
 <div class="footnote">
@@ -238,14 +242,14 @@ are still usually very good options when one needs to predict activity coefficie
 <li id="fn:Soares2023">
 <p>Rafael de P. Soares and Paula B. Staudt. Beyond activity coefficients with pairwise interacting surface (COSMO-type) models. <em>Fluid Phase Equilib.</em>, 564(April 2022):113611, 2023. <a href="https://doi.org/10.1016/j.fluid.2022.113611">doi:10.1016/j.fluid.2022.113611</a>.&#160;<a class="footnote-backref" href="#fnref:Soares2023" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Soares2023" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:Soares2023" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
-<li id="fn:Larsen1986">
-<p>B. L. Larsen and P. Rasmussen. A comparison between the quasichemical model and two-fluid local-composition models. <em>Fluid Phase Equilib.</em>, 28(1):1–11, 1986. <a href="https://doi.org/10.1016/0378-3812(86)85065-8">doi:10.1016/0378-3812(86)85065-8</a>.&#160;<a class="footnote-backref" href="#fnref:Larsen1986" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Larsen1986" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:Larsen1986" title="Jump back to footnote 3 in the text">&#8617;</a></p>
-</li>
 <li id="fn:Egner1997">
-<p>K. Egner, J. Gaubc, and A. Pfennig. GEQUAC, an excess gibbs energy model for simultaneous description of associating and non-associating liquid mixtures. <em>Ber. Bunsen-Ges./Phys. Chem. Chem. Phys.</em>, 101(2):209–218, 1997. <a href="https://doi.org/10.1002/bbpc.19971010208">doi:10.1002/bbpc.19971010208</a>.&#160;<a class="footnote-backref" href="#fnref:Egner1997" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Egner1997" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+<p>K. Egner, J. Gaubc, and A. Pfennig. GEQUAC, an excess gibbs energy model for simultaneous description of associating and non-associating liquid mixtures. <em>Ber. Bunsen-Ges./Phys. Chem. Chem. Phys.</em>, 101(2):209–218, 1997. <a href="https://doi.org/10.1002/bbpc.19971010208">doi:10.1002/bbpc.19971010208</a>.&#160;<a class="footnote-backref" href="#fnref:Egner1997" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Egner1997" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 <li id="fn:Panayiotou1980">
-<p>C Panayiotou and J.H. Vera. The quasi-chemical approach for non-randomness in liquid mixtures. Expressions for local surfaces and local compositions with an application to polymer solutions. <em>Fluid Phase Equilib.</em>, 5(1-2):55–80, jan 1980. <a href="https://doi.org/10.1016/0378-3812(80)80043-4">doi:10.1016/0378-3812(80)80043-4</a>.&#160;<a class="footnote-backref" href="#fnref:Panayiotou1980" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+<p>C Panayiotou and J.H. Vera. The quasi-chemical approach for non-randomness in liquid mixtures. Expressions for local surfaces and local compositions with an application to polymer solutions. <em>Fluid Phase Equilib.</em>, 5(1-2):55–80, jan 1980. <a href="https://doi.org/10.1016/0378-3812(80)80043-4">doi:10.1016/0378-3812(80)80043-4</a>.&#160;<a class="footnote-backref" href="#fnref:Panayiotou1980" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Larsen1986">
+<p>B. L. Larsen and P. Rasmussen. A comparison between the quasichemical model and two-fluid local-composition models. <em>Fluid Phase Equilib.</em>, 28(1):1–11, 1986. <a href="https://doi.org/10.1016/0378-3812(86)85065-8">doi:10.1016/0378-3812(86)85065-8</a>.&#160;<a class="footnote-backref" href="#fnref:Larsen1986" title="Jump back to footnote 5 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Larsen1986" title="Jump back to footnote 5 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:Larsen1986" title="Jump back to footnote 5 in the text">&#8617;</a></p>
 </li>
 <li id="fn:klamt2005cosmo">
 <p>A. Klamt. <em>COSMO-RS: From Quantum Chemistry to Fluid Phase Thermodynamics and Drug Design</em>. Elsevier Science, 2005. ISBN 9780444519948.&#160;<a class="footnote-backref" href="#fnref:klamt2005cosmo" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:klamt2005cosmo" title="Jump back to footnote 6 in the text">&#8617;</a></p>
