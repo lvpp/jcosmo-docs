@@ -1,6 +1,6 @@
 # JCOSMO Documentation
 
-**Welcome to JCOSMO, a computational tool developed by [LVPP-UFRGS](https://ufrgs.br/lvpp/) for modern quasi-chemical models (*e.g.* COSMO-SAC).**
+Welcome to **JCOSMO documentation!** JCOSMO is a computational tool developed by [LVPP-UFRGS](https://ufrgs.br/lvpp/) for modern quasi-chemical models (*e.g.* COSMO-SAC).
 
 Modern quasi-chemical models are invaluable tools for a wide range of applications in chemistry, materials science, and drug discovery, enabling researchers to make informed decisions and explore novel chemical spaces.
 
@@ -31,36 +31,28 @@ This documentation guides users through installation, usage, theoretical foundat
 - [Quick Start Guide](quickstart.md)
 
 ## Theory & Models
-- [Overview of COSMO-SAC](cosmo-sac.md)
-- [Comparison: COSMO-SAC vs. UNIFAC](cosmo-vs-unifac.md)
-- [UNIFAC (Do) and UNIFAC (NIST) Models](unifac.md)
-- [PSRK Model](psrk.md)
+- [Basics](basics.md)
+- [COSMO-SAC variants](cosmo-sac.md)
+- [UNIFAC variants](unifac.md)
+- [Cubic equations of State and mixing rules](cubic.md)
+- [COSMO-SAC-Phi](csp.md)
+
 
 ## Using JCOSMO
-- [Input File Structure](input-files.md)
-- [Running COSMO-SAC Calculations](cosmo-sac-run.md)
-- [Using UNIFAC and PSRK](unifac-psrk-run.md)
-- [Output File Interpretation](output.md)
+- [Binary mixture charts](binary.md)
+- [Profiles, surfaces and pie charts](profiles.md)
+- [General mixture calculations](mixture.md)
+- [Vapor-Liquid Equilibrium - VLE](vle.md)
+- [Liquid-Liquid Equilibrium - LLE](lle.md)
+- [Solid-Liquid Equilibrium - SLE](sle.md)
 
-## Advanced Features
-- [Customizing COSMO-SAC Parameters](custom-cosmo.md)
-- [Batch Processing of Mixtures](batch-processing.md)
-- [Integration with External Software](integration.md)
-
-## Performance & Accuracy
-- [Benchmarking Against Experimental Data](benchmark.md)
-- [Known Limitations](limitations.md)
-
-## Development & Contributions
-- [JCOSMO Development Roadmap](roadmap.md)
-- [How to Contribute](contributing.md)
-- [Citing JCOSMO](citation.md)
-
-## References & Further Reading
-- [Key Papers](references.md)
-- [External Tools and Libraries](external-tools.md)
+## Advanced Uses
+- [Polymer handling](polymer.md)
+- [Python interface](python.md)
+- [Ionic Liquids](ils.md)
+- [Solvent screening](screening.md)
 
 
 ## Citation test
 
-Testing citation [@guggenheim1952mixtures]. And also @guggenheim1952mixtures.
+Testing citation [@guggenheim1952mixtures]. And also @guggenheim1952mixtures
