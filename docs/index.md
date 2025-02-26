@@ -39,7 +39,7 @@ This documentation guides users through installation, usage, theoretical foundat
 - [Cubic equations of State and mixing rules](cubic.md)
 - [COSMO-SAC-Phi](csp.md)
 
-## Detailed Use Cases
+## Use Cases
 
 - [Binary mixture charts](binary.md)
 - [Profiles, surfaces and pie charts](profiles.md)

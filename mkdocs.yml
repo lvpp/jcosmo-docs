@@ -8,11 +8,11 @@ nav:
   - Theory:
     - Basics: basics.md
     - COSMO-SAC variants: cosmo-sac.md
-    - F-SAC: f-sac.md
+    - F-SAC: cosmo-sac.md
     - UNIFAC variants: unifac.md
     - Cubic equations and mixing rules: cubic.md
     - COSMO-SAC-Phi: csp.md
-  - Detailed Use Cases:
+  - Use Cases:
     - Binary Mixture Charts: binary.md
     - Profiles, Surfaces, and Pie Charts: profiles.md
     - General Mixture Calculations: mixture.md
