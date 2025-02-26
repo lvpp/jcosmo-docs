@@ -38,7 +38,7 @@ This documentation guides users through installation, usage, theoretical foundat
 - [Cubic equations of State and mixing rules](cubic.md)
 - [COSMO-SAC-Phi](csp.md)
 
-## Detailed JCOSMO uses
+## Detailed Use Cases
 
 - [Binary mixture charts](binary.md)
 - [Profiles, surfaces and pie charts](profiles.md)
@@ -47,7 +47,7 @@ This documentation guides users through installation, usage, theoretical foundat
 - [Liquid-Liquid Equilibrium - LLE](lle.md)
 - [Solid-Liquid Equilibrium - SLE](sle.md)
 
-## Advanced Uses
+## Advanced Use Cases
 
 - [Polymer handling](polymer.md)
 - [Python interface](python.md)

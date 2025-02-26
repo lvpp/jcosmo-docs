@@ -2,10 +2,27 @@ site_name: JCOSMO Docs
 
 nav:
   - Home: index.md
-  - Installation: installation.md
-  - Quick Start Guide: quickstart.md
-  - Theory Basics: basics.md
-  - License: license-personal.md
+  - Getting Started:
+      - Installation: installation.md
+      - Quick Start Guide: quickstart.md
+  - Theory:
+    - Basics: basics.md
+    - COSMO-SAC variants: cosmo-sac.md
+    - UNIFAC variants: unifac.md
+    - Cubic equations and mixing rules: cubic.md
+    - COSMO-SAC-Phi: csp.md
+  - Detailed Use Cases:
+      - Binary Mixture Charts: binary.md
+      - Profiles, Surfaces, and Pie Charts: profiles.md
+      - General Mixture Calculations: mixture.md
+      - Vapor-Liquid Equilibrium (VLE): vle.md
+      - Liquid-Liquid Equilibrium (LLE): lle.md
+      - Solid-Liquid Equilibrium (SLE): sle.md
+  - Advanced Use Cases:
+      - Polymer Handling: polymer.md
+      - Python Interface: python.md
+      - Ionic Liquids: ils.md
+      - Solvent Screening: screening.md
 
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML
