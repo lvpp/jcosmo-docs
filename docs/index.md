@@ -31,14 +31,15 @@ This documentation guides users through installation, usage, theoretical foundat
 - [Quick Start Guide](quickstart.md)
 
 ## Theory & Models
-- [Basics](basics.md)
+
+- [Theory Basics](basics.md)
 - [COSMO-SAC variants](cosmo-sac.md)
 - [UNIFAC variants](unifac.md)
 - [Cubic equations of State and mixing rules](cubic.md)
 - [COSMO-SAC-Phi](csp.md)
 
+## Detailed JCOSMO uses
 
-## Using JCOSMO
 - [Binary mixture charts](binary.md)
 - [Profiles, surfaces and pie charts](profiles.md)
 - [General mixture calculations](mixture.md)
@@ -47,12 +48,31 @@ This documentation guides users through installation, usage, theoretical foundat
 - [Solid-Liquid Equilibrium - SLE](sle.md)
 
 ## Advanced Uses
+
 - [Polymer handling](polymer.md)
 - [Python interface](python.md)
 - [Ionic Liquids](ils.md)
 - [Solvent screening](screening.md)
 
+## Contributing
 
-## Citation test
+We welcome contributions to improve the **JCOSMO documentation!** If you find errors, have suggestions, or want to contribute new content, please follow these steps to submit a pull request:
 
-Testing citation [@guggenheim1952mixtures]. And also @guggenheim1952mixtures
+1. **Create a GitHub account** (if you don’t have one yet) by signing up [here](https://github.com/join).
+2. **Fork the repository**: Navigate to the [JCOSMO Documentation project](https://github.com/lvpp/jcosmo-docs) and click the **Fork** button in the top-right corner.
+3. **Clone your fork**: After forking, clone the repository to your local machine using:
+    ```bash
+    git clone https://github.com/your-username/jcosmo-docs.git
+    ```
+4. **Make your changes**: Edit the documentation files locally as needed. Be sure to follow the repository's style guide and structure.
+5. **Commit your changes**: Once you’re happy with your edits, commit them to your fork using:
+    ```bash
+    git commit -m "Brief description of changes"
+    ```
+6. **Push your changes**: Push the committed changes back to your fork on GitHub:
+    ```bash
+    git push origin main
+    ```
+7. **Submit a pull request**: Go to the original repository and submit a pull request (PR) with your changes. Make sure to describe the changes you've made and why they are important.
+
+Feel free to also [open an issue](https://github.com/lvpp/jcosmo-docs/issues) if you encounter problems or have questions.

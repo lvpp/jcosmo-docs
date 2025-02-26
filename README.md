@@ -52,4 +52,12 @@ To generate the static site files, run:
 mkdocs build
 ```  
 
+### Deploying on GitHub Pages
+**For staff only**: After merging a pull request or updating the content, deploy the documentation by running:
+```sh
+mkdocs gh-deploy
+```  
+
+The live documentation is available at [lvpp.github.io/jcosmo-docs/](https://lvpp.github.io/jcosmo-docs/).
+
 For more details, check the [MkDocs documentation](https://www.mkdocs.org/).

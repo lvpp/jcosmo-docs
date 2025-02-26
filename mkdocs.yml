@@ -2,6 +2,7 @@ site_name: JCOSMO Docs
 
 nav:
   - Home: index.md
+  - Theory Basics: basics.md
   - License: license-personal.md
 
 extra_javascript:
