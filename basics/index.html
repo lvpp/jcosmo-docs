@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Theory Basics - JCOSMO Docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">JCOSMO Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Theory Basics</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../license-personal/" class="nav-link">License</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../license-personal/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#modern-quasi-chemical-theory-basics" class="nav-link">Modern Quasi-Chemical Theory Basics</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#original-quasi-chemical-model" class="nav-link">Original quasi-chemical model</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#extensions-in-terms-of-groups-or-small-segments" class="nav-link">Extensions in terms of groups or small segments</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#semi-empirical-approximations" class="nav-link">Semi-empirical approximations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="modern-quasi-chemical-theory-basics">Modern Quasi-Chemical Theory Basics</h1>
+<p>In this section, we will explore the foundations of quasi-chemical theory, starting from its original model to the more advanced and modern formulations, such as COSMO-SAC. We will also delve into semi-empirical approximations of the theory, including well-known models like Wilson, NRTL, UNIQUAC, and others. These models have been pivotal in advancing our understanding of solution thermodynamics and play a key role in various applications, including phase equilibria and mixture property prediction.</p>
+<h2 id="original-quasi-chemical-model">Original quasi-chemical model</h2>
+<p>The <strong>quasi-chemical</strong> model was pioneered by Guggenheim<sup id="fnref:guggenheim1952mixtures"><a class="footnote-ref" href="#fn:guggenheim1952mixtures">1</a></sup> in 1940s as a thermodynamic
+model to describe the <em>non-random</em> arrangement of molecules in a mixture, particularly in liquids.
+In its original version, it is based on a lattice picture of the liquid state assuming interactions only between nearest neighbour compounds.</p>
+<p>In this framework, interactions can be interpreted as <em>chemical reactions</em> at equilibrium. For a binary mixture of compounds A and B, the following reaction holds:</p>
+<p>
+<script type="math/tex; mode=display"> AA + BB \rightleftharpoons 2 AB </script>
+</p>
+<p>When either compound A or compound B is pure, they can only <em>interact</em> with other identical molecules, forming AA or BB pairs. However, in mixtures, there exists an equilibrium between AA, BB, and AB complexes.</p>
+<p>Using the notation introduced by Soares and Staudt<sup id="fnref:Soares2023"><a class="footnote-ref" href="#fn:Soares2023">2</a></sup>, there should be Boltzmann factor <script type="math/tex">\Psi_{AB}</script> is a  in terms of the pair formation (or interaction) energy <script type="math/tex">u_{AB} = u_{BA}</script>, given by:
+<script type="math/tex; mode=display">
+\Psi_{AB} = \exp\left(-\frac{u_{AB}}{kT}\right)    
+</script>
+</p>
+<p>Then, the probabylity of find AB pairs would be given by:
+<script type="math/tex; mode=display">
+    \theta_{AB}^2 = \theta_{AA} \theta_{BB} \frac{\Psi_{AB}^2}{\Psi_{AA} \Psi_{BB}}
+</script>
+</p>
+<blockquote>
+<p><strong>Note:</strong> The above equation is equivalent to the <em>quasi-chemical</em> treatment, Eq.(4.09.1) of Guggenheim<sup id="fnref2:guggenheim1952mixtures"><a class="footnote-ref" href="#fn:guggenheim1952mixtures">1</a></sup>. If the mixture where to be completely random <script type="math/tex">\theta_{AB} = \Theta_{A} \Theta_{B}</script>, where <script type="math/tex">\Theta_{A}</script> is the surface area fraction of compound A in mixture.</p>
+</blockquote>
+<h2 id="extensions-in-terms-of-groups-or-small-segments">Extensions in terms of groups or small segments</h2>
+<p>When no additional approximations are assumed, quasi-chemical models lack explicit expressions for activity coefficients, requiring the solution of a set of non-linear equations<sup id="fnref:Larsen1986"><a class="footnote-ref" href="#fn:Larsen1986">3</a></sup>.
+In its original and simplest form, the method is given in <strong>molecular</strong> terms which leaves the model with several limitations.
+For instance, the model is unable to describe positive excess entropies (found for instance in the acetone/<em>n</em>-heptane system).
+The simple preference for cross-compound interactions invariably leads to an increase in order within the mixture <sup id="fnref:Egner1997"><a class="footnote-ref" href="#fn:Egner1997">4</a></sup>.</p>
+<p>In a more sophisticated form (assuming the presence of functional groups with different interaction energies), quasi-chemical models becomes quite flexible.
+However, expressing the problem in terms of groups results in an expanded set of equations that need to be solved.
+Notably, Panayiotou<sup id="fnref:Panayiotou1980"><a class="footnote-ref" href="#fn:Panayiotou1980">5</a></sup> have already presented a formulation in terms of surface area fractions in the 1980s Larsen<sup id="fnref2:Larsen1986"><a class="footnote-ref" href="#fn:Larsen1986">3</a></sup> investigated the numerical solution of the resulting system of euqations.</p>
+<p>The surface fragmentation can be refined to <strong>small surface segments</strong>, as depicted below<sup id="fnref2:Soares2023"><a class="footnote-ref" href="#fn:Soares2023">2</a></sup>:</p>
+<div style="display: flex; justify-content: space-between;">
+  <img src="../img/cosmo-surface.png" alt="First Image" style="width: 45%;"/>
+  <img src="../img/cosmo-surface-segments.png" alt="Second Image" style="width: 45%;"/>
+</div>
+
+<p>This refinement results in sets of equations equivalent to those used in COSMO-RS <sup id="fnref:klamt2005cosmo"><a class="footnote-ref" href="#fn:klamt2005cosmo">6</a></sup> or COSMO-SAC <sup id="fnref:Lin2002"><a class="footnote-ref" href="#fn:Lin2002">7</a></sup> models. Many studies have recognized COSMO-based models as equivalent to the quasi-chemical treatment <sup id="fnref:Klamt2002"><a class="footnote-ref" href="#fn:Klamt2002">8</a></sup><sup id="fnref2:klamt2005cosmo"><a class="footnote-ref" href="#fn:klamt2005cosmo">6</a></sup><sup id="fnref:Panayiotou2003"><a class="footnote-ref" href="#fn:Panayiotou2003">9</a></sup><sup id="fnref:Panayiotou2015"><a class="footnote-ref" href="#fn:Panayiotou2015">10</a></sup><sup id="fnref3:Soares2023"><a class="footnote-ref" href="#fn:Soares2023">2</a></sup>. </p>
+<p>Elliott <sup id="fnref:elliott2023properties"><a class="footnote-ref" href="#fn:elliott2023properties">11</a></sup> extends this concept by characterizing COSMO-RS/SAC models as Small Segment Quasi-Chemical Theory (SS-QCT), considering them <em>essentially equivalent</em>, despite the absence of an explicit lattice reference. </p>
+<p>We prefer to refer to this category of models simply as <strong>modern quasi-chemical</strong> models.</p>
+<h2 id="semi-empirical-approximations">Semi-empirical approximations</h2>
+<p>Many semi-empirical developments - like Wilson<sup id="fnref:Wilson1964"><a class="footnote-ref" href="#fn:Wilson1964">12</a></sup>, NRTL<sup id="fnref:Renon1968"><a class="footnote-ref" href="#fn:Renon1968">13</a></sup>, and UNIQUAC<sup id="fnref:Abrams1975"><a class="footnote-ref" href="#fn:Abrams1975">14</a></sup> - originate from quasi-chemical theory, but their simplifications allow for explicit expressions for the activity coefficients<sup id="fnref3:Larsen1986"><a class="footnote-ref" href="#fn:Larsen1986">3</a></sup>.
+These models became widely used due to their simplicity and flexibility<sup id="fnref2:Egner1997"><a class="footnote-ref" href="#fn:Egner1997">4</a></sup>.
+UNIFAC (UNIQUAC Functional-group Activity Coefficients) original
+and modified versions like the UNIFAC&nbsp;(Do)<sup id="fnref:Lohmann2001"><a class="footnote-ref" href="#fn:Lohmann2001">15</a></sup>.
+are still usually very good options when one needs to predict activity coefficients.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:guggenheim1952mixtures">
+<p>E A Guggenheim. <em>Mixtures: The Theory of the Equlibrium Properties of Some Simple Classes of Mixtures Solutions and Alloys</em>. The International series of monographs on physics. Clarendon Press, 1952.&#160;<a class="footnote-backref" href="#fnref:guggenheim1952mixtures" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:guggenheim1952mixtures" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Soares2023">
+<p>Rafael de P. Soares and Paula B. Staudt. Beyond activity coefficients with pairwise interacting surface (COSMO-type) models. <em>Fluid Phase Equilib.</em>, 564(April 2022):113611, 2023. <a href="https://doi.org/10.1016/j.fluid.2022.113611">doi:10.1016/j.fluid.2022.113611</a>.&#160;<a class="footnote-backref" href="#fnref:Soares2023" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Soares2023" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:Soares2023" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Larsen1986">
+<p>B. L. Larsen and P. Rasmussen. A comparison between the quasichemical model and two-fluid local-composition models. <em>Fluid Phase Equilib.</em>, 28(1):1–11, 1986. <a href="https://doi.org/10.1016/0378-3812(86)85065-8">doi:10.1016/0378-3812(86)85065-8</a>.&#160;<a class="footnote-backref" href="#fnref:Larsen1986" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Larsen1986" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:Larsen1986" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Egner1997">
+<p>K. Egner, J. Gaubc, and A. Pfennig. GEQUAC, an excess gibbs energy model for simultaneous description of associating and non-associating liquid mixtures. <em>Ber. Bunsen-Ges./Phys. Chem. Chem. Phys.</em>, 101(2):209–218, 1997. <a href="https://doi.org/10.1002/bbpc.19971010208">doi:10.1002/bbpc.19971010208</a>.&#160;<a class="footnote-backref" href="#fnref:Egner1997" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Egner1997" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Panayiotou1980">
+<p>C Panayiotou and J.H. Vera. The quasi-chemical approach for non-randomness in liquid mixtures. Expressions for local surfaces and local compositions with an application to polymer solutions. <em>Fluid Phase Equilib.</em>, 5(1-2):55–80, jan 1980. <a href="https://doi.org/10.1016/0378-3812(80)80043-4">doi:10.1016/0378-3812(80)80043-4</a>.&#160;<a class="footnote-backref" href="#fnref:Panayiotou1980" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:klamt2005cosmo">
+<p>A. Klamt. <em>COSMO-RS: From Quantum Chemistry to Fluid Phase Thermodynamics and Drug Design</em>. Elsevier Science, 2005. ISBN 9780444519948.&#160;<a class="footnote-backref" href="#fnref:klamt2005cosmo" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:klamt2005cosmo" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Lin2002">
+<p>Shiang-Tai Lin and Stanley I. Sandler. A Priori Phase Equilibrium Prediction from a Segment Contribution Solvation Model. <em>Ind. &amp; Eng. Chem. Res.</em>, 41(5):899–913, 2002. <a href="https://doi.org/10.1021/ie001047w">doi:10.1021/ie001047w</a>.&#160;<a class="footnote-backref" href="#fnref:Lin2002" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Klamt2002">
+<p>Andreas Klamt, Gerard J. P. Krooshof, and Ross Taylor. COSMOSPACE: Alternative to conventional activity-coefficient models. <em>AIChE J.</em>, 48(10):2332–2349, oct 2002. <a href="https://doi.org/10.1002/aic.690481023">doi:10.1002/aic.690481023</a>.&#160;<a class="footnote-backref" href="#fnref:Klamt2002" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Panayiotou2003">
+<p>Costas Panayiotou. Equation-of-State Models and Quantum Mechanics Calculations. <em>Ind. Eng. Chem. Res.</em>, 42(7):1495–1507, apr 2003. <a href="https://doi.org/10.1021/ie0207212">doi:10.1021/ie0207212</a>.&#160;<a class="footnote-backref" href="#fnref:Panayiotou2003" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Panayiotou2015">
+<p>C. Panayiotou, I. Tsivintzelis, D. Aslanidou, and V. Hatzimanikatis. Solvation quantities from a COSMO-RS equation of state. <em>J. Chem. Thermodyn.</em>, 90:294–309, 2015. <a href="https://doi.org/10.1016/j.jct.2015.07.011">doi:10.1016/j.jct.2015.07.011</a>.&#160;<a class="footnote-backref" href="#fnref:Panayiotou2015" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:elliott2023properties">
+<p>J.R. Elliott, V. Diky, T.A. Knotts, and W.V. Wilding. <em>The Properties of Gases and Liquids, Sixth Edition</em>. McGraw-Hill Education, 2023. ISBN 9781260116342.&#160;<a class="footnote-backref" href="#fnref:elliott2023properties" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Wilson1964">
+<p>Grant M. Wilson. Vapor-Liquid Equilibrium. XI. A New Expression for the Excess Free Energy of Mixing. <em>J. Am. Chem. Soc.</em>, 86(2):127–130, jan 1964. <a href="https://doi.org/10.1021/ja01056a002">doi:10.1021/ja01056a002</a>.&#160;<a class="footnote-backref" href="#fnref:Wilson1964" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Renon1968">
+<p>Henri Renon and JM Prausnitz. Local compositions in thermodynamic excess functions for liquid mixtures. <em>AIChE J.</em>, 14(1):135–144, 1968. <a href="https://doi.org/10.1002/aic.690140124">doi:10.1002/aic.690140124</a>.&#160;<a class="footnote-backref" href="#fnref:Renon1968" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Abrams1975">
+<p>Denis S. Abrams and John M Prausnitz. Statistical thermodynamics of liquid mixtures: A new expression for the excess Gibbs energy of partly or completely miscible systems. <em>AIChE J.</em>, 21(1):116–128, jan 1975. <a href="https://doi.org/10.1002/aic.690210115">doi:10.1002/aic.690210115</a>.&#160;<a class="footnote-backref" href="#fnref:Abrams1975" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Lohmann2001">
+<p>Jürgen Lohmann, Ralph Joh, and Jürgen Gmehling. From UNIFAC to Modified UNIFAC (Dortmund). <em>Ind. Eng. Chem. Res.</em>, 40(3):957–964, feb 2001. <a href="https://doi.org/10.1021/ie0005710">doi:10.1021/ie0005710</a>.&#160;<a class="footnote-backref" href="#fnref:Lohmann2001" title="Jump back to footnote 15 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

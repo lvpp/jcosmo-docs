@@ -38,6 +38,9 @@
                                 <a href="." class="nav-link active" aria-current="page">Home</a>
                             </li>
                             <li class="nav-item">
+                                <a href="basics/" class="nav-link">Theory Basics</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="license-personal/" class="nav-link">License</a>
                             </li>
                         </ul>
@@ -54,7 +57,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="license-personal/" class="nav-link">
+                                <a rel="next" href="basics/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -86,7 +89,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#using-jcosmo" class="nav-link">Using JCOSMO</a>
+            <li class="nav-item" data-bs-level="2"><a href="#detailed-jcosmo-uses" class="nav-link">Detailed JCOSMO uses</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -94,7 +97,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#citation-test" class="nav-link">Citation test</a>
+            <li class="nav-item" data-bs-level="2"><a href="#contributing" class="nav-link">Contributing</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -136,38 +139,46 @@
 </ul>
 <h2 id="theory-models">Theory &amp; Models</h2>
 <ul>
-<li><a href="basics.md">Basics</a></li>
-<li><a href="cosmo-sac.md">COSMO-SAC variants</a></li>
-<li><a href="unifac.md">UNIFAC variants</a></li>
-<li><a href="cubic.md">Cubic equations of State and mixing rules</a></li>
-<li><a href="csp.md">COSMO-SAC-Phi</a></li>
+<li><a href="basics/">Theory Basics</a></li>
+<li><a href="cosmo-sac/">COSMO-SAC variants</a></li>
+<li><a href="unifac/">UNIFAC variants</a></li>
+<li><a href="cubic/">Cubic equations of State and mixing rules</a></li>
+<li><a href="csp/">COSMO-SAC-Phi</a></li>
 </ul>
-<h2 id="using-jcosmo">Using JCOSMO</h2>
+<h2 id="detailed-jcosmo-uses">Detailed JCOSMO uses</h2>
 <ul>
-<li><a href="binary.md">Binary mixture charts</a></li>
-<li><a href="profiles.md">Profiles, surfaces and pie charts</a></li>
-<li><a href="mixture.md">General mixture calculations</a></li>
-<li><a href="vle.md">Vapor-Liquid Equilibrium - VLE</a></li>
-<li><a href="lle.md">Liquid-Liquid Equilibrium - LLE</a></li>
-<li><a href="sle.md">Solid-Liquid Equilibrium - SLE</a></li>
+<li><a href="binary/">Binary mixture charts</a></li>
+<li><a href="profiles/">Profiles, surfaces and pie charts</a></li>
+<li><a href="mixture/">General mixture calculations</a></li>
+<li><a href="vle/">Vapor-Liquid Equilibrium - VLE</a></li>
+<li><a href="lle/">Liquid-Liquid Equilibrium - LLE</a></li>
+<li><a href="sle/">Solid-Liquid Equilibrium - SLE</a></li>
 </ul>
 <h2 id="advanced-uses">Advanced Uses</h2>
 <ul>
-<li><a href="polymer.md">Polymer handling</a></li>
-<li><a href="python.md">Python interface</a></li>
-<li><a href="ils.md">Ionic Liquids</a></li>
-<li><a href="screening.md">Solvent screening</a></li>
+<li><a href="polymer/">Polymer handling</a></li>
+<li><a href="python/">Python interface</a></li>
+<li><a href="ils/">Ionic Liquids</a></li>
+<li><a href="screening/">Solvent screening</a></li>
 </ul>
-<h2 id="citation-test">Citation test</h2>
-<p>Testing citation <sup id="fnref:guggenheim1952mixtures"><a class="footnote-ref" href="#fn:guggenheim1952mixtures">1</a></sup>. And also E A Guggenheim. <em>Mixtures: The Theory of the Equlibrium Properties of Some Simple Classes of Mixtures Solutions and Alloys</em>. The International series of monographs on physics. Clarendon Press, 1952.</p>
-<div class="footnote">
-<hr />
+<h2 id="contributing">Contributing</h2>
+<p>We welcome contributions to improve the <strong>JCOSMO documentation!</strong> If you find errors, have suggestions, or want to contribute new content, please follow these steps to submit a pull request:</p>
 <ol>
-<li id="fn:guggenheim1952mixtures">
-<p>E A Guggenheim. <em>Mixtures: The Theory of the Equlibrium Properties of Some Simple Classes of Mixtures Solutions and Alloys</em>. The International series of monographs on physics. Clarendon Press, 1952.&#160;<a class="footnote-backref" href="#fnref:guggenheim1952mixtures" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
+<li><strong>Create a GitHub account</strong> (if you don’t have one yet) by signing up <a href="https://github.com/join">here</a>.</li>
+<li><strong>Fork the repository</strong>: Navigate to the <a href="https://github.com/lvpp/jcosmo-docs">JCOSMO Documentation project</a> and click the <strong>Fork</strong> button in the top-right corner.</li>
+<li><strong>Clone your fork</strong>: After forking, clone the repository to your local machine using:
+    <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-username/jcosmo-docs.git
+</code></pre></div></li>
+<li><strong>Make your changes</strong>: Edit the documentation files locally as needed. Be sure to follow the repository's style guide and structure.</li>
+<li><strong>Commit your changes</strong>: Once you’re happy with your edits, commit them to your fork using:
+    <div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Brief description of changes&quot;</span>
+</code></pre></div></li>
+<li><strong>Push your changes</strong>: Push the committed changes back to your fork on GitHub:
+    <div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div></li>
+<li><strong>Submit a pull request</strong>: Go to the original repository and submit a pull request (PR) with your changes. Make sure to describe the changes you've made and why they are important.</li>
 </ol>
-</div></div>
+<p>Feel free to also <a href="https://github.com/lvpp/jcosmo-docs/issues">open an issue</a> if you encounter problems or have questions.</p></div>
             </div>
         </div>
 
@@ -250,5 +261,5 @@
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-02-26 11:57:40.500921+00:00
+Build Date UTC : 2025-02-26 14:36:25.012350+00:00
 -->
