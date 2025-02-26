@@ -54,7 +54,7 @@ We prefer to refer to this category of models simply as **modern quasi-chemical*
 
 Many semi-empirical developments - like Wilson[@Wilson1964], NRTL[@Renon1968], and UNIQUAC[@Abrams1975] - originate from quasi-chemical theory, but their simplifications allow for explicit expressions for the activity coefficients[@Larsen1986].
 These models became widely used due to their simplicity and flexibility[@Egner1997].
-UNIFAC (UNIQUAC Functional-group Activity Coefficients) original[@Fredenslund:1975]
+UNIFAC (UNIQUAC Functional-group Activity Coefficients) original[@Fredenslund1975]
 and modified versions like the UNIFAC&nbsp;(Do)[@Lohmann2001].
 are still usually very good options when one needs to predict activity coefficients.
 
