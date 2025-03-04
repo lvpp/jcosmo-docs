@@ -12,7 +12,7 @@ In this framework, interactions can be interpreted as *chemical reactions* at eq
 
 $$ AA + BB \rightleftharpoons 2 AB $$
 
-When either compound *A* or compound *B* is pure, they can only *interact* with other identical molecules, forming AA or BB pairs. However, in mixtures, there exists an equilibrium between *AA*, *BB*, and *AB* complexes.
+When either compound *A* or compound *B* is pure, they can only *interact* with other identical molecules, forming *AA* or *BB* pairs. However, in mixtures, there exists an equilibrium between *AA*, *BB*, and *AB* complexes.
 
 Using the notation introduced by Soares and Staudt[@Soares2023], there should be Boltzmann factor \(\Psi_{AB}\) in terms of the pair formation (or interaction) energy \(u_{AB} = u_{BA}\), given by:
 $$
@@ -56,6 +56,6 @@ Many semi-empirical developments - like Wilson[@Wilson1964], NRTL[@Renon1968], a
 These models became widely used due to their simplicity and flexibility[@Egner1997].
 
 UNIFAC (UNIQUAC Functional-group Activity Coefficients) original[@Fredenslund1975]
-and modified versions like the UNIFAC&nbsp;(Do)[@Lohmann2001].
+and modified versions like the UNIFAC&nbsp;(Do)[@Lohmann2001]
 are still usually very good options when one needs to predict activity coefficients.
 
