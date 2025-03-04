@@ -80,7 +80,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Detailed Use Cases</a>
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Use Cases</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
@@ -183,7 +183,15 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#vle-vapor-liquid-equilibrium" class="nav-link">VLE — vapor liquid equilibrium</a>
+            <li class="nav-item" data-bs-level="2"><a href="#vle-vapor-liquid-equilibrium" class="nav-link">VLE — vapor-liquid equilibrium</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#lle-liquid-liquid-equilibrium" class="nav-link">LLE — liquid-liquid equilibrium</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#sle-solid-liquid-equilibrium" class="nav-link">SLE — solid-liquid equilibrium</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -256,7 +264,7 @@ The actual infinite dilution values are also displayed at the bottom of the page
 <p>Cyclohexane is a nonpolar molecule, meaning its <strong>sigma profile</strong> is concentrated around <strong>zero charge density</strong>. This indicates a surface largely free of significant electrostatic interactions, making cyclohexane a typical example of a <strong>neutral, nonpolar solvent</strong> in COSMO-based models.</p>
 <p>For <strong>sec-butanol</strong>, the presence of the <strong>hydroxyl (-OH) group</strong> introduces regions of <strong>polarization</strong>. The <strong>oxygen atom</strong> in the hydroxyl group tends to <strong>accumulate electron density</strong>, leading to <strong>induced positive charge densities</strong> on nearby surface segments. Conversely, the <strong>hydrogen</strong> of the hydroxyl group becomes <strong>electron-deficient</strong>, contributing to <strong>negative induced charge densities</strong>. However, despite these polar contributions, a <strong>substantial portion</strong> of sec-butanol’s surface remains <strong>neutral</strong>, reflecting the balance between its <strong>hydrophobic alkyl chain</strong> and <strong>hydrophilic hydroxyl group</strong>.</p>
 <p>This difference in sigma profiles explains why cyclohexane cannot donate or accept hydrogen bonds, while sec-butanol can participate in hydrogen bonding while still retaining some nonpolar character.</p>
-<h2 id="vle-vapor-liquid-equilibrium">VLE — vapor liquid equilibrium</h2>
+<h2 id="vle-vapor-liquid-equilibrium">VLE — vapor-liquid equilibrium</h2>
 <p>To predict an <strong>isothermal vapor-liquid equilibrium (VLE)</strong>, navigate to the <strong><code>VLE</code></strong> tab and click <strong><code>Recalc</code></strong>. This will generate the equilibrium data based on the selected model.  </p>
 <p>Please note that <strong>two compounds</strong> must be selected before proceeding with the prediction. You can also compare the predictions with other models (e.g. <strong>UNIFAC (Do)</strong>) by selecting it in the <strong>comparison combobox</strong>, as shown below:</p>
 <div style="position: relative; display: inline-block; width: 100%;">
@@ -284,15 +292,63 @@ The actual infinite dilution values are also displayed at the bottom of the page
 ├── jcosmo.exe
 ├── jcosmo.sh
 ├── data
-│ ├── vle # Vapor-Liquid Equilibrium data
-│ ├── lle # Liquid-Liquid Equilibrium data
+│ ├── vle # Vapor-Liquid Equilibrium
+│ ├── lle # Liquid-Liquid Equilibrium
+│ ├── sle # Solid-Liquid Equilibrium
 │ ├── ...
 └── ...
 </code></pre></div>
 <p>For the cyclohexane/sec-butanol system, experimental data is available for <strong>323.15 K</strong>. When this experimental file is selected, the results shown above are displayed.</p>
 <p>For this particular case, both the selected <strong>COSMO-SAC</strong> variant and <strong>UNIFAC (Do)</strong> produce predictions that closely match the available experimental data, including the azeotrope. However, <strong>COSMO-based models</strong>, such as <strong>COSMO-SAC</strong>, offer several advantages over group contribution methods like <strong>UNIFAC</strong>.  </p>
 <p>One key advantage is that COSMO-based models rely on information derived from quantum chemistry calculations. Unlike <strong>UNIFAC</strong>, which uses predefined group interactions that have to be calibrated with experimental data.
-Thus, COSMO-based models are <strong>less reliant on empirical data</strong> and can be applied to a broader range of systems, including those with limited or no group contributions. This makes COSMO-based models particularly useful for systems with complex interactions or for predicting properties of new, uncharacterized compounds.</p></div>
+Thus, COSMO-based models are <strong>less reliant on empirical data</strong> and can be applied to a broader range of systems, including those with limited or no group contributions. This makes COSMO-based models particularly useful for systems with complex interactions or for predicting properties of new, uncharacterized compounds.</p>
+<h2 id="lle-liquid-liquid-equilibrium">LLE — liquid-liquid equilibrium</h2>
+<p>JCOSMO also provides a framework for predicting <strong>liquid-liquid equilibrium (LLE)</strong>, navigate to the <strong><code>LLE</code></strong> tab and click <strong><code>Recalc</code></strong>.</p>
+<blockquote>
+<p>Please note that <strong>two compounds</strong> must be selected before proceeding with the prediction.
+Additionally, LLE occurs when a binary or multicomponent liquid mixture separates into two immiscible liquid phases at equilibrium. This phase separation is mostly driven by differences in molecular interactions.</p>
+</blockquote>
+<p>However, not all binary mixtures will undergo phase separation. Some systems remain fully miscible across all compositions. In that case, no predictions will be made.</p>
+<p>If the Gibbs energy curve exhibits a double-well shape with a common tangent, the mixture is predicted to split into two liquid phases.</p>
+<p>In JCOSMO, the compositions of the two coexisting phases (<script type="math/tex"> x^{\alpha} </script> and <script type="math/tex"> x^{\beta} </script>) at the initial temperature point are determined using a dividing rectangles global search algorithm. If a valid two-phase system is identified for the selected mixture, subsequent calculations follow the isoactivity criterion for liquid phases <script type="math/tex"> \alpha </script> and <script type="math/tex"> \beta </script>:</p>
+<p>
+<script type="math/tex; mode=display"> x_i^{\alpha} \gamma_i^{\alpha} = x_i^{\beta} \gamma_i^{\beta} </script>
+</p>
+<p>As for VLEs, the user can perform either pure predictions by clicking on <strong><code>Recalc</code></strong> or compare the results with experimental data by selecting the <strong><code>Experiment...</code></strong> button.
+Results for the system <em>n</em>-pentanol/water are shown below:</p>
+<div style="position: relative; display: inline-block; width: 100%;">
+  <img src="../img/jcosmo-lle-exp.png" alt="JCOSMO Initial Screen" style="width: 100%; height: auto;" />
+</div>
+
+<h2 id="sle-solid-liquid-equilibrium">SLE — solid-liquid equilibrium</h2>
+<p>JCOSMO can also perform <strong>solid-liquid equilibrium (SLE)</strong> calculations.
+The standard calculations assume a pure compound in the solid phase, surrounded by a liquid phase. Under this assumption, and with the further considerations that there is no phase transition and that the heat capacity difference between the solid and liquid phases is negligible, the following relation holds:</p>
+<p>
+<script type="math/tex; mode=display"> x_i \gamma_i = \exp \left( \frac{ -\Delta H_i^{\text{fus}} \left( 1 - \frac{T}{T_i^{\text{fus}}} \right)}{ R T } \right) </script>
+</p>
+<p>where:</p>
+<ul>
+<li>
+<script type="math/tex"> x_i </script> is the mole fraction of the solute in the liquid phase,</li>
+<li>
+<script type="math/tex"> \gamma_i </script> is the activity coefficient of the solute in the liquid phase,</li>
+<li>
+<script type="math/tex"> \Delta H_i^{\text{fus}} </script> is the solute enthalpy of fusion,</li>
+<li>
+<script type="math/tex"> T_i^{\text{fus}} </script> is the solute fusion temperature,</li>
+<li>
+<script type="math/tex"> R </script> is the universal gas constant,</li>
+<li>
+<script type="math/tex"> T </script> is the absolute temperature.</li>
+</ul>
+<blockquote>
+<p>Note that JCOSMO can also predict SLE with up to two solid transition temperatures and with a non-zero heat capacity difference between solid and liquid.</p>
+</blockquote>
+<p>As usual, the user can perform either pure predictions by clicking on <strong><code>Recalc</code></strong> or compare the results with experimental data by selecting the <strong><code>Experiment...</code></strong> button.
+Results for the system glucose/water system are shown below:</p>
+<div style="position: relative; display: inline-block; width: 100%;">
+  <img src="../img/jcosmo-sle-exp.png" alt="JCOSMO Initial Screen" style="width: 100%; height: auto;" />
+</div></div>
             </div>
         </div>
 
