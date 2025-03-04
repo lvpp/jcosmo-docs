@@ -82,7 +82,7 @@ For **sec-butanol**, the presence of the **hydroxyl (-OH) group** introduces reg
 
 This difference in sigma profiles explains why cyclohexane cannot donate or accept hydrogen bonds, while sec-butanol can participate in hydrogen bonding while still retaining some nonpolar character.
 
-## VLE — vapor liquid equilibrium
+## VLE — vapor-liquid equilibrium
 
 To predict an **isothermal vapor-liquid equilibrium (VLE)**, navigate to the **`VLE`** tab and click **`Recalc`**. This will generate the equilibrium data based on the selected model.  
 
@@ -118,8 +118,9 @@ jcosmo3
 ├── jcosmo.exe
 ├── jcosmo.sh
 ├── data
-│ ├── vle # Vapor-Liquid Equilibrium data
-│ ├── lle # Liquid-Liquid Equilibrium data
+│ ├── vle # Vapor-Liquid Equilibrium
+│ ├── lle # Liquid-Liquid Equilibrium
+│ ├── sle # Solid-Liquid Equilibrium
 │ ├── ...
 └── ...
 ```
@@ -131,3 +132,52 @@ For this particular case, both the selected **COSMO-SAC** variant and **UNIFAC (
 One key advantage is that COSMO-based models rely on information derived from quantum chemistry calculations. Unlike **UNIFAC**, which uses predefined group interactions that have to be calibrated with experimental data.
 Thus, COSMO-based models are **less reliant on empirical data** and can be applied to a broader range of systems, including those with limited or no group contributions. This makes COSMO-based models particularly useful for systems with complex interactions or for predicting properties of new, uncharacterized compounds.
 
+
+## LLE — liquid-liquid equilibrium
+
+JCOSMO also provides a framework for predicting **liquid-liquid equilibrium (LLE)**, navigate to the **`LLE`** tab and click **`Recalc`**.
+
+> Please note that **two compounds** must be selected before proceeding with the prediction.
+Additionally, LLE occurs when a binary or multicomponent liquid mixture separates into two immiscible liquid phases at equilibrium. This phase separation is mostly driven by differences in molecular interactions.
+
+However, not all binary mixtures will undergo phase separation. Some systems remain fully miscible across all compositions. In that case, no predictions will be made.
+
+If the Gibbs energy curve exhibits a double-well shape with a common tangent, the mixture is predicted to split into two liquid phases.
+
+In JCOSMO, the compositions of the two coexisting phases (\( x^{\alpha} \) and \( x^{\beta} \)) at the initial temperature point are determined using a dividing rectangles global search algorithm. If a valid two-phase system is identified for the selected mixture, subsequent calculations follow the isoactivity criterion for liquid phases \( \alpha \) and \( \beta \):
+
+$$ x_i^{\alpha} \gamma_i^{\alpha} = x_i^{\beta} \gamma_i^{\beta} $$
+
+As for VLEs, the user can perform either pure predictions by clicking on **`Recalc`** or compare the results with experimental data by selecting the **`Experiment...`** button.
+Results for the system *n*-pentanol/water are shown below:
+
+<div style="position: relative; display: inline-block; width: 100%;">
+  <img src="../img/jcosmo-lle-exp.png" alt="JCOSMO Initial Screen" style="width: 100%; height: auto;" />
+</div>
+
+
+
+## SLE — solid-liquid equilibrium
+
+JCOSMO can also perform **solid-liquid equilibrium (SLE)** calculations.
+The standard calculations assume a pure compound in the solid phase, surrounded by a liquid phase. Under this assumption, and with the further considerations that there is no phase transition and that the heat capacity difference between the solid and liquid phases is negligible, the following relation holds:
+
+$$ x_i \gamma_i = \exp \left( \frac{ -\Delta H_i^{\text{fus}} \left( 1 - \frac{T}{T_i^{\text{fus}}} \right)}{ R T } \right) $$
+
+where:
+
+- \( x_i \) is the mole fraction of the solute in the liquid phase,
+- \( \gamma_i \) is the activity coefficient of the solute in the liquid phase,
+- \( \Delta H_i^{\text{fus}} \) is the solute enthalpy of fusion,
+- \( T_i^{\text{fus}} \) is the solute fusion temperature,
+- \( R \) is the universal gas constant,
+- \( T \) is the absolute temperature.
+
+> Note that JCOSMO can also predict SLE with up to two solid transition temperatures and with a non-zero heat capacity difference between solid and liquid.
+
+As usual, the user can perform either pure predictions by clicking on **`Recalc`** or compare the results with experimental data by selecting the **`Experiment...`** button.
+Results for the system glucose/water system are shown below:
+
+<div style="position: relative; display: inline-block; width: 100%;">
+  <img src="../img/jcosmo-sle-exp.png" alt="JCOSMO Initial Screen" style="width: 100%; height: auto;" />
+</div>
