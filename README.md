@@ -1,6 +1,8 @@
 # JCOSMO Documentation  
 
-Welcome to the **JCOSMO Documentation Repository**. This repository contains user guides, tutorials, and reference materials for **JCOSMO**, a tool for COSMO-based modeling and property prediction.  
+Welcome to the **JCOSMO Documentation Repository**. This repository contains user guides, tutorials, and reference materials for **JCOSMO**, a tool for COSMO-based modeling and property prediction.
+
+The live documentation is available at [lvpp.github.io/jcosmo-docs/](https://lvpp.github.io/jcosmo-docs/).
 
 ## About JCOSMO  
 
