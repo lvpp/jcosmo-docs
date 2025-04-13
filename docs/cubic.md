@@ -108,11 +108,11 @@ $$
 
 Here, \( k_{ij} \) is the binary interaction parameter between components \( i \) and \( j \), typically fitted using experimental phase equilibrium data. While these parameters are often assumed to be zero, they are crucial for mixtures with significant deviations from ideality. Nevertheless, even with \( k_{ij} \), these classical rules struggle to represent mixtures involving strong molecular interactions, such as polar mixtures (e.g., water and ethanol), due to the absence of temperature-dependent binary parameters [@Smith2007].
 
-Huron and Vidal[@Huron1979] in 1979 proposed a mixing rule for the \( a \) parameter based on excess Gibbs energy models \( g^E_\gamma \). The excess Gibbs energy calculated using a cubic equation of state \( g^E_\phi \), at the limit \( P \rightarrow \infty \), is equated to the expression for \( g^E_\gamma \). Under this pressure condition, the molar volume is considered equal to the covolume \( b \), and the expression for the \( a \) parameter is derived.
+Huron and Vidal[@Huron1979] in 1979 proposed a mixing rule based on excess Gibbs energy models \( g^E_\gamma \). They equated the excess Gibbs energy calculated using a cubic equation of state \( g^E_\phi \), at the limit \( P \rightarrow \infty \), to the expression for \( g^E_\gamma \). Under this pressure condition, the molar volume is considered equal to the covolume \( b \), and the expression for the \( a \) parameter is derived.
 
 Following the work of Huron and Vidal[@Huron1979], several other mixing rules were developed, including MHV-1 (Modified Huron-Vidal mixing rule) [@Michelsen1990a] [@Michelsen1990b], UMR (Universal Mixing Rule) [@Voutsas2004], the rule by Wong and Sandler[@Wong1992], and PSRK (Predictive Soave-Redlich-Kwong)[@Holderbaum1991].
 
-The PSRK (Predictive Soave-Redlich-Kwong)[@Holderbaum1991] equation of state combines the SRK equation with the \( \alpha(T) \) function proposed by Mathias and Copeman shown previously, and the UNIFAC model.   
+The PSRK (Predictive Soave-Redlich-Kwong)[@Holderbaum1991] combines the SRK equation with the \( \alpha(T) \) function proposed by Mathias and Copeman shown previously, and the UNIFAC model.   
 
 To combine the SRK equation of state with the excess Gibbs energy model (UNIFAC), the MHV1 mixing rule was applied:
 
@@ -123,9 +123,7 @@ b = \sum_i x_i b_i
 \end{gathered}
 $$
 
-where \( g_0^E \) is the excess Gibbs energy in the limit \( P \rightarrow 0 \), calculated using the UNIFAC model. In PSRK, the parameter \( A_1 \) is set to -0.64663.
-
-The UNIFAC parameter matrix used in PSRK includes six additional gases, and the most recent revision accepted by the UNIFAC consortium was presented by Horstmann in 2005[@Horstmann2005].
+where \( g_0^E \) is the excess Gibbs energy in the limit \( P \rightarrow 0 \), calculated using the UNIFAC model. In PSRK, the parameter \( A_1 \) is set to -0.64663. The UNIFAC parameter matrix used in PSRK includes six additional gases, and the most recent revision accepted by the UNIFAC consortium was presented by Horstmann in 2005[@Horstmann2005].
 
 However, all these mixing rules introduce distortions in phase equilibrium calculations at low pressures due to discrepancies between \( g^E_\phi \) and \( g^E_\gamma \) under such conditions. Nonetheless, they provide satisfactory results for many mixtures with significant non-ideality, representing an improvement over the classical van der Waals rule.
 
