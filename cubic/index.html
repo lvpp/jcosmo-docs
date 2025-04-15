@@ -164,12 +164,286 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cubic-equations-of-state-and-mixing-rules" class="nav-link">Cubic equations of state and mixing rules</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#cubic-equations-of-state" class="nav-link">Cubic equations of state</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#mixing-rules" class="nav-link">Mixing Rules</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p><strong>This page is currently under development and will be available soon. Stay tuned for updates!</strong></p></div>
+<h1 id="cubic-equations-of-state-and-mixing-rules">Cubic equations of state and mixing rules</h1>
+<p>In this section, we will examine the development and application of cubic equations of state, beginning with classical models such as the van der Waals equation and progressing to widely adopted forms like the Soave-Redlich-Kwong (SRK) and Peng-Robinson (PR) equations, which are used in JCOSMO. We will also discuss the incorporation of mixing rules, both classical and advanced, which allow these equations to be applied to multicomponent systems.</p>
+<h2 id="cubic-equations-of-state">Cubic equations of state</h2>
+<p>To define the thermodynamic state of a pure substance in a single phase, two thermodynamic properties are required. An equation of state provides a mathematical relationship that allows the determination of an unknown property from two known variables. This requires mathematical relations that are functions of temperature (<em>T</em>), pressure (<em>P</em>), and specific volume (<em>v</em>), which are intensive properties that can be determined experimentally <sup id="fnref:Koretsky2012"><a class="footnote-ref" href="#fn:Koretsky2012">1</a></sup>.</p>
+<p>There are numerous forms of equations of state in the literature, and the most commonly employed are the <strong>cubic equations of state</strong>.  These are third-degree polynomial equations in volume, whose roots can be obtained through various solution methods. A key advantage is that they always yield three roots, allowing for a predictable number of possible solutions <sup id="fnref:chao1979equations"><a class="footnote-ref" href="#fn:chao1979equations">2</a></sup>.</p>
+<p>In 1873, van der Waals <sup id="fnref:Waals1873"><a class="footnote-ref" href="#fn:Waals1873">3</a></sup> attempted to overcome the limitations of the ideal gas law, which neglects intermolecular forces and assumes that gas molecules occupy negligible volume. He proposed that gas molecules possess finite volume at high pressures and introduced a covolume parameter, <em>b</em>, subtracted from the molar volume. To account for molecular interactions, he included the term <script type="math/tex">a/v^2</script>, where <em>a</em> represents attractive forces between molecules. The resulting expression is:</p>
+<p>
+<script type="math/tex; mode=display">
+P(T, v) = \frac{RT}{v - b} - \frac{a}{v^2}
+</script>
+</p>
+<p>Here, <em>a</em> and <em>b</em> are parameters determined from critical point data for pure substances. The parameter <em>b</em> represents the molar volume limit as <script type="math/tex">P \rightarrow \infty,</script> and <script type="math/tex">v \rightarrow b </script>
+<sup id="fnref2:Waals1873"><a class="footnote-ref" href="#fn:Waals1873">3</a></sup>.</p>
+<p>Based on his work, Redlich and Kwong <sup id="fnref:Redlich1949"><a class="footnote-ref" href="#fn:Redlich1949">4</a></sup> observed that the <script type="math/tex">a/v^2</script> term did not account for the influence of temperature on attractive molecular forces. Thus, they introduced a temperature dependency in the attractive term:</p>
+<p>
+<script type="math/tex; mode=display">
+P(T, v) = \frac{RT}{v - b} - \frac{a / \sqrt{T}}{v(v + b)}
+</script>
+</p>
+<p>This modification provided a better representation of several systems. However, as the parameter <em>a</em> remained constant, Soave <sup id="fnref:Soave1972"><a class="footnote-ref" href="#fn:Soave1972">5</a></sup> proposed a widely used modification, known as SRK (Soave–Redlich–Kwong), where <em>a</em> is replaced with a temperature-dependent function <script type="math/tex">\alpha</script>:</p>
+<p>
+<script type="math/tex; mode=display">
+\alpha(T_r, \omega) = \left[ 1 + (0.480 + 1.574 \omega - 0.176 \omega^2)(1 - \sqrt{T_r}) \right]^2
+</script>
+</p>
+<p>Here, <script type="math/tex">\omega</script> is the acentric factor, and <script type="math/tex">T_r = T/T_c</script> is the reduced temperature, with <script type="math/tex">T_c</script> being the critical temperature and <em>T</em> the system temperature.</p>
+<p>Peng and Robinson<sup id="fnref:Peng1976"><a class="footnote-ref" href="#fn:Peng1976">6</a></sup> evaluated the SRK model for hydrocarbon systems and found it needed improvements, particularly for liquid densities near the critical point. They proposed the following modified expression, altering the volume dependence in the attractive term:</p>
+<p>
+<script type="math/tex; mode=display">
+P = \frac{RT}{v - b} - \frac{a \alpha}{v(v + b) + b(v - b)}
+</script>
+</p>
+<p>The terms <em>a</em>, <em>b</em>, and <script type="math/tex">\alpha(T)</script> have the same interpretations as in the SRK model. The <script type="math/tex">\alpha(T)</script> function was redefined as:</p>
+<p>
+<script type="math/tex; mode=display">
+\alpha(T_r, \omega) = \left[ 1 + (0.37464 + 1.54226 \omega - 0.26992 \omega^2)(1 - \sqrt{T_r}) \right]^2
+</script>
+</p>
+<p>These equations of state are widely implemented in computational tools and offer reasonable estimates for thermodynamic properties. Nevertheless, they do not accurately represent all substances and mixtures. As a result, many modifications have been developed over time to better describe the behavior of diverse systems.</p>
+<p>Mathias and Copeman<sup id="fnref:Mathias1983"><a class="footnote-ref" href="#fn:Mathias1983">7</a></sup> developed an alpha funcition that is a modification designed to enhance the accuracy of PR and SRK equations in predicting fluid phase behavior. The standard alpha functions within these equations can sometimes produce inaccuracies, particularly when dealing with complex mixtures or a wide range of thermodynamic conditions. The Mathias-Copeman alpha function addresses these limitations by introducing additional adjustable parameters (<script type="math/tex">c_1</script>,<script type="math/tex">c_2</script>, and <script type="math/tex">c_3</script>), thereby providing a more flexible and accurate representation of this temperature dependence. This increased flexibility allows for a better fit to experimental data, improving the equation's ability to model a broader range of substances and conditions. In essence, it acts as a replacement for the original alpha function within these equations, offering a refined approach to modeling the temperature-dependent behavior of fluids. This function is implemented in JCOSMO with the SRK model (SRK-MC).
+<script type="math/tex; mode=display">
+\alpha_\text{MC}\left(T_r\right)=\left[1+c_1\left(1-\sqrt{T_r}\right)+c_2\left(1-\sqrt{T_r}\right)^2+c_3\left(1-\sqrt{T_r}\right)^3\right]^2
+</script>
+</p>
+<p>A general form of a cubic equation of state is expressed as:</p>
+<p>
+<script type="math/tex; mode=display">
+P(T, v) = \frac{RT}{v - b} - \frac{a(T)}{(v + \epsilon b)(v + \sigma b)}
+</script>
+</p>
+<p>Where <script type="math/tex">\epsilon</script> and <script type="math/tex">\sigma</script> are constants specific to the equation of state used. The parameters <em>a(T)</em> and <em>b</em> are defined as:</p>
+<p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+a(T) &= \Psi \frac{\alpha(T_r, \omega) R^2 T_c^2}{P_c} \\
+b &= \Omega \frac{RT_c}{P_c}
+\end{aligned}
+</script>
+</p>
+<p>The values of <script type="math/tex">\Psi</script>, <script type="math/tex">\Omega</script>, and <script type="math/tex">\alpha(T_r, \omega)</script> vary depending on the specific equation of state, as shown below. The subscript <em>c</em> refers to the critical point properties. The acentric factor <script type="math/tex">\omega</script> is defined as <sup id="fnref:Pitzer1955"><a class="footnote-ref" href="#fn:Pitzer1955">8</a></sup>:</p>
+<p>
+<script type="math/tex; mode=display">
+\omega = -1 - \log \left[ \frac{P^{\text{sat}}(T_r = 0.7)}{P_c} \right]
+</script>
+</p>
+<p>Where <script type="math/tex">P^{\text{sat}}(T_r = 0.7)</script> is the saturation pressure at a reduced temperature of 0.7 <script type="math/tex">T_r = 0.7</script>.</p>
+<h3 id="table-parameters-of-cubic-equations-of-state">Table: Parameters of Cubic Equations of State</h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>
+<script type="math/tex">\alpha(T_r,\omega)</script>
+</th>
+<th>
+<script type="math/tex">\epsilon</script>
+</th>
+<th>
+<script type="math/tex">\sigma</script>
+</th>
+<th>
+<script type="math/tex">\Psi</script>
+</th>
+<th>
+<script type="math/tex">\Omega</script>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ideal Gas</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Van der Waals (VDW)</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>27/64</td>
+<td>1/8</td>
+</tr>
+<tr>
+<td>Redlich–Kwong (RK)</td>
+<td>
+<script type="math/tex">1/\sqrt{T_r}</script>
+</td>
+<td>0</td>
+<td>1</td>
+<td>0.42748</td>
+<td>0.08664</td>
+</tr>
+<tr>
+<td>Soave–Redlich–Kwong (SRK)</td>
+<td>
+<script type="math/tex">\alpha_\text{SRK}(T_r,\omega)</script>
+</td>
+<td>0</td>
+<td>1</td>
+<td>0.42747</td>
+<td>0.08664</td>
+</tr>
+<tr>
+<td>Peng–Robinson (PR)</td>
+<td>
+<script type="math/tex">\alpha_\text{PR}(T_r,\omega)</script>
+</td>
+<td>
+<script type="math/tex">1 - \sqrt{2}</script>
+</td>
+<td>$1 + \sqrt{2})</td>
+<td>0.45724</td>
+<td>0.07780</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<script type="math/tex">\alpha_\text{SRK}(T_r,\omega) = \left[1 + (0.480 + 1.574 \omega - 0.176 \omega^2)(1 - \sqrt{T_r}) \right]^2</script>
+</li>
+<li>
+<script type="math/tex">\alpha_\text{PR}(T_r,\omega) = \left[1 + (0.37464 + 1.54226 \omega - 0.26992 \omega^2)(1 - \sqrt{T_r}) \right]^2</script>
+</li>
+<li>
+<script type="math/tex">\alpha_\text{MC}\left(T_r\right)=\left[1+c_1\left(1-\sqrt{T_r}\right)+c_2\left(1-\sqrt{T_r}\right)^2+c_3\left(1-\sqrt{T_r}\right)^3\right]^2</script>
+</li>
+</ul>
+<h2 id="mixing-rules">Mixing Rules</h2>
+<p>To enable phase equilibrium calculations and represent mixtures, equations of state require the use of mixing rules. This is necessary because, for cubic equations of state, the parameters <script type="math/tex"> a </script> and <script type="math/tex"> b </script> for mixtures cannot be obtained directly as they are for pure compounds, where critical property data are used. Therefore, mixing rules establish mathematical relationships that relate the mixture parameters <script type="math/tex"> a </script> and <script type="math/tex"> b </script> to the parameters <script type="math/tex"> a_i </script> and <script type="math/tex"> b_i </script> of each pure component <script type="math/tex"> i </script>.</p>
+<p>The classic van der Waals mixing rule consists of a linear relation for the covolume <script type="math/tex"> b </script> and a quadratic rule for the attractive parameter <script type="math/tex"> a </script>:</p>
+<p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+a = \sum_{i} \sum_{j} x_{i} x_{j} a_{ij} \\
+b = \sum_{i} x_{i} b_{i}
+\end{gathered}
+</script>
+</p>
+<p>where <script type="math/tex"> a </script> is the mixture's attractive parameter, <script type="math/tex"> b </script> is the mixture's covolume, <script type="math/tex"> x_i </script> is the mole fraction of component <script type="math/tex"> i </script>, <script type="math/tex"> b_i </script> is the covolume of species <script type="math/tex"> i </script>, and <script type="math/tex"> a_{ij} </script> includes both pure component parameters (when <script type="math/tex"> i = j </script>) and interaction parameters (when <script type="math/tex"> i \neq j </script>). The interaction parameters <script type="math/tex"> a_{ij} </script> are calculated using the following combination rule based on a geometric mean:</p>
+<p>
+<script type="math/tex; mode=display">
+a_{ij} = \sqrt{a_i a_j}(1 - k_{ij})
+</script>
+</p>
+<p>Here, <script type="math/tex"> k_{ij} </script> is the binary interaction parameter between components <script type="math/tex"> i </script> and <script type="math/tex"> j </script>, typically fitted using experimental phase equilibrium data. While these parameters are often assumed to be zero, they are crucial for mixtures with significant deviations from ideality. Nevertheless, even with <script type="math/tex"> k_{ij} </script>, these classical rules struggle to represent mixtures involving strong molecular interactions, such as polar mixtures (e.g., water and ethanol), due to the absence of temperature-dependent binary parameters <sup id="fnref:Smith2007"><a class="footnote-ref" href="#fn:Smith2007">9</a></sup>.</p>
+<p>Huron and Vidal<sup id="fnref:Huron1979"><a class="footnote-ref" href="#fn:Huron1979">10</a></sup> in 1979 proposed a mixing rule based on excess Gibbs energy models <script type="math/tex"> g^E_\gamma </script>. They equated the excess Gibbs energy calculated using a cubic equation of state <script type="math/tex"> g^E_\phi </script>, at the limit <script type="math/tex"> P \rightarrow \infty </script>, to the expression for <script type="math/tex"> g^E_\gamma </script>. Under this pressure condition, the molar volume is considered equal to the covolume <script type="math/tex"> b </script>, and the expression for the <script type="math/tex"> a </script> parameter is derived.</p>
+<p>Following the work of Huron and Vidal<sup id="fnref2:Huron1979"><a class="footnote-ref" href="#fn:Huron1979">10</a></sup>, several other mixing rules were developed, including MHV-1 (Modified Huron-Vidal mixing rule) <sup id="fnref:Michelsen1990a"><a class="footnote-ref" href="#fn:Michelsen1990a">11</a></sup> <sup id="fnref:Michelsen1990b"><a class="footnote-ref" href="#fn:Michelsen1990b">12</a></sup>, UMR (Universal Mixing Rule) <sup id="fnref:Voutsas2004"><a class="footnote-ref" href="#fn:Voutsas2004">13</a></sup>, the rule by Wong and Sandler<sup id="fnref:Wong1992"><a class="footnote-ref" href="#fn:Wong1992">14</a></sup>, and PSRK (Predictive Soave-Redlich-Kwong)<sup id="fnref:Holderbaum1991"><a class="footnote-ref" href="#fn:Holderbaum1991">15</a></sup>.</p>
+<p>The PSRK (Predictive Soave-Redlich-Kwong)<sup id="fnref2:Holderbaum1991"><a class="footnote-ref" href="#fn:Holderbaum1991">15</a></sup> combines the SRK equation with the <script type="math/tex"> \alpha(T) </script> function proposed by Mathias and Copeman shown previously, and the UNIFAC model.   </p>
+<p>To combine the SRK equation of state with the excess Gibbs energy model (UNIFAC), the MHV1 mixing rule was applied:</p>
+<p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+a = b \left[\frac{g_0^E}{A_1} + \sum_i x_i \frac{a_i}{b_i} + \frac{RT}{A_1} \sum_i x_i \ln \frac{b}{b_i}\right] \\
+b = \sum_i x_i b_i
+\end{gathered}
+</script>
+</p>
+<p>where <script type="math/tex"> g_0^E </script> is the excess Gibbs energy in the limit <script type="math/tex"> P \rightarrow 0 </script>, calculated using the UNIFAC model. In PSRK, the parameter <script type="math/tex"> A_1 </script> is set to -0.64663. The UNIFAC parameter matrix used in PSRK includes six additional gases, and the most recent revision accepted by the UNIFAC consortium was presented by Horstmann in 2005<sup id="fnref:Horstmann2005"><a class="footnote-ref" href="#fn:Horstmann2005">16</a></sup>.</p>
+<p>However, all these mixing rules introduce distortions in phase equilibrium calculations at low pressures due to discrepancies between <script type="math/tex"> g^E_\phi </script> and <script type="math/tex"> g^E_\gamma </script> under such conditions. Nonetheless, they provide satisfactory results for many mixtures with significant non-ideality, representing an improvement over the classical van der Waals rule.</p>
+<p>To overcome this limitation, Staudt and coworkers<sup id="fnref:Staudt2012"><a class="footnote-ref" href="#fn:Staudt2012">17</a></sup> developed a mixing rule that yields consistent results, where the excess Gibbs energy <script type="math/tex"> g^E_\phi </script> from the equation of state matches the excess Gibbs energy <script type="math/tex"> g^E_\gamma </script> from the activity coefficient model. Due to this consistency, regardless of the cubic equation of state used, the authors named the approach the SCMR (Self-Consistent Mixing Rule). This mixing rule was created by developers of JCOSMO, and it is implemented as an option when calculating phase equilibria. In this mixing rule, the following expression is used to calculate the excess Gibbs energy via an equation of state:</p>
+<p>
+<script type="math/tex; mode=display">
+\frac{g^E_\phi}{RT} = \ln \hat{\phi} - \sum_i x_i \ln \phi_i
+</script>
+</p>
+<p>where <script type="math/tex"> \hat{\phi} </script> is the fugacity coefficient of the mixture, and <script type="math/tex"> \phi_i </script> is the fugacity coefficient of the pure component <script type="math/tex"> i </script>, both at the same temperature and pressure.</p>
+<p>From this equation, the authors made some assumptions, the main one being that excess volume is negligible. Consequently, they derived the following expression:</p>
+<p>
+<script type="math/tex; mode=display">
+q = \frac{1}{I^{Id}} \left( \frac{g^E_\gamma}{RT} - \sum_i x_i \ln \left( \frac{v_i - b_i}{v^{Id} - b} \right) + \sum_i x_i q_i I_i \right)
+</script>
+</p>
+<p>Here, the superscript <script type="math/tex"> Id </script> denotes the ideal solution reference, the subscript <script type="math/tex"> i </script> refers to each component, <script type="math/tex"> v </script> is the molar volume, and <script type="math/tex"> q </script> and <script type="math/tex"> I </script> are defined as follows:</p>
+<p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+q_i &\equiv \frac{a_i}{b_i RT} \\
+I_i &\equiv I_0 \ln \left( \frac{v_i + \epsilon b_i}{v_i + \sigma b_i} \right) \\
+I_0 &= \frac{1}{\sigma - \epsilon}
+\end{aligned}
+</script>
+</p>
+<p>where <script type="math/tex"> \epsilon </script> and <script type="math/tex"> \sigma </script> are constants that depend on the chosen equation of state, as shown in the previous table.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:Koretsky2012">
+<p>Milo D. Koretsky. <em>Engineering and Chemical Thermodynamics</em>. Wiley, Hoboken, 2nd edition, 2012. ISBN 9781118549742.&#160;<a class="footnote-backref" href="#fnref:Koretsky2012" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:chao1979equations">
+<p>Kwang Chu Chao and Robert L Robinson Jr. <em>Equations of state in engineering and research</em>. ACS Publications, 1979.&#160;<a class="footnote-backref" href="#fnref:chao1979equations" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Waals1873">
+<p>Johannes Diderik van der Waals. <em>Over de Continuiteit van den Gas- en Vloeistoftoestand</em>. PhD thesis, Universidade de Leiden, Países Baixos, 1873.&#160;<a class="footnote-backref" href="#fnref:Waals1873" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Waals1873" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Redlich1949">
+<p>Otto Redlich and J. N. S. Kwong. On the Thermodynamics of Solutions. V. An Equation of State. Fugacities of Gaseous Solutions. <em>Chemical Reviews</em>, 44(1):233–244, feb 1949. <a href="https://doi.org/10.1021/cr60137a013">doi:10.1021/cr60137a013</a>.&#160;<a class="footnote-backref" href="#fnref:Redlich1949" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Soave1972">
+<p>Giorgio Soave. Equilibrium constants from a modified Redlich-Kwong equation of state. <em>Chemical Engineering Science</em>, 27(6):1197–1203, jun 1972. <a href="https://doi.org/10.1016/0009-2509(72)80096-4">doi:10.1016/0009-2509(72)80096-4</a>.&#160;<a class="footnote-backref" href="#fnref:Soave1972" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Peng1976">
+<p>Ding-Yu Peng and Donald B. Robinson. A New Two-Constant Equation of State. <em>Industrial &amp; Engineering Chemistry Fundamentals</em>, 15(1):59–64, feb 1976. <a href="https://doi.org/10.1021/i160057a011">doi:10.1021/i160057a011</a>.&#160;<a class="footnote-backref" href="#fnref:Peng1976" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Mathias1983">
+<p>Paul M. Mathias and Thomas W. Copeman. Extension of the Peng-Robinson equation of state to complex mixtures: Evaluation of the various forms of the local composition concept. <em>Fluid Phase Equilibria</em>, 13(C):91–108, jan 1983. <a href="https://doi.org/10.1016/0378-3812(83)80084-3">doi:10.1016/0378-3812(83)80084-3</a>.&#160;<a class="footnote-backref" href="#fnref:Mathias1983" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Pitzer1955">
+<p>Kenneth S. Pitzer, David Z. Lippmann, R. F. Curl, Charles M. Huggins, and Donald E. Petersen. The Volumetric and Thermodynamic Properties of Fluids. II. Compressibility Factor, Vapor Pressure and Entropy of Vaporization. <em>Journal of the American Chemical Society</em>, 77(13):3433–3440, jul 1955. <a href="https://doi.org/10.1021/ja01618a002">doi:10.1021/ja01618a002</a>.&#160;<a class="footnote-backref" href="#fnref:Pitzer1955" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Smith2007">
+<p>J. M. Smith, H. C. Van Ness, and M. M. Abbott. <em>Introdução à Termodinâmica da Engenharia Química</em>. LTC, Rio de Janeiro, 7ª edition, 2007. ISBN 9788521615538. Tradução da sétima edição em inglês.&#160;<a class="footnote-backref" href="#fnref:Smith2007" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Huron1979">
+<p>Marie-José Huron and Jean Vidal. New mixing rules in simple equations of state for representing vapour-liquid equilibria of strongly non-ideal mixtures. <em>Fluid Phase Equilibria</em>, 3(4):255–271, jan 1979. <a href="https://doi.org/10.1016/0378-3812(79)80001-1">doi:10.1016/0378-3812(79)80001-1</a>.&#160;<a class="footnote-backref" href="#fnref:Huron1979" title="Jump back to footnote 10 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Huron1979" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Michelsen1990a">
+<p>Michael L. Michelsen. A method for incorporating excess Gibbs energy models in equations of state. <em>Fluid Phase Equilibria</em>, 60(1–2):47–58, oct 1990a. <a href="https://doi.org/10.1016/0378-3812(90)85042-9">doi:10.1016/0378-3812(90)85042-9</a>.&#160;<a class="footnote-backref" href="#fnref:Michelsen1990a" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Michelsen1990b">
+<p>Michael L. Michelsen. A modified Huron-Vidal mixing rule for cubic equations of state. <em>Fluid Phase Equilibria</em>, 60(1–2):213–219, oct 1990b. <a href="https://doi.org/10.1016/0378-3812(90)85053-D">doi:10.1016/0378-3812(90)85053-D</a>.&#160;<a class="footnote-backref" href="#fnref:Michelsen1990b" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Voutsas2004">
+<p>Epaminondas Voutsas, Kostis Magoulas, and Dimitrios Tassios. Universal Mixing Rule for Cubic Equations of State Applicable to Symmetric and Asymmetric Systems: Results with the Peng-Robinson Equation of State. <em>Industrial &amp; Engineering Chemistry Research</em>, 43(19):6238–6246, sep 2004. <a href="https://doi.org/10.1021/ie049580p">doi:10.1021/ie049580p</a>.&#160;<a class="footnote-backref" href="#fnref:Voutsas2004" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Wong1992">
+<p>David Shan Hill Wong and Stanley I. Sandler. A theoretically correct mixing rule for cubic equations of state. <em>AIChE Journal</em>, 38(5):671–680, may 1992. <a href="https://doi.org/10.1002/aic.690380505">doi:10.1002/aic.690380505</a>.&#160;<a class="footnote-backref" href="#fnref:Wong1992" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Holderbaum1991">
+<p>T. Holderbaum and J. Gmehling. PSRK: A Group Contribution Equation of State Based on UNIFAC. <em>Fluid Phase Equilibria</em>, 70(2–3):251–265, dec 1991. <a href="https://doi.org/10.1016/0378-3812(91)85038-V">doi:10.1016/0378-3812(91)85038-V</a>.&#160;<a class="footnote-backref" href="#fnref:Holderbaum1991" title="Jump back to footnote 15 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Holderbaum1991" title="Jump back to footnote 15 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Horstmann2005">
+<p>Sven Horstmann, Anna Jabłoniec, Jörg Krafczyk, Kai Fischer, and Jürgen Gmehling. PSRK group contribution equation of state: Comprehensive revision and extension IV, including critical constants and α-function parameters for 1000 components. <em>Fluid Phase Equilibria</em>, 227(2):157–164, 2005. <a href="https://doi.org/10.1016/j.fluid.2004.11.002">doi:10.1016/j.fluid.2004.11.002</a>.&#160;<a class="footnote-backref" href="#fnref:Horstmann2005" title="Jump back to footnote 16 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Staudt2012">
+<p>Paula B. Staudt and Rafael de P. Soares. A self-consistent Gibbs excess mixing rule for cubic equations of state. <em>Fluid Phase Equilibria</em>, 334:76–88, nov 2012. <a href="https://doi.org/10.1016/j.fluid.2012.06.029">doi:10.1016/j.fluid.2012.06.029</a>.&#160;<a class="footnote-backref" href="#fnref:Staudt2012" title="Jump back to footnote 17 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
             </div>
         </div>
 
