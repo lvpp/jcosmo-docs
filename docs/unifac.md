@@ -1,4 +1,4 @@
-**This page is currently under development and will be available soon. Stay tuned for updates!**
+**This page is currently under development. Stay tuned for updates!**
 
 # UNIFAC
 Introduced as a group-contribution method for the prediction of activity coefficients in nonelectrolyte liquid mixtures, UNIFAC model (UNIQUAC Functional-group Activity Coefficients) was proposed in 1975 by Fredenslund et al. [@Fredenslund1975] to use group contributuion for calculating thermodynamic properties. In group-contribution methods a molecule is built by several functional groups, and a physical property is the sum of the contributions made by the functional groups that compose the molecule. For mixtures this approach is attractive because it allows for the reuse of functional groups for different molecules, allowing a better representation of the chemical space with lower expenditure on experimental data collection. 
