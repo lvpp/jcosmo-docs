@@ -79,5 +79,8 @@ While UNIFAC-LLE is limited to the available parameters, it still retain some ad
 ## UNIFAC(Do)
 With the purpose of calculating vapor-liquid equilibria, activity coefficients at infinite dilution and enthalpies of mixing with just one set of parameters, Weidlich and Gmehling [@Weidlich1987] modified the UNIFAC method with what is now known as UNIFAC(Do) - (Modified UNIFAC - Dortmund).
 
+## UNIFAC(PSRK)
+The application of cubic equations of state (EoS) for the description of systems with supercritical compounds is a way to reduce the deviations in the model’s predictions. For this purpose an approach with a coupled  Soave-Redlich-Kwong (SRK) equation with the original UNIFAC model was developed, UNIFAC(PSRK) [@Holderbaum1991]. This model allows an accurate prediction of phase equilibrium in a wide temperature and pressure range. Beside phase equilibria, equations of state provide other thermodynamic properties (enthalpies, densities). 
+
 ## UNIFAC-NIST
 As more experimental data becomes available, there is a need for periodic updates of the parameter matrix of models to reflect the most recent information for phase equilibrium. UNIFAC-NIST[@Kang2011] is a modified UNIFAC (with the same expression that of UNIFAC(Do) for both the combinatorial and residual contributions) with model parameters estimated with critically evaluated phase equilibrium data including vapor–liquid equilibrium (VLE), liquid–liquid equilibrium (LLE), solid–liquid equilibrium (SLE), excess enthalpy (HE), infinite dilution activity coefficient (IDAC) and excess heat capacity (CPE) data. Data collected within the NIST SOURCE Data Archival System and processed through NIST ThermoData Engine were used in the parameter optimization process. 
