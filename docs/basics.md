@@ -20,7 +20,7 @@ $$
 \Psi_{AB} = \exp\left(-\frac{u_{AB}}{kT}\right)    
 $$
 
-Then, the probabylity of finding *AB* pairs would be given by:
+Then, the probability of finding *AB* pairs would be given by:
 
 $$
     \theta_{AB}^2 = \theta_{AA} \theta_{BB} \frac{\Psi_{AB}^2}{\Psi_{AA} \Psi_{BB}}
