@@ -15,16 +15,18 @@ $$ AA + BB \rightleftharpoons 2 AB $$
 When either compound *A* or compound *B* is pure, they can only *interact* with other identical molecules, forming *AA* or *BB* pairs. However, in mixtures, there exists an equilibrium between *AA*, *BB*, and *AB* complexes.
 
 Using the notation introduced by Soares and Staudt[@Soares2023], there should be Boltzmann factor \(\Psi_{AB}\) in terms of the pair formation (or interaction) energy \(u_{AB} = u_{BA}\), given by:
+
 $$
 \Psi_{AB} = \exp\left(-\frac{u_{AB}}{kT}\right)    
 $$
 
 Then, the probabylity of finding *AB* pairs would be given by:
+
 $$
     \theta_{AB}^2 = \theta_{AA} \theta_{BB} \frac{\Psi_{AB}^2}{\Psi_{AA} \Psi_{BB}}
 $$
 
-> **Note:** The above equation is equivalent to the quasi-chemical treatment, Eq.(4.09.1) of Guggenheim[@guggenheim1952mixtures]. If the mixture where to be completely random: \(\theta_{AB} = \Theta_{A} \Theta_{B}\), where \(\Theta_{A}\) is the surface area fraction of compound *A* in mixture.
+> **Note:** The above equation is equivalent to the quasi-chemical treatment, Eq.(4.09.1) of Guggenheim[@guggenheim1952mixtures]. If the mixture where to be completely random: \($\theta_{AB} = \Theta_{A} \Theta_{B}\$), where \($\Theta_{A}$\) is the surface area fraction of compound *A* in mixture.
 
 ## Extensions in terms of groups or small segments
 
