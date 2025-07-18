@@ -1,6 +1,6 @@
 # Vapor-Liquid Equilibrium (VLE)
 ## Theory concepts
-The separation of a mixture into a liquid phase and a vapor phase is of great importance and utility for the chemical, petrochemical, natural gas, and other industries. The separation process is fundamented in the phase equilibrium, which describes the conditions under which different phases of a pure substance or a mixture can coexist in thermodynamic equilibrium [@Koretsky2012;@Smith2007].
+The separation of a mixture into a liquid phase and a vapor phase is of great importance and utility for the chemical, petrochemical, natural gas, and other industries. The separation process is founded in the phase equilibrium, which describes the conditions under which different phases of a pure substance or a mixture can coexist in thermodynamic equilibrium [@Koretsky2012;@Smith2007].
 
 An equilibrium system is often represented for two phases, as shown in **Figure 1**. This system is divided into phases \(\alpha\) and \(\beta\), which for VLE represent a liquid phase and a vapor phase. For the system to be in equilibrium, it is essential that its thermodynamic variables remain constant with respect to both time and position, without the presence of a driving force to induce changes [@Koretsky2012;@Smith2007].
 
@@ -9,7 +9,7 @@ An equilibrium system is often represented for two phases, as shown in **Figure 
   <figcaption><strong>Figura 1.</strong> Schematic representation of the equilibrium between two generic phases.</figcaption>
 </figure>
 
-There are some criterias for an equilibrium occur. Firstly, if there were a pressure imbalance in the system, it would tend to contract or expand until its pressure equalized with that of its surroundings. Thus, for a system to be in equilibrium, mechanical equilibrium is essential, with no pressure variations [@Koretsky2012;@Smith2007]:
+There are some criteria for an equilibrium occur. Firstly, if there were a pressure imbalance in the system, it would tend to contract or expand until its pressure equalized with that of its surroundings. Thus, for a system to be in equilibrium, mechanical equilibrium is essential, with no pressure variations [@Koretsky2012;@Smith2007]:
 
 $$P^{\alpha} = P^{\beta} \tag{1}$$ 
 
@@ -49,7 +49,7 @@ $$\hat{\phi}_{i} \equiv \frac{\hat{f}_{i}}{\hat{f}_{i}^{IG}} = \frac{\hat{f}_{i}
 
 The fugacity coefficient is a dimensionless variable that compares the fugacity of substance *i* to the fugacity of the component in an ideal gas mixture, giving an idea of how far from ideality that species is in the mixture [@Koretsky2012;@Smith2007].
 
-When characterizing an incompressible liquid phase, one often resorts to a reference condition other than an ideal gas mixture. In this case, the use of an ideal solution reference is more common. In this context, the fugacity of species *i* in an ideal solution \((\hat{f}_i^{id})\) is assumed to show a linear relationship with the fugacity of component *i* in its pure state \((f_i)\) and its mole fraction in the liquid \((x_i)\). Thus, the fugacity of component *i* in a mixture, when at the reference state of an ideal liquid, is expressed by  [@Koretsky2012;@Smith2007]:
+When characterizing an incompressible liquid phase, one often resorts to a reference condition other than an ideal gas mixture. In this case, the use of an ideal solution reference is more common. In this context, the fugacity of specie *i* in an ideal solution \((\hat{f}_i^{id})\) is assumed to show a linear relationship with the fugacity of component *i* in its pure state \((f_i)\) and its mole fraction in the liquid \((x_i)\). Thus, the fugacity of component *i* in a mixture, when at the reference state of an ideal liquid, is expressed by  [@Koretsky2012;@Smith2007]:
 
 $$\hat{f}_{i}^{id} = x_{i}f_{i} \tag{9}$$
 
@@ -113,16 +113,16 @@ The results obtained from solving the system of equations formed by Equations 13
 In a Pxy diagram presented in **Figure 2**, pressure is plotted against the mole fraction of the liquid and vapor phases (x and y) at a constant temperature. **The Bubble Point Curve (Px curve)** is the upper curve at the diagram. Any point of this curve represents the saturated liquid, where the first bubble of vapor is formed. Above this curve, only the liquid phase exists. **The Dew Point Curve (Py curve)** is the lower curve of the diagram. At any point on this line, the vapor is saturated, where the first drop of liquid is formed. Below this curve, only the vapor phase exists. **The Two-Phase Region** occurs between the two curves, where the liquid and vapor phases coexist in equilibrium [@Koretsky2012;@Smith2007].
 
 <p align="center">
-  <img src="/img/Pxy.png" alt="Pxy" width="300">
+  <img src="/img/Pxy.png" alt="Pxy" width="500">
   <figcaption><strong>Figura 2.</strong> Pxy diagram of cyclohexane(1)/sec-butanol(2). Squares are experimental data at 323.15 K; black line is the COSMO-SAC model.
 </p>
 
 #### Txy Diagram
-In a Txy diagram shwon in **Figure 3**, temperature is plotted against composition at a constant pressure. Similarly, **the Bubble Point Curve (Tx curve)** is the lower curve, and for a given liquid composition it shows the temperature at which the first bubble of vapor forms upon heating. Below this curve, only liquid exists. **The Dew Point Curve (Ty curve)** is the upper curve, which represents the temperature where the last drop of liquid vaporizes. Above this curve, only vapor exists. Again, **The Two-Phase Region** occurs between the curves, where liquid and vapor coexist in equilibrium [@Koretsky2012;@Smith2007].
+In a Txy diagram shown in **Figure 3**, temperature is plotted against composition at a constant pressure. Similarly, **the Bubble Point Curve (Tx curve)** is the lower curve, and for a given liquid composition it shows the temperature at which the first bubble of vapor forms upon heating. Below this curve, only liquid exists. **The Dew Point Curve (Ty curve)** is the upper curve, which represents the temperature where the last drop of liquid vaporizes. Above this curve, only vapor exists. Again, **The Two-Phase Region** occurs between the curves, where liquid and vapor coexist in equilibrium [@Koretsky2012;@Smith2007].
 
 <p align="center">
-  <img src="/img/Txy.png" alt="Txy" width="300">
-  <figcaption><strong>Figura 3.</strong> Txy diagram of ethanol(1)/water(2). Squares are experimental data at 1.01 bar; black line is the COSMO-SAC model.
+  <img src="/img/Txy.png" alt="Txy" width="500">
+  <figcaption><strong>Figure 3.</strong> Txy diagram of ethanol(1)/water(2). Squares are experimental data at 1.01 bar; black line is the COSMO-SAC model.
 </p>
 
 
@@ -131,8 +131,49 @@ In real mixtures, **azeotropes** are frequently observed, which occur when the b
 
 ---
 ## Algorithm
+<!--
+As discussed in the Theory concepts section, there are two main modeling approaches for solving VLE. JCOSMO utilizes, for both of them, a bubble point algorithm. If a isothermal VLE is chosen the pressure (P) and vapor composition (yi) must be found. However, if a isobaric VLE is selected the temperature (T) and yi need to be found. 
 
+**Figure 4** details the algorithm structure for a isothermal VLE. Since the equilibrium temperature is known, the saturation pressures of the pure compounds can be calculated using a correlation (the types and how to introduce its coefficients are detailed in the Practical Example section). The liquid phase composition ($x_i$) must assume a value between 0 and 1, the algorithm discretizes this interval in 200 points. With x_i and T the activity coefficients of the species can be calculated using the activity model selected. With the $\gamma_i$ values, the total system pressure ($P$) and the vapor phase mole fractions ($y_i$) were directly obtained.
+-->
 ## Pratical Example
 
+The main model should be selected in the dropdown list shown in **Figure 4**. The model's default options are displayed below, with values of the universal parameters and different options of combinatorial terms.
+<p align="center">
+  <img src="/img/Model_selection.png" alt="Model_selection" width="1000">
+  <figcaption><strong>Figure 4.</strong> Model selection dropdown list and default parameters.
+</p>
 
+JCOSMO currently supports only binary VLE systems. However, the Mixture tab allows users to view activity coefficients for mixtures with n compounds. This data can be extracted via a Python script, and phase equilibria can then be solved externally. This advanced use case is further explained in Python Interface section. 
 
+For a binary system, you can directly search for the two compounds and add them to the system, as illustrated in **Figure 5**. The search engine uses compound names; if the desired compound is not found, try using alternative synonyms. The first selected compound is represented by the subscript **1**, and the second by **2** in all calculated properties.
+<p align="center">
+  <img src="/img/Compound_selection.png" alt="Compound_selection" width="1000">
+  <figcaption><strong>Figure 5.</strong> Example of a compound being added to the system.
+</p>
+
+Before starting the VLE calculations, press the "Edit..." button and carefully review the properties of each compound.  If critical properties are missing, they should be added if a cubic equation of state is going to be used. The saturation pressure is required if an activity coefficient model is selected, according to the Modified Raoult's Law in the Theory concepts section. By pressing the "Edit..." button, the user can choose the best available correlation. Coefficients are provided just for the default option; if another type is selected, the user must manually enter the new coefficients. Information about each property and correlation is available at the bottom section of the window. After making the necessary changes, confirm by clicking the "OK" button. **Figure 6** illustrates the process of editing compounds and their properties.
+<p align="center">
+  <img src="/img/Edit_properties.png" alt="Edit_properties" width="1000">
+  <figcaption><strong>Figure 6.</strong> Example of editing compound properties.
+</p>
+
+The next step is to compute the VLE. First, select the VLE tab in the upper-right corner of the JCOSMO window. The user can select the desired type of diagram, isobaric or isothermal, by clicking in the dropdown menu. The field on the right corresponds to either the temperature or pressure, depending on the selected diagram type, and can be adjusted by the user. The temperature must be provided in Kelvin and the pressure in bar. The next fields are the start and end value of composition. When the cursor is placed over any of these fields, a tooltip will appear indicating the required property and its unit. The "Use SCMR" option enables the user to apply this mixing rule, which combines an activity coefficient model with an equation of state. Currently, only the SRK-MC equation of state is available for this option. For more information, refer to the "Cubic Equations and Mixing Rules" section under the Theory tab. The next dropdown menus are used to select more models to compare with the main model. Ensure that all required properties are included for each model. Finally, press the "Recalc" button to compute the VLE. **Figure 7** illustrates this process. If you want to save the chart you can press the "Export to PDF" button, which will save a PDF file in the ...\jcosmo3\pdf directory.  Alternatively, you can right click with the mouse and copy the chart. The "Copy to clipboard" option will save the calculations, which can be pasted in an Excel file. The caption box location can be changed in the dropdown menu at the bottom of the window. For more details about binary charts and all options, see the "Binary Mixture Charts" section under Use cases in this documentation.
+<p align="center">
+  <img src="/img/VLE_settings.png" alt="VLE_settings" width="1000">
+  <figcaption><strong>Figure 7.</strong> VLE calculation and options.
+</p>
+
+The comparison of experimental data with the calculated results is also available. This requires creating a .txt file following the template shown in **Figure 8**. The hash symbol (#) is used for comments. Initially write the first and second components, from left to right, with the exact same name as found in the interface. Then, add a header with temperature (T), pressure (P), molar liquid composition (X), and molar vapor composition (Y).  If the letter W is used instead of X, mass fractions are assumed for the liquid phase—this is especially useful for polymers.  Right after the property, include its respective unit. Other temperature units can be used, but never use the degree symbol (°) or it will cause errors. Same for pressure, several units can be used – atm, mmHg, bar, psi, BTU. If data for one of the phases is missing, entering -1 will indicate its absence.
+
+<p align="center">
+  <img src="/img/VLE_txt_example.png" alt="VLE_txt_example" width="700">
+  <figcaption><strong>Figure 8.</strong> Example of experimental data set of VLE to include for comparison with predicted data.
+</p>
+
+After building the .txt file, you can simply load it into the program by clicking the "Experiment..." button on the VLE tab, as shown in Figure 9.
+
+<p align="center">
+  <img src="/img/Load_experiment_VLE.png" alt="Load_experiment_VLE" width="1000">
+  <figcaption><strong>Figure 9.</strong> COSMO-SAC predictions along with experimental data for the chloroform(1)/tetrahydrofuran(2) system.
+</p>
