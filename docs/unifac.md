@@ -12,10 +12,8 @@ $$
 $$
 
 
-\begin{itemize}
-    \item Combinatorial: provides the contribution due to differences in molecular size and shape.
-    \item Residual: provides the contribution due to molecular interactions.
-\end{itemize}
+- **Combinatorial**: provides the contribution due to differences in molecular size and shape.
+- **Residual**: provides the contribution due to molecular interactions.
 
 The combinatorial part is taken as the same as the one in UNIQUAC – designed in a group-contribution scope – without modification.
 
