@@ -164,12 +164,135 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#unifac" class="nav-link">UNIFAC</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#unifac-lle" class="nav-link">UNIFAC-LLE</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#unifacdo" class="nav-link">UNIFAC(Do)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#unifacpsrk" class="nav-link">UNIFAC(PSRK)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#unifac-nist" class="nav-link">UNIFAC-NIST</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p><strong>This page is currently under development and will be available soon. Stay tuned for updates!</strong></p></div>
+<p><strong>This page is currently under development. Stay tuned for updates!</strong></p>
+<h1 id="unifac">UNIFAC</h1>
+<p>Introduced in 1975 by Fredenslund et al. <sup id="fnref:Fredenslund1975"><a class="footnote-ref" href="#fn:Fredenslund1975">1</a></sup>, the UNIFAC model (UNIQUAC Functional-group Activity Coefficients) is a group-contribution method developed for predicting activity coefficients in nonelectrolyte liquid mixtures. In this approach, molecules are represented as assemblies of functional groups, with thermodynamic properties estimated as the sum of contributions from these individual groups. This method is particularly advantageous for mixture modeling, as it enables the reuse of group parameters across different compounds, expanding coverage of the chemical space while reducing the need for extensive experimental data.</p>
+<p>In UNIFAC, the molecular activity coefficient is made of two parts, one combinatorial and one residual:</p>
+<p>
+<script type="math/tex; mode=display">  
+  \ln \gamma_{i} = \ln \gamma_{i}^{C} + \ln \gamma_{i}^{R}
+</script>
+</p>
+<ul>
+<li><strong>Combinatorial</strong>: provides the contribution due to differences in molecular size and shape.</li>
+<li><strong>Residual</strong>: provides the contribution due to molecular interactions.</li>
+</ul>
+<p>The combinatorial part is taken as the same as the one in UNIQUAC – designed in a group-contribution scope – without modification.</p>
+<p>
+<script type="math/tex; mode=display">
+    \ln \gamma_{i}^{C} = \ln\frac{\Phi_{i}}{x_{i}} + \frac{z}{2}q_{i}\ln\frac{\theta_{i}}{\Phi_{i}} + l_{i} - \frac{\Phi_{i}}{x_{i}} \sum_{j}x_{j}l_{j}
+</script>
+</p>
+<p>
+<script type="math/tex; mode=display">
+    l_{J} = \frac{z}{2} \left(r_{i} - q_{i} \right) - \left( r_{i} -1 \right)_{i}
+</script>
+</p>
+<p>
+<script type="math/tex; mode=display">
+    z = 10
+</script>
+</p>
+<p>
+<script type="math/tex; mode=display">
+    \theta_{i} = \frac{q_{i}x_{i}}{\sum_{j}q_{j}x_{j}}
+</script>
+</p>
+<p>
+<script type="math/tex; mode=display">
+    \Phi_{i} = \frac{r_{i}x_{i}}{\sum_{j}r_{j}x_{j}}
+</script>
+</p>
+<p>
+<script type="math/tex; mode=display">
+    r_{i} = \sum_{k} \nu_{k}^{(i)} R_{k}
+</script>
+</p>
+<p>
+<script type="math/tex; mode=display">
+     {q_{i} = \sum_{k}\nu_{k}^{(i)} Q_{k} {a}}
+</script>
+</p>
+<p>Residual contribution is calculated by the solution-of-groups concept, and is defined as:</p>
+<p>
+<script type="math/tex; mode=display">
+    \ln \gamma_{i}^{R} = \underbrace{\sum_{k}\nu_{k}^{(i)}[\ln \Gamma_{k} - \ln \Gamma_{k}^{(i)}]}_\text{all groups}
+</script>
+</p>
+<p>The group activity coefficient $\Gamma_{k}$ is found from a similar equation to UNIQUAC's residual contribution:</p>
+<p>
+<script type="math/tex; mode=display">
+   \ln \Gamma_{k} = Q_{k} \left [1 - \ln(\sum_{m}\Theta_{m}\Psi_{mk}) - \sum_{m}\left(\frac{\Theta_{m} \Psi_{km}}{\sum_{n}\Theta_{n} \Psi_{nm}}\right)\right]
+</script>
+</p>
+<p>$\Theta_{m}$ is calculated in a similar way to $\theta_{i}$:</p>
+<p>
+<script type="math/tex; mode=display">
+    \Theta_{m} = \frac{Q_{m}X_{m}}{\sum_{n}Q_{n}X_{n}}
+</script>
+</p>
+<p>The groups interaction parameter $\Psi_{mn}$ is given by:</p>
+<p>
+<script type="math/tex; mode=display">
+    \Psi_{mn} = exp - \left[\frac{U_{mn}-U_{nm}}{RT}\right] = exp - (a_{mn}/T)
+</script>
+</p>
+<p>UNIFAC pioneered the use of group-contribution on models for the prediction of activity coefficients of non-electrolytes, and showed good success on predicting binary and multi-component mixtures where little or no experimental data was available. It's initial scope of compounds and temperature range was expanded with new developments. Inside JCOSMO several UNIFAC variants are available, in the following sections these variants will be described briefly.</p>
+<h2 id="unifac-lle">UNIFAC-LLE</h2>
+<p>As a development to the original UNIFAC model, in 1981 Magnussen et al.<sup id="fnref:Magnussen1981"><a class="footnote-ref" href="#fn:Magnussen1981">2</a></sup> proposed a parameter table specially calculated for Liquid-Liquid Equilibira (LLE). Changing the data used for estimation of the UNIFAC prameters from VLE data to LLE data reduced the AAD for ternary LLE systems in almost 80\%.</p>
+<p>While UNIFAC-LLE is limited to the available parameters, it still retain some advantages when working with molecules and systems that were part of the parameter estimation process.</p>
+<h2 id="unifacdo">UNIFAC(Do)</h2>
+<p>With the purpose of calculating vapor-liquid equilibria, activity coefficients at infinite dilution and enthalpies of mixing with just one set of parameters, Weidlich and Gmehling <sup id="fnref:Weidlich1987"><a class="footnote-ref" href="#fn:Weidlich1987">3</a></sup> modified the UNIFAC method with what is now known as UNIFAC(Do) - (Modified UNIFAC - Dortmund).</p>
+<h2 id="unifacpsrk">UNIFAC(PSRK)</h2>
+<p>The application of cubic equations of state (EoS) for the description of systems with supercritical compounds is a way to reduce the deviations in the model’s predictions. For this purpose an approach with a coupled  Soave-Redlich-Kwong (SRK) equation with the original UNIFAC model was developed, UNIFAC(PSRK) <sup id="fnref:Holderbaum1991"><a class="footnote-ref" href="#fn:Holderbaum1991">4</a></sup>. This model allows an accurate prediction of phase equilibrium in a wide temperature and pressure range. Beside phase equilibria, equations of state provide other thermodynamic properties (enthalpies, densities). </p>
+<h2 id="unifac-nist">UNIFAC-NIST</h2>
+<p>As more experimental data becomes available, there is a need for periodic updates of the parameter matrix of models to reflect the most recent information for phase equilibrium. UNIFAC-NIST<sup id="fnref:Kang2011"><a class="footnote-ref" href="#fn:Kang2011">5</a></sup> is a modified UNIFAC (with the same expression that of UNIFAC(Do) for both the combinatorial and residual contributions) with model parameters estimated with critically evaluated phase equilibrium data including vapor–liquid equilibrium (VLE), liquid–liquid equilibrium (LLE), solid–liquid equilibrium (SLE), excess enthalpy (HE), infinite dilution activity coefficient (IDAC) and excess heat capacity (CPE) data. Data collected within the NIST SOURCE Data Archival System and processed through NIST ThermoData Engine were used in the parameter optimization process. </p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:Fredenslund1975">
+<p>Aage Fredenslund, Russell L. Jones, and John M. Prausnitz. Group-contribution estimation of activity coefficients in nonideal liquid mixtures. <em>AIChE J.</em>, 21(6):1086–1099, 1975. <a href="https://doi.org/10.1002/aic.690210607">doi:10.1002/aic.690210607</a>.&#160;<a class="footnote-backref" href="#fnref:Fredenslund1975" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Magnussen1981">
+<p>Thomas Magnussen, Peter Rasmussen, and Aage Fredenslund. Unifac parameter table for prediction of liquid-liquid equilibriums. <em>Industrial &amp; Engineering Chemistry Process Design and Development</em>, 20(2):331&ndash;339, 1981. URL: <a href="https://doi.org/10.1021/i200013a024">https://doi.org/10.1021/i200013a024</a>, <a href="https://arxiv.org/abs/https://doi.org/10.1021/i200013a024">arXiv:https://doi.org/10.1021/i200013a024</a>, <a href="https://doi.org/10.1021/i200013a024">doi:10.1021/i200013a024</a>.&#160;<a class="footnote-backref" href="#fnref:Magnussen1981" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Weidlich1987">
+<p>Ulrich Weidlich and Juergen Gmehling. A modified unifac model. 1. prediction of vle, he, and .gamma..infin. <em>Industrial &amp; Engineering Chemistry Research</em>, 26(7):1372&ndash;1381, 1987. URL: <a href="https://doi.org/10.1021/ie00067a018">https://doi.org/10.1021/ie00067a018</a>, <a href="https://arxiv.org/abs/https://doi.org/10.1021/ie00067a018">arXiv:https://doi.org/10.1021/ie00067a018</a>, <a href="https://doi.org/10.1021/ie00067a018">doi:10.1021/ie00067a018</a>.&#160;<a class="footnote-backref" href="#fnref:Weidlich1987" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Holderbaum1991">
+<p>T. Holderbaum and J. Gmehling. PSRK: A Group Contribution Equation of State Based on UNIFAC. <em>Fluid Phase Equilibria</em>, 70(2–3):251–265, dec 1991. <a href="https://doi.org/10.1016/0378-3812(91)85038-V">doi:10.1016/0378-3812(91)85038-V</a>.&#160;<a class="footnote-backref" href="#fnref:Holderbaum1991" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Kang2011">
+<p>Jeongwon Kang, Vladimir Diky, Robert Chirico, Joe Magee, Chris Muzny, Ilmutdin Abdulagatov, Andrei Kazakov, and Michael Frenkel. A new method for evaluation of unifac interaction parameters. <em>Fluid Phase Equilibria</em>, 2011-07-01 00:07:00 2011.&#160;<a class="footnote-backref" href="#fnref:Kang2011" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
             </div>
         </div>
 
