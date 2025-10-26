@@ -6,7 +6,7 @@ An equilibrium system is often represented for two phases, as shown in **Figure 
 
 <figure style="text-align: center;">
   <img src="/img/FiguraEquilibriodeFases.png" alt="Equilíbrio de Fases" width="300">
-  <figcaption><strong>Figura 1.</strong> Schematic representation of the equilibrium between two generic phases.</figcaption>
+  <figcaption><strong>Figure 1.</strong> Schematic representation of the equilibrium between two generic phases.</figcaption>
 </figure>
 
 There are some criteria for an equilibrium occur. Firstly, if there were a pressure imbalance in the system, it would tend to contract or expand until its pressure equalized with that of its surroundings. Thus, for a system to be in equilibrium, mechanical equilibrium is essential, with no pressure variations [@Koretsky2012;@Smith2007]:
@@ -131,6 +131,10 @@ In real mixtures, **azeotropes** are frequently observed, which occur when the b
 
 ---
 ## Algorithm
+
+This section is currently under development and will be available soon. Stay tuned for updates!
+
+
 <!--
 As discussed in the Theory concepts section, there are two main modeling approaches for solving VLE. JCOSMO utilizes, for both of them, a bubble point algorithm. If a isothermal VLE is chosen the pressure (P) and vapor composition (yi) must be found. However, if a isobaric VLE is selected the temperature (T) and yi need to be found. 
 
