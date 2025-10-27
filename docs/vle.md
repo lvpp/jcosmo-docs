@@ -1,23 +1,24 @@
 # Vapor-Liquid Equilibrium (VLE)
+This section is largely based on the work of Koretsky (2012)[@Koretsky2012] and Smith et al. (2007)[@Smith2007], which constitute the main theoretical basis for the VLE description presented here. Additional references are cited when relevant to specific aspects or extensions of their approach.
 ## Theory concepts
-The separation of a mixture into a liquid phase and a vapor phase is of great importance and utility for the chemical, petrochemical, natural gas, and other industries. The separation process is founded in the phase equilibrium, which describes the conditions under which different phases of a pure substance or a mixture can coexist in thermodynamic equilibrium [@Koretsky2012;@Smith2007].
+The separation of a mixture into a liquid phase and a vapor phase is of great importance and utility for the chemical, petrochemical, natural gas, and other industries. The separation process is founded in the phase equilibrium, which describes the conditions under which different phases of a pure substance or a mixture can coexist in thermodynamic equilibrium.
 
-An equilibrium system is often represented for two phases, as shown in **Figure 1**. This system is divided into phases \(\alpha\) and \(\beta\), which for VLE represent a liquid phase and a vapor phase. For the system to be in equilibrium, it is essential that its thermodynamic variables remain constant with respect to both time and position, without the presence of a driving force to induce changes [@Koretsky2012;@Smith2007].
+An equilibrium system is often represented for two phases, as shown in **Figure 1**. This system is divided into phases \(\alpha\) and \(\beta\), which for VLE represent a liquid phase and a vapor phase. For the system to be in equilibrium, it is essential that its thermodynamic variables remain constant with respect to both time and position, without the presence of a driving force to induce changes.
 
 <figure style="text-align: center;">
   <img src="/img/FiguraEquilibriodeFases.png" alt="Equilíbrio de Fases" width="300">
   <figcaption><strong>Figure 1.</strong> Schematic representation of the equilibrium between two generic phases.</figcaption>
 </figure>
 
-There are some criteria for an equilibrium occur. Firstly, if there were a pressure imbalance in the system, it would tend to contract or expand until its pressure equalized with that of its surroundings. Thus, for a system to be in equilibrium, mechanical equilibrium is essential, with no pressure variations [@Koretsky2012;@Smith2007]:
+There are some criteria for an equilibrium occur. Firstly, if there were a pressure imbalance in the system, it would tend to contract or expand until its pressure equalized with that of its surroundings. Thus, for a system to be in equilibrium, mechanical equilibrium is essential, with no pressure variations:
 
 $$P^{\alpha} = P^{\beta} \tag{1}$$ 
 
-Similarly, for temperature, if the system had a different temperature from its surroundings, a driving force would exist for energy transfer in the form of heat until they become equal. Therefore, for a system to be in equilibrium, thermal equilibrium must exist [@Koretsky2012;@Smith2007]:
+Similarly, for temperature, if the system had a different temperature from its surroundings, a driving force would exist for energy transfer in the form of heat until they become equal. Therefore, for a system to be in equilibrium, thermal equilibrium must exist:
 
 $$T^{\alpha} = T^{\beta} \tag{2}$$ 
 
-However, these two criteria are not sufficient to define thermodynamic equilibrium. Chemical equilibrium must also occur, which is established when there is no tendency for any component of the mixture to change phase or react chemically. The driving force for mass transfer is the difference in the chemical potential \(\mu_i\) of the species between the phases, which translates to the partial molar Gibbs energy of the components present in the system [@Koretsky2012;@Smith2007]:
+However, these two criteria are not sufficient to define thermodynamic equilibrium. Chemical equilibrium must also occur, which is established when there is no tendency for any component of the mixture to change phase or react chemically. The driving force for mass transfer is the difference in the chemical potential \(\mu_i\) of the species between the phases, which translates to the partial molar Gibbs energy of the components present in the system:
 
 $$\mu_{i} = \overline{G}_{i} = \left(\frac{\partial G}{\partial n_{i}}\right)_{T, P, n_{j \neq i}} \tag{3}$$
 
@@ -25,45 +26,45 @@ Thus, for equilibrium to occur, the chemical potential of each component *i* mus
 
 $$\mu_{i}^{\alpha} = \mu_{i}^{\beta} \tag{4}$$
 
-Thermodynamic equilibrium, therefore, requires all three criteria to be met. For a pure component, the chemical potential is simply the molar Gibbs energy of the substance. The focus here will be on mixtures, as the equilibrium for a pure substance is a special case of the equations that will be described[@Koretsky2012;@Smith2007].
+Thermodynamic equilibrium, therefore, requires all three criteria to be met. For a pure component, the chemical potential is simply the molar Gibbs energy of the substance. The focus here will be on mixtures, as the equilibrium for a pure substance is a special case of the equations that will be described.
 
 ---
 
 ### Fugacity and Activity Coefficients
 
-Using chemical potential to formulate phase equilibrium presents some mathematical challenges. The first relates to infinite dilution and the second to the scenario where pressure approaches zero, corresponding to the ideal gas limit. In both situations, the chemical potential tends towards negative infinity, creating mathematical inconveniences. To circumvent this problem, a new thermodynamic property is introduced as an alternative to chemical potential, called **fugacity** \(f\) [@Koretsky2012;@Smith2007]:
+Using chemical potential to formulate phase equilibrium presents some mathematical challenges. The first relates to infinite dilution and the second to the scenario where pressure approaches zero, corresponding to the ideal gas limit. In both situations, the chemical potential tends towards negative infinity, creating mathematical inconveniences. To circumvent this problem, a new thermodynamic property is introduced as an alternative to chemical potential, called **fugacity** \(f\):
 
 $$\mu_{i} - \mu_{i}^{\circ} \equiv RT \ln\left(\frac{\hat{f}_{i}}{f_{i}^{\circ}}\right) \tag{5}$$  
 
-where \(\hat{f}_i\) represents the fugacity of component *i* in a mixture, and \(f_i^{\circ}\) is its fugacity at an arbitrary reference state. Substituting Equation 5 into Equation 4, the criterion for chemical equilibrium can be described in terms of fugacity [@Koretsky2012;@Smith2007]:
+where \(\hat{f}_i\) represents the fugacity of component *i* in a mixture, and \(f_i^{\circ}\) is its fugacity at an arbitrary reference state. Substituting Equation 5 into Equation 4, the criterion for chemical equilibrium can be described in terms of fugacity:
 
 $$\hat{f}_{i}^{\alpha} = \hat{f}_{i}^{\beta} \tag{6}$$
 
-A commonly used reference point is an ideal gas mixture. Thus, the definition of fugacity is extended for this condition [@Koretsky2012;@Smith2007]:
+A commonly used reference point is an ideal gas mixture. Thus, the definition of fugacity is extended for this condition:
 
 $$\lim_{P\to0} \left(\frac{\hat{f}_{i}}{y_{i}P}\right) \equiv 1 \tag{7}$$
 
-where  \(\hat{f}_{i}^{IG}= y_i P\) and \(y_i\) is the mole fraction of substance *i* in the vapor phase. For an ideal gas, the fugacity is simply the partial pressure. The ratio \(\hat{f}_i / (y_i P)\) is defined as the **fugacity coefficient** (\(\hat{\phi}_i\)) of specie *i* in a mixture [@Koretsky2012;@Smith2007]:
+where  \(\hat{f}_{i}^{IG}= y_i P\) and \(y_i\) is the mole fraction of substance *i* in the vapor phase. For an ideal gas, the fugacity is simply the partial pressure. The ratio \(\hat{f}_i / (y_i P)\) is defined as the **fugacity coefficient** (\(\hat{\phi}_i\)) of specie *i* in a mixture:
 
 $$\hat{\phi}_{i} \equiv \frac{\hat{f}_{i}}{\hat{f}_{i}^{IG}} = \frac{\hat{f}_{i}}{y_{i}P} \tag{8}$$
 
-The fugacity coefficient is a dimensionless variable that compares the fugacity of substance *i* to the fugacity of the component in an ideal gas mixture, giving an idea of how far from ideality that species is in the mixture [@Koretsky2012;@Smith2007].
+The fugacity coefficient is a dimensionless variable that compares the fugacity of substance *i* to the fugacity of the component in an ideal gas mixture, giving an idea of how far from ideality that species is in the mixture.
 
-When characterizing an incompressible liquid phase, one often resorts to a reference condition other than an ideal gas mixture. In this case, the use of an ideal solution reference is more common. In this context, the fugacity of specie *i* in an ideal solution \((\hat{f}_i^{id})\) is assumed to show a linear relationship with the fugacity of component *i* in its pure state \((f_i)\) and its mole fraction in the liquid \((x_i)\). Thus, the fugacity of component *i* in a mixture, when at the reference state of an ideal liquid, is expressed by  [@Koretsky2012;@Smith2007]:
+When characterizing an incompressible liquid phase, one often resorts to a reference condition other than an ideal gas mixture. In this case, the use of an ideal solution reference is more common. In this context, the fugacity of specie *i* in an ideal solution \((\hat{f}_i^{id})\) is assumed to show a linear relationship with the fugacity of component *i* in its pure state \((f_i)\) and its mole fraction in the liquid \((x_i)\). Thus, the fugacity of component *i* in a mixture, when at the reference state of an ideal liquid, is expressed by:
 
 $$\hat{f}_{i}^{id} = x_{i}f_{i} \tag{9}$$
 
-Analogous to Equation 7, when considering the ideal solution standard state, we can define the **activity coefficient** \((\gamma_i)\) of component *i* in the mixture  [@Koretsky2012;@Smith2007]:
+Analogous to Equation 7, when considering the ideal solution standard state, we can define the **activity coefficient** \((\gamma_i)\) of component *i* in the mixture:
 
 $$\gamma_{i} \equiv \frac{\hat{f}_{i}}{\hat{f}_{i}^{id}} = \frac{\hat{f}_{i}}{x_{i}f_{i}} \tag{10}$$
 
-The activity coefficient serves as an indicator of the non-ideality of species in a liquid, reflecting the interactions present and the effects of molecular structure, in comparison to the ideal solution reference[@Koretsky2012;@Smith2007].
+The activity coefficient serves as an indicator of the non-ideality of species in a liquid, reflecting the interactions present and the effects of molecular structure, in comparison to the ideal solution reference.
 
 The fugacity of the pure component \((f_i)\) can be determined through the following relation:
 
 $$f_i = \phi_i^{sat} P_i^{sat} \exp\left[\frac{v_i^L(P - P_i^{sat})}{RT}\right]\tag{11}$$
 
-where \(P_i^{sat}\) is the saturation pressure of pure component *i*, \(\phi_i^{sat}\) is the fugacity coefficient of the pure component at saturation, \(v_i^L\) is the molar volume of pure component *i* in the liquid phase, and \(R\) is the universal gas constant. The exponential term is called the **Poynting factor** and is usually negligible at pressures below 100 bar. Furthermore, when pressure \(P\) is low, \(\phi_i^{sat} \approx 1\), and the previous equation can be simplified to [@Koretsky2012;@Smith2007]:
+where \(P_i^{sat}\) is the saturation pressure of pure component *i*, \(\phi_i^{sat}\) is the fugacity coefficient of the pure component at saturation, \(v_i^L\) is the molar volume of pure component *i* in the liquid phase, and \(R\) is the universal gas constant. The exponential term is called the **Poynting factor** and is usually negligible at pressures below 100 bar. Furthermore, when pressure \(P\) is low, \(\phi_i^{sat} \approx 1\), and the previous equation can be simplified to:
 
 $$f_i \approx P_i^{sat} \tag{12}$$
 
@@ -77,7 +78,7 @@ The formulation of VLE can be done in different ways, depending on the mixture a
 
 #### 1. Modified Raoult's Law (Gamma-Phi)
 
-For low to moderate pressures, the vapor phase can be approximated as an ideal gas. Under these conditions, the activity coefficient can be used for the liquid phase and the fugacity coefficient for the vapor phase is assumed to be 1 (ideal gas). The equation for the equality of fugacities becomes [@Koretsky2012;@Smith2007]:
+For low to moderate pressures, the vapor phase can be approximated as an ideal gas. Under these conditions, the activity coefficient can be used for the liquid phase and the fugacity coefficient for the vapor phase is assumed to be 1 (ideal gas). The equation for the equality of fugacities becomes:
 
 $$y_{i}P = x_{i}\gamma_{i}P_{i}^{sat} \tag{13}$$
 
@@ -91,7 +92,7 @@ where \(A\), \(B\), and \(C\) are parameters fitted to experimental data. It is 
 
 #### 2. Phi-Phi Method
 
-The second possibility for VLE modeling is to use the fugacity coefficient for both the liquid and vapor phases. This is done for mixtures where pressure plays a significant role, which the activity coefficient approach is unsuitable [@Koretsky2012;@Smith2007]:
+The second possibility for VLE modeling is to use the fugacity coefficient for both the liquid and vapor phases. This is done for mixtures where pressure plays a significant role, which the activity coefficient approach is unsuitable:
 
 $$y_{i}\hat{\phi}_{i}^{V} = x_{i}\hat{\phi}_{i}^{L} \tag{15}$$
 
@@ -101,16 +102,16 @@ where \(\hat{\phi}_{i}^{V}\) is the fugacity coefficient of the vapor phase and 
 
 ### Phase Diagrams and Degrees of Freedom
 
-To solve the system of equations formed by either modeling approach, it is necessary to determine the number of degrees of freedom using the **Gibbs Phase Rule**  [@Koretsky2012;@Smith2007]:
+To solve the system of equations formed by either modeling approach, it is necessary to determine the number of degrees of freedom using the **Gibbs Phase Rule**:
 
 $$F = C - P + 2 \tag{16}$$
 
-where \(F\) is the number of degrees of freedom, \(C\) is the number of components, and \(P\) is the number of phases. For a binary system (\(C=2\)) with two phases in equilibrium (\(P=2\)), \(F\) is equal to 2. This means that two variables (e.g., temperature and pressure) must be specified to determine all other properties of the system  [@Koretsky2012;@Smith2007].
+where \(F\) is the number of degrees of freedom, \(C\) is the number of components, and \(P\) is the number of phases. For a binary system (\(C=2\)) with two phases in equilibrium (\(P=2\)), \(F\) is equal to 2. This means that two variables (e.g., temperature and pressure) must be specified to determine all other properties of the system.
 
-The results obtained from solving the system of equations formed by Equations 13 or 15 are often presented in **Pxy** and **Txy** diagrams of binary systems. The procedure for solving this equations are described in the Algorithm section [@Koretsky2012;@Smith2007].
+The results obtained from solving the system of equations formed by Equations 13 or 15 are often presented in **Pxy** and **Txy** diagrams of binary systems. The procedure for solving this equations are described in the Algorithm section.
 
 #### Pxy Diagram
-In a Pxy diagram presented in **Figure 2**, pressure is plotted against the mole fraction of the liquid and vapor phases (x and y) at a constant temperature. **The Bubble Point Curve (Px curve)** is the upper curve at the diagram. Any point of this curve represents the saturated liquid, where the first bubble of vapor is formed. Above this curve, only the liquid phase exists. **The Dew Point Curve (Py curve)** is the lower curve of the diagram. At any point on this line, the vapor is saturated, where the first drop of liquid is formed. Below this curve, only the vapor phase exists. **The Two-Phase Region** occurs between the two curves, where the liquid and vapor phases coexist in equilibrium [@Koretsky2012;@Smith2007].
+In a Pxy diagram presented in **Figure 2**, pressure is plotted against the mole fraction of the liquid and vapor phases (x and y) at a constant temperature. **The Bubble Point Curve (Px curve)** is the upper curve at the diagram. Any point of this curve represents the saturated liquid, where the first bubble of vapor is formed. Above this curve, only the liquid phase exists. **The Dew Point Curve (Py curve)** is the lower curve of the diagram. At any point on this line, the vapor is saturated, where the first drop of liquid is formed. Below this curve, only the vapor phase exists. **The Two-Phase Region** occurs between the two curves, where the liquid and vapor phases coexist in equilibrium.
 
 <p align="center">
   <img src="/img/Pxy.png" alt="Pxy" width="500">
@@ -118,7 +119,7 @@ In a Pxy diagram presented in **Figure 2**, pressure is plotted against the mole
 </p>
 
 #### Txy Diagram
-In a Txy diagram shown in **Figure 3**, temperature is plotted against composition at a constant pressure. Similarly, **the Bubble Point Curve (Tx curve)** is the lower curve, and for a given liquid composition it shows the temperature at which the first bubble of vapor forms upon heating. Below this curve, only liquid exists. **The Dew Point Curve (Ty curve)** is the upper curve, which represents the temperature where the last drop of liquid vaporizes. Above this curve, only vapor exists. Again, **The Two-Phase Region** occurs between the curves, where liquid and vapor coexist in equilibrium [@Koretsky2012;@Smith2007].
+In a Txy diagram shown in **Figure 3**, temperature is plotted against composition at a constant pressure. Similarly, **the Bubble Point Curve (Tx curve)** is the lower curve, and for a given liquid composition it shows the temperature at which the first bubble of vapor forms upon heating. Below this curve, only liquid exists. **The Dew Point Curve (Ty curve)** is the upper curve, which represents the temperature where the last drop of liquid vaporizes. Above this curve, only vapor exists. Again, **The Two-Phase Region** occurs between the curves, where liquid and vapor coexist in equilibrium.
 
 <p align="center">
   <img src="/img/Txy.png" alt="Txy" width="500">
@@ -127,7 +128,7 @@ In a Txy diagram shown in **Figure 3**, temperature is plotted against compositi
 
 
 #### Azeotropes
-In real mixtures, **azeotropes** are frequently observed, which occur when the bubble point and dew point curves touch, as shown in **Figure 2**. At this point, the composition of the liquid phase is equal to the composition of the vapor phase \((x_i = y_i)\). In the **Pxy** diagram, an **Maximum Pressure Azeotrope (Minimum-Boiling Azeotrope)** can occur when the **Px** and **Py** curves meet at a maximum pressure. This happens when the interactions between unlike molecules are weaker than those between like molecules. Thus, the components prefer to be in their pure state, making the mixture more volatile than the pure components, resulting in a higher vapor pressure and a lower boiling point. Likewise, a **Minimum Pressure Azeotrope (Maximum-Boiling Azeotrope)** can happen when the curves meet at a minimum pressure. This signifies that the interactions between unlike molecules are stronger than those between like molecules. Consequently, the components prefer to be mixed, making the mixture harder to vaporize than the pure components. This results in a lower vapor pressure and a higher boiling point, requiring more energy to vaporize the mixture [@Koretsky2012;@Smith2007]:
+In real mixtures, **azeotropes** are frequently observed, which occur when the bubble point and dew point curves touch, as shown in **Figure 2**. At this point, the composition of the liquid phase is equal to the composition of the vapor phase \((x_i = y_i)\). In the **Pxy** diagram, an **Maximum Pressure Azeotrope (Minimum-Boiling Azeotrope)** can occur when the **Px** and **Py** curves meet at a maximum pressure. This happens when the interactions between unlike molecules are weaker than those between like molecules. Thus, the components prefer to be in their pure state, making the mixture more volatile than the pure components, resulting in a higher vapor pressure and a lower boiling point. Likewise, a **Minimum Pressure Azeotrope (Maximum-Boiling Azeotrope)** can happen when the curves meet at a minimum pressure. This signifies that the interactions between unlike molecules are stronger than those between like molecules. Consequently, the components prefer to be mixed, making the mixture harder to vaporize than the pure components. This results in a lower vapor pressure and a higher boiling point, requiring more energy to vaporize the mixture:
 
 ---
 ## Algorithm
