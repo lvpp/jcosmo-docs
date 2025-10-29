@@ -164,12 +164,51 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#extending-sigma-profiles-for-polymers" class="nav-link">Extending \sigma-profiles for polymers</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#creating-custom-files" class="nav-link">Creating .custom files</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p><strong>This page is currently under development and will be available soon. Stay tuned for updates!</strong></p></div>
+<h1 id="extending-sigma-profiles-for-polymers">Extending <script type="math/tex">\sigma</script>-profiles for polymers</h1>
+<p>Modeling polymers using COSMO-based methods requires special treatment due to their large molecular size and repetitive structural units. Performing full quantum chemical calculations for entire polymer chains is computationally prohibitive. Extending <script type="math/tex">\sigma</script>-profiles for polymers provides an efficient alternative, enabling the construction of representative COSMO surfaces for macromolecules from monomer-level information. This approach significantly reduces computational cost while preserving a physically meaningful description of the polymer’s surface polarity and volume. The resulting polymer <script type="math/tex">\sigma</script>-profile can be directly used in COSMO-SAC calculations, allowing the phase equilibrium prediction without the need for full polymer-level quantum computations.</p>
+<h2 id="creating-custom-files">Creating .custom files</h2>
+<p>This section describes the procedure used to construct the .custom file, necessary for extending the polymer <script type="math/tex">\sigma</script>-profile. The .custom file can be opened and inspected with any text editor. An example is presented in Figure 1.</p>
+<figure style="text-align: center;">
+  <img src="/img/custom file figure.jpg" alt="Equilíbrio de Fases" width="1000">
+  <figcaption><strong>Figure 1.</strong> Example of the .custom file for polyethylene glycol (PEG) with a molar mass of 3350 g/mol.</figcaption>
+</figure>
+
+<p><strong>1. Loading the COSMO File</strong></p>
+<p>The construction procedure begins by loading the .cosmo file of the monomer using the LOAD command, as illustrated in Figure 1. This file must contain the COSMO surface information generated from a quantum chemical calculation.</p>
+<p><strong>2. Estimation of the Monomer Volume</strong></p>
+<p>The molecular volume of the monomer is estimated from the difference in total COSMO volumes between oligomers of different chain lengths. This value, given in <script type="math/tex">\text{Å}^3</script>, is used in the construction of the polymer model and must be specified in the .custom file, as shown in Figure 1. The surface area is automatically computed by JCOSMO using the multiplier and the monomer .cosmo file.</p>
+<p><strong>3. Defining the COSMO Surface Atoms</strong></p>
+<p>The ONLY_FOR command specifies which atoms of the monomer contribute to the COSMO surface. Atom indices can be identified directly from the .cosmo file or through JCOSMO by selecting “View Surfaces” and hovering the cursor over the atoms of interest.</p>
+<p><strong>4. Assigning Atom Multipliers</strong></p>
+<p>The ATOM_MULTIPLIER command is used to assign multiplicative factors to the atoms of the COSMO surface:</p>
+<ul>
+<li>
+<p>Atoms belonging to the terminal groups receive a multiplier of 1.</p>
+</li>
+<li>
+<p>Atoms belonging to the repeating unit receive a multiplier corresponding to the number of monomeric units required to reach the target polymer molar mass. </p>
+</li>
+</ul>
+<p>This procedure ensures that the final COSMO surface represents a polymer with the target molar mass while preserving the correct relative contributions of the end groups and repeating units. The calculation of the appropriate multiplier <script type="math/tex">(N_b)</script> is described by Equation 1, where <script type="math/tex">MW_e</script> is the molecular weight of an end group, <script type="math/tex">MW_r</script> is the molecular weight of the repeating unit, and <script type="math/tex">MW_p</script> is the average molecular weight of the polymer.</p>
+<p>
+<script type="math/tex; mode=display">N_b=\frac{M W_p-\sum M W_e}{M W_r} \tag{1}</script>
+</p>
+<p><strong>5. Final .custom File</strong></p>
+<p>Once all commands and multipliers have been correctly defined, the .custom file can be saved. This file contains all structural and surface specifications required for COSMO-based thermodynamic calculations of the polymer, as it automatically retrieves the necessary information from the monomer .cosmo file. Both files, the .custom and the corresponding monomer.cosmo must be located in the Profile Folder referenced in JCOSMO GUI.</p></div>
             </div>
         </div>
 

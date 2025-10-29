@@ -164,12 +164,94 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#cosmo-sac-variants" class="nav-link">COSMO-SAC Variants</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#cs25" class="nav-link">CS25</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#cosmo-sac-hb2" class="nav-link">COSMO-SAC-HB2</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p><strong>This page is currently under development and will be available soon. Stay tuned for updates!</strong></p></div>
+<h1 id="cosmo-sac-variants">COSMO-SAC Variants</h1>
+<p>In this section, we describe the different <strong>COSMO-SAC</strong> variants currently available in <strong>JCOSMO</strong>.<br />
+Over the years, several versions of COSMO-SAC have been developed to improve the description of intermolecular interactions, hydrogen bonding, etc. Each variant introduces changes to specific components of the model &mdash; such as the sigma-profile generation, the segment interaction energy expression, or the combinatorial term.</p>
+<p>JCOSMO provides an implementation of multiple COSMO-SAC variants so users can explore their relative performance and applicability depending on the target property or chemical system.
+The variant can be selected via the combobox in the top left corner of JCOSMO user interface, allowing users to benchmark and validate different formulations under consistent computational settings.</p>
+<blockquote>
+<p><strong>Note:</strong> Compatibility between sigma profiles and the chosen COSMO-SAC variant is essential. Always ensure that sigma-profiles were generated using the corresponding assumptions (e.g., level of theory, basis set, cavity construction, etc.).</p>
+</blockquote>
+<h2 id="cs25">CS25</h2>
+<p>The <strong>LVPP-modified COSMO-SAC 2025</strong> model represents our latest COSMO-SAC parametrization, referred to simply as <strong>CS25</strong>.</p>
+<h3 id="sigma-profiles">Sigma-Profiles</h3>
+<p>CS25 is based on sigma-profiles calculated using <a href="https://nwchemgit.github.io/">NWChem</a> as the quantum chemical package, in contrast to previous parametrizations that relied on GAMESS.
+The level of theory employed is <strong>B3LYP/def2-SVPD</strong>.
+Molecular geometries were first optimized in the gas phase, followed by a single-point calculation with the <strong>COSMO</strong> solvation model to generate the sigma-profiles.</p>
+<p>The <strong>def2-SVPD</strong> basis set was chosen as a balance between accuracy and computational cost, offering improved polarization treatment and broader elemental coverage compared to the TZVP basis set used previously.<br />
+For larger molecules, the <strong>def2-SVP</strong> basis set was adopted to reduce computational demand, with negligible loss of accuracy in the resulting sigma-profiles.</p>
+<h3 id="multiple-hydrogen-bonds">Multiple Hydrogen Bonds</h3>
+<p>In this parametrization, different types of hydrogen bonds (HBs) are explicitly considered.
+Two types of HB donors are defined: one corresponding to water molecules and another representing hydrogens bonded to electronegative atoms such as N, O, F, Cl, Br, or I.
+In the user interface, all these donor types are collectively referred to as <em>alcohol</em> donors.  </p>
+<p>Only the surface area fraction with a charge density exceeding the defined HB cutoff value is assumed to be capable of participating in HBs.</p>
+<p>For HB acceptors, several categories are available: <em>ketone</em>, <em>ether</em>, <em>amine</em>, and <em>F+</em>.
+Some special cases apply to nitrogen-containing groups:</p>
+<ul>
+<li>When nitrogen is bonded to a single atom (e.g., in nitriles), it is treated as a <em>ketone</em>-type acceptor.  </li>
+<li>When bonded to two atoms (e.g., in pyridine), it is treated as an <em>ether</em>-type acceptor.</li>
+</ul>
+<h3 id="dispersion-contribution">Dispersion Contribution</h3>
+<p>The original COSMO-SAC model typically disregarded dispersion interactions, assuming that their effects would cancel out in excess properties.
+In <strong>CS25</strong>, a dedicated dispersion contribution is included for each pair of atoms.
+This is achieved by storing, along with the surface charge density (sigma-profile), the <strong>atom type</strong> associated with each surface segment.</p>
+<p>Although the resulting dispersion term is generally small, it provides a subtle yet meaningful correction that improves the description of nearly athermal mixtures, systems dominated by weak interactions, and particularly <strong>fluorinated/hydrocarbon mixtures</strong>, where dispersion effects play a more significant role.</p>
+<h3 id="combinatorial-contribution">Combinatorial contribution</h3>
+<p>the Flory-Huggins (FH) equation is used for the combinatorial contribution:
+<script type="math/tex; mode=display">
+\ln\ \gamma^{\rm{comb}}_{i} = \ln \frac{\Phi_i}{x_i} + 1 - \frac{\Phi_i}{x_i}
+</script>
+where <script type="math/tex">\Phi_i \equiv x_i r_i / \sum_j x_j r_j</script> is the volume fraction, <script type="math/tex">r_i</script> is the molecular volume of compound <em>i</em> obtained from the COSMO calculations, and <script type="math/tex">x_i</script> is the mole fraction of component <em>i</em>.</p>
+<p>This is in contrast to the typical Staverman-Guggenheim (SG) term with a normalized area<sup id="fnref:lin2002"><a class="footnote-ref" href="#fn:lin2002">1</a></sup><sup id="fnref:Soares2011"><a class="footnote-ref" href="#fn:Soares2011">2</a></sup>.
+The reason for using FH is because the potential inconsistencies with the SG formula<sup id="fnref:krooshof2024gibbs"><a class="footnote-ref" href="#fn:krooshof2024gibbs">3</a></sup>.
+Thus, in all recent COSMO-SAC calculations of our group we have assumed a simple FH combinatorial contribution. Although this can produce slightly worse results for linear hydrocarbon mixtures.</p>
+<h2 id="cosmo-sac-hb2">COSMO-SAC-HB2</h2>
+<p>The <strong>LVPP-modified COSMO-SAC</strong> model with multiple hydrogen-bond (HB) energy types, improving the description of systems where different donor and acceptor strengths play a significant role.
+Three parametrizations are available, depending on the quantum chemistry package and level of theory used to generate the sigma-profiles:</p>
+<ul>
+<li><strong>COSMO-SAC-HB2 (GAMESS)</strong> <sup id="fnref:Ferrarini2018"><a class="footnote-ref" href="#fn:Ferrarini2018">4</a></sup>: based on sigma-profiles computed with <strong>GAMESS</strong> using the <strong>HF/TZVP</strong> level of theory.  </li>
+<li><strong>COSMO-SAC-HB2 (FINE)</strong> <sup id="fnref:deSouza2025"><a class="footnote-ref" href="#fn:deSouza2025">5</a></sup>: based on <strong>TURBOMOLE</strong> calculations employing a fine-grid marching tetrahedron cavity and the <strong>BP/TZVPD</strong> level of theory.  </li>
+<li><strong>COSMO-SAC-HB2 (BP-TZVP)</strong> <sup id="fnref2:deSouza2025"><a class="footnote-ref" href="#fn:deSouza2025">5</a></sup>: based on <strong>TURBOMOLE</strong> calculations using the <strong>BP/TZVP</strong> level of theory.  </li>
+</ul>
+<p>All variants use <strong>FH</strong> as the combinatorial contribution by default, and none includes a dispersive contribution.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:lin2002">
+<p>Shiang-Tai Lin and Stanley I. Sandler. A Priori Phase Equilibrium Prediction from a Segment Contribution Solvation Model. <em>Ind. &amp; Eng. Chem. Res.</em>, 41(5):899–913, 2002. <a href="https://doi.org/10.1021/ie001047w">doi:10.1021/ie001047w</a>.&#160;<a class="footnote-backref" href="#fnref:lin2002" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Soares2011">
+<p>Rafael de P. Soares. The Combinatorial Term for COSMO-Based Activity Coefficient Models. <em>Industrial &amp; Engineering Chemistry Research</em>, 50(5):3060–3063, mar 2011. <a href="https://doi.org/10.1021/ie102087p">doi:10.1021/ie102087p</a>.&#160;<a class="footnote-backref" href="#fnref:Soares2011" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:krooshof2024gibbs">
+<p>Gerard J P Krooshof and Gijsbertus de With. Gibbs probability entropy and its implication to combinatorial entropy models. <em>Fluid Ph. Equilib.</em>, 584:114146, 2024. <a href="https://doi.org/https://doi.org/10.1016/j.fluid.2024.114146">doi:https://doi.org/10.1016/j.fluid.2024.114146</a>.&#160;<a class="footnote-backref" href="#fnref:krooshof2024gibbs" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Ferrarini2018">
+<p>F. Ferrarini, G. B. Flores, A. R. Muniz, and R. P. Soares. An open and extensible sigma-profile database for cosmo-based models. <em>AIChE J.</em>, 64(9):3443&ndash;3455, 2018. <a href="https://doi.org/10.1002/aic.16194">doi:10.1002/aic.16194</a>.&#160;<a class="footnote-backref" href="#fnref:Ferrarini2018" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:deSouza2025">
+<p>Edgar T. de Souza Jr., Murilo L. Alcantara, Paula B. Staudt, João A. P. Coutinho, and Rafael de P. Soares. Development of a COSMO-SAC parametrization with advanced QM method TZVPD-FINE. <em>Industrial &amp; Engineering Chemistry Research</em>, 64(29):14700–14711, 2025. URL: <a href="https://doi.org/10.1021/acs.iecr.5c01146">https://doi.org/10.1021/acs.iecr.5c01146</a>, <a href="https://doi.org/10.1021/acs.iecr.5c01146">doi:10.1021/acs.iecr.5c01146</a>.&#160;<a class="footnote-backref" href="#fnref:deSouza2025" title="Jump back to footnote 5 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:deSouza2025" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
             </div>
         </div>
 
