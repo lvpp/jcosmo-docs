@@ -26,7 +26,7 @@ $$
     \theta_{AB}^2 = \theta_{AA} \theta_{BB} \frac{\Psi_{AB}^2}{\Psi_{AA} \Psi_{BB}}
 $$
 
-> **Note:** The above equation is equivalent to the quasi-chemical treatment, Eq.(4.09.1) of Guggenheim[@guggenheim1952mixtures]. If the mixture where to be completely random: \($\theta_{AB} = \Theta_{A} \Theta_{B}\$), where \($\Theta_{A}$\) is the surface area fraction of compound *A* in mixture.
+> **Note:** The above equation is equivalent to the quasi-chemical treatment, Eq.(4.09.1) of Guggenheim[@guggenheim1952mixtures]. If the mixture where to be completely random: \(\theta_{AB} = \Theta_{A} \Theta_{B}\), where \(\Theta_{A}\) is the surface area fraction of compound *A* in mixture.
 
 ## Extensions in terms of groups or small segments
 
