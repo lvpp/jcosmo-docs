@@ -39,8 +39,3 @@ plugins:
   - search
   - bibtex:
       bib_file: "bib.bib"
-
-extra:
-  meta:
-    - name: google-site-verification
-      content: NvwvrjNK9soj1y556NAwMUMECNYtF_RmnRv8--E3U-I

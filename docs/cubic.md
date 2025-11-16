@@ -91,6 +91,8 @@ Where \(P^{\text{sat}}(T_r = 0.7)\) is the saturation pressure at a reduced temp
 
 To enable phase equilibrium calculations and represent mixtures, equations of state require the use of mixing rules. This is necessary because, for cubic equations of state, the parameters \( a \) and \( b \) for mixtures cannot be obtained directly as they are for pure compounds, where critical property data are used. Therefore, mixing rules establish mathematical relationships that relate the mixture parameters \( a \) and \( b \) to the parameters \( a_i \) and \( b_i \) of each pure component \( i \).
 
+### Classic vdW mixing rule
+
 The classic van der Waals mixing rule consists of a linear relation for the covolume \( b \) and a quadratic rule for the attractive parameter \( a \):
 
 $$
@@ -106,13 +108,21 @@ $$
 a_{ij} = \sqrt{a_i a_j}(1 - k_{ij})
 $$
 
-Here, \( k_{ij} \) is the binary interaction parameter between components \( i \) and \( j \), typically fitted using experimental phase equilibrium data. While these parameters are often assumed to be zero, they are crucial for mixtures with significant deviations from ideality. Nevertheless, even with \( k_{ij} \), these classical rules struggle to represent mixtures involving strong molecular interactions, such as polar mixtures (e.g., water and ethanol), due to the absence of temperature-dependent binary parameters [@Smith2007].
+Here, \( k_{ij} \) is the binary interaction parameter between components \( i \) and \( j \), typically fitted using experimental phase equilibrium data. While these parameters are often assumed to be zero, they are crucial for mixtures with significant deviations from ideality.
+Nevertheless, even with \( k_{ij} \), these classical rule struggle to represent mixtures involving strong molecular interactions, such as polar mixtures (e.g., water and ethanol), due to the absence of temperature-dependent binary parameters [@Smith2007].
+By default, all \( k_{ij} = 0 \) within JCOSMO.
+
+### MHV1
 
 Huron and Vidal[@Huron1979] in 1979 proposed a mixing rule based on excess Gibbs energy models \( g^E_\gamma \). They equated the excess Gibbs energy calculated using a cubic equation of state \( g^E_\phi \), at the limit \( P \rightarrow \infty \), to the expression for \( g^E_\gamma \). Under this pressure condition, the molar volume is considered equal to the covolume \( b \), and the expression for the \( a \) parameter is derived.
 
 Following the work of Huron and Vidal[@Huron1979], several other mixing rules were developed, including MHV-1 (Modified Huron-Vidal mixing rule) [@Michelsen1990a] [@Michelsen1990b], UMR (Universal Mixing Rule) [@Voutsas2004], the rule by Wong and Sandler[@Wong1992], and PSRK (Predictive Soave-Redlich-Kwong)[@Holderbaum1991].
 
-The PSRK (Predictive Soave-Redlich-Kwong)[@Holderbaum1991] combines the SRK equation with the \( \alpha(T) \) function proposed by Mathias and Copeman shown previously, and the UNIFAC model.   
+Within JCOSMO **MHV-1** can be combined with activity models to include pressure effects in such models.
+
+### PSRK
+
+The PSRK (Predictive Soave-Redlich-Kwong)[@Holderbaum1991] combines the SRK equation with the \( \alpha(T) \) function proposed by Mathias and Copeman shown previously, and a specific UNIFAC parametrization.
 
 To combine the SRK equation of state with the excess Gibbs energy model (UNIFAC), the MHV1 mixing rule was applied:
 
@@ -125,7 +135,12 @@ $$
 
 where \( g_0^E \) is the excess Gibbs energy in the limit \( P \rightarrow 0 \), calculated using the UNIFAC model. In PSRK, the parameter \( A_1 \) is set to -0.64663. The UNIFAC parameter matrix used in PSRK includes six additional gases, and the most recent revision accepted by the UNIFAC consortium was presented by Horstmann in 2005[@Horstmann2005].
 
-However, all these mixing rules introduce distortions in phase equilibrium calculations at low pressures due to discrepancies between \( g^E_\phi \) and \( g^E_\gamma \) under such conditions. Nonetheless, they provide satisfactory results for many mixtures with significant non-ideality, representing an improvement over the classical van der Waals rule.
+**PSRK** is available within JCOSMO as one of the options for model comparison.
+
+### SCMR
+
+All mixing rules described previously introduce distortions in phase equilibrium calculations at low pressures due to discrepancies between Gibbs excess calculated with the equation of state (\( g^E_\phi \)) and with the activity model (\( g^E_\gamma \)).
+Nonetheless, they provide satisfactory results for many mixtures with significant non-ideality, representing an improvement over the classical van der Waals rule.
 
 To overcome this limitation, Staudt and coworkers[@Staudt2012] developed a mixing rule that yields consistent results, where the excess Gibbs energy \( g^E_\phi \) from the equation of state matches the excess Gibbs energy \( g^E_\gamma \) from the activity coefficient model. Due to this consistency, regardless of the cubic equation of state used, the authors named the approach the SCMR (Self-Consistent Mixing Rule). This mixing rule was created by developers of JCOSMO, and it is implemented as an option when calculating phase equilibria. In this mixing rule, the following expression is used to calculate the excess Gibbs energy via an equation of state:
 

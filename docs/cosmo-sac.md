@@ -1,9 +1,10 @@
 # COSMO-SAC Variants
 
-In this section, we describe the different **COSMO-SAC** variants currently available in **JCOSMO**.  
+In this section, we describe the different **COSMO-SAC** variants currently available in **JCOSMO**.
+
 Over the years, several versions of COSMO-SAC have been developed to improve the description of intermolecular interactions, hydrogen bonding, etc. Each variant introduces changes to specific components of the model --- such as the sigma-profile generation, the segment interaction energy expression, or the combinatorial term.
 
-JCOSMO provides an implementation of multiple COSMO-SAC variants so users can explore their relative performance and applicability depending on the target property or chemical system.
+JCOSMO provides the implementation of multiple COSMO-SAC variants, so users can explore their relative performance and applicability.
 The variant can be selected via the combobox in the top left corner of JCOSMO user interface, allowing users to benchmark and validate different formulations under consistent computational settings.
 
 > **Note:** Compatibility between sigma profiles and the chosen COSMO-SAC variant is essential. Always ensure that sigma-profiles were generated using the corresponding assumptions (e.g., level of theory, basis set, cavity construction, etc.).
@@ -14,14 +15,14 @@ The **LVPP-modified COSMO-SAC 2025** model represents our latest COSMO-SAC param
 
 ### Sigma-Profiles
 
-CS25 is based on sigma-profiles calculated using [NWChem](https://nwchemgit.github.io/) as the quantum chemical package, in contrast to previous parametrizations that relied on GAMESS.
+CS25 is based on sigma-profiles calculated using [NWChem](https://nwchemgit.github.io/)[@Apra2020] as the quantum chemical package, in contrast to previous parametrizations that relied on GAMESS.
 The level of theory employed is **B3LYP/def2-SVPD**.
-Molecular geometries were first optimized in the gas phase, followed by a single-point calculation with the **COSMO** solvation model to generate the sigma-profiles.
+Molecular geometries were first optimized in the gas phase, followed by a single-point calculation with the **COSMO** solvation model to generate the sigma-profiles[@Soares2025NWChemCOSMO].
 
-The **def2-SVPD** basis set was chosen as a balance between accuracy and computational cost, offering improved polarization treatment and broader elemental coverage compared to the TZVP basis set used previously.  
+The **def2-SVPD** basis set was chosen as a balance between accuracy and computational cost, offering improved polarization treatment and broader elemental coverage compared to the TZVP basis set used previously.
 For larger molecules, the **def2-SVP** basis set was adopted to reduce computational demand, with negligible loss of accuracy in the resulting sigma-profiles.
 
-### Multiple Hydrogen Bonds
+### Multiple Hydrogen Bond Types
 
 In this parametrization, different types of hydrogen bonds (HBs) are explicitly considered.
 Two types of HB donors are defined: one corresponding to water molecules and another representing hydrogens bonded to electronegative atoms such as N, O, F, Cl, Br, or I.
@@ -37,7 +38,7 @@ Some special cases apply to nitrogen-containing groups:
 
 ### Dispersion Contribution
 
-The original COSMO-SAC model typically disregarded dispersion interactions, assuming that their effects would cancel out in excess properties.
+The original COSMO-SAC model typically disregarded dispersion interactions[@Lin2002], assuming that their effects would cancel out in excess properties.
 In **CS25**, a dedicated dispersion contribution is included for each pair of atoms.
 This is achieved by storing, along with the surface charge density (sigma-profile), the **atom type** associated with each surface segment.
 
@@ -45,15 +46,19 @@ Although the resulting dispersion term is generally small, it provides a subtle 
 
 ### Combinatorial contribution
 
-the Flory-Huggins (FH) equation is used for the combinatorial contribution:
+A modified Flory-Huggins (FH) equation is used for the combinatorial contribution[@Kikic1980]:
 $$
-\ln\ \gamma^{\rm{comb}}_{i} = \ln \frac{\Phi_i}{x_i} + 1 - \frac{\Phi_i}{x_i}
+\ln\ \gamma^{\rm{comb}}_{i} = \ln \frac{\Phi_i'}{x_i} + 1 - \frac{\Phi_i'}{x_i}
 $$
-where \(\Phi_i \equiv x_i r_i / \sum_j x_j r_j\) is the volume fraction, \(r_i\) is the molecular volume of compound *i* obtained from the COSMO calculations, and \(x_i\) is the mole fraction of component *i*.
+where \(\Phi_i' \equiv x_i r_i^p / \sum_j x_j r_j^p\) is the modified volume fraction, \(r_i\) is the molecular volume of compound \(i\) obtained from the COSMO calculations, \(x_i\) is the mole fraction of component \(i\),
+and \(p\) is an empirical exponent[@Donohue1975].
 
 This is in contrast to the typical Staverman-Guggenheim (SG) term with a normalized area[@lin2002;@Soares2011].
 The reason for using FH is because the potential inconsistencies with the SG formula[@krooshof2024gibbs].
-Thus, in all recent COSMO-SAC calculations of our group we have assumed a simple FH combinatorial contribution. Although this can produce slightly worse results for linear hydrocarbon mixtures.
+
+When the exponent \( p = 1 \), the expression reduces to the original FH form.
+This classical formula is known to overestimate the combinatorial contribution, effectively providing an upper limit[@Donohue1975].
+In **CS25**, an exponent of \( p = \tfrac{2}{3} \) is used, based on comparisons with experimental data for aliphatic hydrocarbons[@Kikic1980].
 
 ## COSMO-SAC-HB2
 
@@ -64,4 +69,4 @@ Three parametrizations are available, depending on the quantum chemistry package
 - **COSMO-SAC-HB2 (FINE)** [@deSouza2025]: based on **TURBOMOLE** calculations employing a fine-grid marching tetrahedron cavity and the **BP/TZVPD** level of theory.  
 - **COSMO-SAC-HB2 (BP-TZVP)** [@deSouza2025]: based on **TURBOMOLE** calculations using the **BP/TZVP** level of theory.  
 
-All variants use **FH** as the combinatorial contribution by default, and none includes a dispersive contribution.
+All variants in this section use **FH** as the combinatorial contribution (\(p = 1\) in the modified FH formula), and none includes a dispersive contribution.
