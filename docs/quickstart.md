@@ -35,7 +35,7 @@ This charge distribution is obtained using the **COSMO method**, which models th
 In addition to the sigma-surface, the compound's molecular volume, surface area, and molar mass are also displayed.
 
 
-## Activity coefficients, Excess, and Mixture properties
+## Activity coefficients, Excess, and Mixing properties
 
 If exactly two compounds are selected, the **`Binary`** tab can be used to display the activity coefficient chart.
 Just click on  **`Calculate`** and the logarithm of the activity coefficients chart is calculated.
@@ -57,14 +57,16 @@ The user can also play with the checkboxes at the top:
 
  - `ln Gamma`: displays the logarithm of the activity coefficients (default)
  - `Excess`: displays the mixture excess properties
- - `Mixture`: displays the mixture properties, recalling excess Gibbs and Entropy differ from mixture Gibbs and Entropy
+ - `Mixing`: displays the mixing properties, recalling excess Gibbs and Entropy differ from mixing Gibbs and Entropy
  - `Dimensionless (1/RT)`: dimensionless (or divided by RT) properties are used (default), otherwise `J/mol` or `J/g` are used
  - `Mass based`: Use mass-based calculations instead of the default molar basis
 
 
 ## Sigma profiles
 
-A **sigma profile** is a molecule-specific distribution of charge density across a solute's surface, used in COSMO-based models to describe intermolecular interactions. It represents the fraction of the surface area associated with a given screening charge density (\( \sigma \)).  
+A **sigma profile** is a molecule-specific distribution of charge density across a solute's surface, used in COSMO-based models to describe intermolecular interactions. It represents the portion of the surface area associated with a given screening charge density (\( \sigma \)).
+
+> Please note that the standard convention is to present **induced charge densities**. Under this convention, **hydrogen-bond donors** show **negative** induced densities, while **hydrogen-bond acceptors** appear **positive**.
 
 Now, let's view a **sigma profile** in JCOSMO. Simply navigate to the **`Profile`** tab and click **`Refresh`**—the profiles for all selected compounds will be displayed.
 

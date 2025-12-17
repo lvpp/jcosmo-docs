@@ -24,17 +24,18 @@ For larger molecules, the **def2-SVP** basis set was adopted to reduce computati
 
 ### Multiple Hydrogen Bond Types
 
-In this parametrization, different types of hydrogen bonds (HBs) are explicitly considered.
-Two types of HB donors are defined: one corresponding to water molecules and another representing hydrogens bonded to electronegative atoms such as N, O, F, Cl, Br, or I.
+In this parametrization, different types of *strong* hydrogen bonds (HBs) are explicitly considered.
+
+Two types of strong HB donors are defined: one corresponding to water molecules and another representing hydrogens bonded to electronegative atoms such as N, O, F, Cl, Br, or I.
 In the user interface, all these donor types are collectively referred to as *alcohol* donors.  
 
-Only the surface area fraction with a charge density exceeding the defined HB cutoff value is assumed to be capable of participating in HBs.
-
-For HB acceptors, several categories are available: *ketone*, *ether*, *amine*, and *F+*.
+For strong HB acceptors, several categories are available: *ketone*, *ether*, *amine*, and *F+*.
 Some special cases apply to nitrogen-containing groups:
 
 - When nitrogen is bonded to a single atom (e.g., in nitriles), it is treated as a *ketone*-type acceptor.  
 - When bonded to two atoms (e.g., in pyridine), it is treated as an *ether*-type acceptor.
+
+Besides being part of one of the categories listed before. Only surface area fractions with a charge density above the HB cutoff are treated as capable of forming *strong* hydrogen bonds. The standard electrostatic contribution already accounts for the general hydrogen-bonding interaction, but segments exceeding the cutoff receive an **additional, strong HB contribution**. This extra term represents situations with particularly strong hydrogen bonds, typically associated with shorter interaction distances.
 
 ### Dispersion Contribution
 
