@@ -199,16 +199,16 @@ Molecular geometries were first optimized in the gas phase, followed by a single
 <p>The <strong>def2-SVPD</strong> basis set was chosen as a balance between accuracy and computational cost, offering improved polarization treatment and broader elemental coverage compared to the TZVP basis set used previously.
 For larger molecules, the <strong>def2-SVP</strong> basis set was adopted to reduce computational demand, with negligible loss of accuracy in the resulting sigma-profiles.</p>
 <h3 id="multiple-hydrogen-bond-types">Multiple Hydrogen Bond Types</h3>
-<p>In this parametrization, different types of hydrogen bonds (HBs) are explicitly considered.
-Two types of HB donors are defined: one corresponding to water molecules and another representing hydrogens bonded to electronegative atoms such as N, O, F, Cl, Br, or I.
+<p>In this parametrization, different types of <em>strong</em> hydrogen bonds (HBs) are explicitly considered.</p>
+<p>Two types of strong HB donors are defined: one corresponding to water molecules and another representing hydrogens bonded to electronegative atoms such as N, O, F, Cl, Br, or I.
 In the user interface, all these donor types are collectively referred to as <em>alcohol</em> donors.  </p>
-<p>Only the surface area fraction with a charge density exceeding the defined HB cutoff value is assumed to be capable of participating in HBs.</p>
-<p>For HB acceptors, several categories are available: <em>ketone</em>, <em>ether</em>, <em>amine</em>, and <em>F+</em>.
+<p>For strong HB acceptors, several categories are available: <em>ketone</em>, <em>ether</em>, <em>amine</em>, and <em>F+</em>.
 Some special cases apply to nitrogen-containing groups:</p>
 <ul>
 <li>When nitrogen is bonded to a single atom (e.g., in nitriles), it is treated as a <em>ketone</em>-type acceptor.  </li>
 <li>When bonded to two atoms (e.g., in pyridine), it is treated as an <em>ether</em>-type acceptor.</li>
 </ul>
+<p>Besides being part of one of the categories listed before. Only surface area fractions with a charge density above the HB cutoff are treated as capable of forming <em>strong</em> hydrogen bonds. The standard electrostatic contribution already accounts for the general hydrogen-bonding interaction, but segments exceeding the cutoff receive an <strong>additional, strong HB contribution</strong>. This extra term represents situations with particularly strong hydrogen bonds, typically associated with shorter interaction distances.</p>
 <h3 id="dispersion-contribution">Dispersion Contribution</h3>
 <p>The original COSMO-SAC model typically disregarded dispersion interactions<sup id="fnref:Lin2002"><a class="footnote-ref" href="#fn:Lin2002">3</a></sup>, assuming that their effects would cancel out in excess properties.
 In <strong>CS25</strong>, a dedicated dispersion contribution is included for each pair of atoms.

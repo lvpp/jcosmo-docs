@@ -175,7 +175,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#activity-coefficients-excess-and-mixture-properties" class="nav-link">Activity coefficients, Excess, and Mixture properties</a>
+            <li class="nav-item" data-bs-level="2"><a href="#activity-coefficients-excess-and-mixing-properties" class="nav-link">Activity coefficients, Excess, and Mixing properties</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -228,7 +228,7 @@ The standard color convention is: <strong>green</strong> for neutral (apolar) re
 <p>These induced charges arise due to differences in electronegativity between atoms within a molecule. For example, oxygen is highly electronegative and tends to attract electron density, inducing a <strong>positive charge</strong> (shown in red). Conversely, hydrogen atoms in polar bonds (such as O-H or N-H) tend to lose electron density and thus induce a <strong>negative charge</strong> (shown in blue) on themselves.  </p>
 <p>This charge distribution is obtained using the <strong>COSMO method</strong>, which models the molecule as being embedded in a <strong>perfect conductor</strong>, similar to a liquid metal. This approximation allows the calculation of charge polarization at the molecular surface, leading to the sigma-surface representation.  </p>
 <p>In addition to the sigma-surface, the compound&rsquo;s molecular volume, surface area, and molar mass are also displayed.</p>
-<h2 id="activity-coefficients-excess-and-mixture-properties">Activity coefficients, Excess, and Mixture properties</h2>
+<h2 id="activity-coefficients-excess-and-mixing-properties">Activity coefficients, Excess, and Mixing properties</h2>
 <p>If exactly two compounds are selected, the <strong><code>Binary</code></strong> tab can be used to display the activity coefficient chart.
 Just click on  <strong><code>Calculate</code></strong> and the logarithm of the activity coefficients chart is calculated.</p>
 <p>Recalling that when a compound is pure, <script type="math/tex">\ln \gamma_i = 0</script>, and when its mole fraction tends to zero, we reach the infinite dilution limit: <script type="math/tex">\ln \gamma_i = \ln \gamma_i^\infty</script>.
@@ -246,12 +246,15 @@ The actual infinite dilution values are also displayed at the bottom of the page
 <ul>
 <li><code>ln Gamma</code>: displays the logarithm of the activity coefficients (default)</li>
 <li><code>Excess</code>: displays the mixture excess properties</li>
-<li><code>Mixture</code>: displays the mixture properties, recalling excess Gibbs and Entropy differ from mixture Gibbs and Entropy</li>
+<li><code>Mixing</code>: displays the mixing properties, recalling excess Gibbs and Entropy differ from mixing Gibbs and Entropy</li>
 <li><code>Dimensionless (1/RT)</code>: dimensionless (or divided by RT) properties are used (default), otherwise <code>J/mol</code> or <code>J/g</code> are used</li>
 <li><code>Mass based</code>: Use mass-based calculations instead of the default molar basis</li>
 </ul>
 <h2 id="sigma-profiles">Sigma profiles</h2>
-<p>A <strong>sigma profile</strong> is a molecule-specific distribution of charge density across a solute&rsquo;s surface, used in COSMO-based models to describe intermolecular interactions. It represents the fraction of the surface area associated with a given screening charge density (<script type="math/tex"> \sigma </script>).  </p>
+<p>A <strong>sigma profile</strong> is a molecule-specific distribution of charge density across a solute&rsquo;s surface, used in COSMO-based models to describe intermolecular interactions. It represents the portion of the surface area associated with a given screening charge density (<script type="math/tex"> \sigma </script>).</p>
+<blockquote>
+<p>Please note that the standard convention is to present <strong>induced charge densities</strong>. Under this convention, <strong>hydrogen-bond donors</strong> show <strong>negative</strong> induced densities, while <strong>hydrogen-bond acceptors</strong> appear <strong>positive</strong>.</p>
+</blockquote>
 <p>Now, let&rsquo;s view a <strong>sigma profile</strong> in JCOSMO. Simply navigate to the <strong><code>Profile</code></strong> tab and click <strong><code>Refresh</code></strong>—the profiles for all selected compounds will be displayed.</p>
 <div style="position: relative; display: inline-block; width: 100%;">
   <img src="../img/jcosmo-profiles.png" alt="JCOSMO Initial Screen" style="width: 100%; height: auto;" />
