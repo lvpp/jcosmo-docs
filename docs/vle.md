@@ -167,9 +167,46 @@ The next step is to compute the VLE. First, select the VLE tab in the upper-righ
 
 The comparison of experimental data with the calculated results is also available. This requires creating a .txt file following the template shown in the figure below. The hash symbol (#) is used for comments. Initially write the first and second components, from left to right, with the exact same name as found in the interface. Then, add a header with temperature (T), pressure (P), molar liquid composition (X), and molar vapor composition (Y).  If the letter W is used instead of X, mass fractions are assumed for the liquid phase—this is especially useful for polymers.  Right after the property, include its respective unit. Other temperature units can be used, but never use the degree symbol (°) or it will cause errors. Same for pressure, several units can be used – atm, mmHg, bar, psi, BTU. If data for one of the phases is missing, entering -1 will indicate its absence.
 
-<p align="center">
-  <img src="../img/jcosmo-vle-exp-example.png" alt="VLE Exp Example" width="700">
-</p>
+```
+# Solimo, H. N.; Gomez Marigliano, A. C.
+# Escess Properties and Vapor-Liquid Equilibrium 
+# Data for the Chloroform + Tetrahydrofuran Binary 
+# System at 30 C
+# J. Solution Chem., 1993, 22, 951-962
+# 
+# Pure psat from other data
+CHLOROFORM TETRAHYDROFURAN
+T K 	P kPa 	X	Y
+303.15	26.73	0	0
+303.15	24.01	0.122	0.044
+303.15	21.34	0.25	0.15
+303.15	20.82	0.297	0.202
+303.15	19.99	0.363	0.293
+303.15	18.62	0.426	0.402
+303.15	19.46	0.497	0.532
+303.15	20.15	0.518	0.57
+303.15	20.62	0.598	0.711
+303.15	23.18	0.689	0.833
+303.15	25.54	0.76	0.899
+303.15	29.27	0.88	0.965
+303.15	32.351	1	1
+```
+
+```
+# Weissenberger, G .;
+# Organic molecular co
+# Monatsh. Chem., 1925
+ACETONE 4-CHLOROPHENOL
+T K     P kPa  X   Y
+293.138 0.2666 0.2 -1
+293.138 0.8666 0.3 -1
+293.138 2.0398 0.4 -1
+293.138 4.1997 0.5 -1
+293.138 7.1994 0.6 -1
+293.138 11.572 0.7 -1
+293.138 16.425 0.8 -1
+293.138 20.665 0.9 -1
+```
 
 After building the .txt file, you can simply load it into the program by clicking the "Experiment..." button on the VLE tab, as shown below:
 
