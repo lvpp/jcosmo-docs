@@ -2,13 +2,14 @@
 Modeling polymers using COSMO-based methods requires special treatment due to their large molecular size and repetitive structural units. Performing full quantum chemical calculations for entire polymer chains is computationally prohibitive. Extending \(\sigma\)-profiles for polymers provides an efficient alternative, enabling the construction of representative COSMO surfaces for macromolecules from monomer-level information. This approach significantly reduces computational cost while preserving a physically meaningful description of the polymer’s surface polarity and volume. The resulting polymer \(\sigma\)-profile can be directly used in COSMO-SAC calculations, allowing the phase equilibrium prediction without the need for full polymer-level quantum computations.
 
 ## Creating .custom files
-This section describes the procedure used to construct the .custom file, necessary for extending the polymer \(\sigma\)-profile. The .custom file can be opened and inspected with any text editor. An example is presented in the figure below:
-
-<figure style="text-align: center;">
-  <img src="../img/jcosmo-polymer-custom-file.jpg" alt="Custom File Example" width="1000">
-  <figcaption>Example of the .custom file for polyethylene glycol (PEG) with a molar mass of 3350 g/mol.</figcaption>
-</figure>
-
+This section describes the procedure used to construct the .custom file, necessary for extending the polymer \(\sigma\)-profile. The .custom file can be opened and inspected with any text editor. An example is presented below:
+```
+LOAD PEG_414 #Base molecule identifier (polymer used as reference)
+VOLUME 4051.58538 #Volume of the full polymer [Å³]; must be provided manually
+ONLY_FOR         1  2  3  26 27 28 29 30     13          14          44          43          15          45          46             59 60 61 62 63 64 65 66 #Selected atoms of the base molecule
+ATOM_MULTIPLIER  1  1  1  1  1  1  1  1      73.99934851 73.99934851 73.99934851 73.99934851 73.99934851 73.99934851 73.99934851    1  1  1  1  1  1  1  1
+                 #END GROUPS                 #MONOMER                                                                               #END GROUPS
+```
 **1. Loading the COSMO File**
 
 The construction procedure begins by loading the .cosmo file of the monomer using the LOAD command, as illustrated in Figure 1. This file must contain the COSMO surface information generated from a quantum chemical calculation.
