@@ -167,11 +167,11 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#ionic-liquids" class="nav-link">Ionic Liquids</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#nomenclature" class="nav-link">Nomenclature</a>
+            <li class="nav-item" data-bs-level="2"><a href="#recommended-approach-ion-pair-pseudo-compound" class="nav-link">Recommended Approach: Ion Pair (Pseudo-Compound)</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#adding-an-ionic-liquid-via-the-graphical-interface" class="nav-link">Adding an Ionic Liquid via the Graphical Interface</a>
+            <li class="nav-item" data-bs-level="2"><a href="#adding-an-ionic-liquid-graphical-interface" class="nav-link">Adding an Ionic Liquid (Graphical Interface)</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -179,11 +179,15 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#working-with-ions-vs-pseudo-compound" class="nav-link">Working with Ions vs. Pseudo-Compound</a>
+            <li class="nav-item" data-bs-level="2"><a href="#multivalent-ions" class="nav-link">Multivalent Ions</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#multivalent-ions" class="nav-link">Multivalent Ions</a>
+            <li class="nav-item" data-bs-level="2"><a href="#advanced-use-only-explicit-ion-representation" class="nav-link">Advanced Use Only: Explicit Ion Representation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#abbreviated-names-for-ions" class="nav-link">Abbreviated Names for Ions</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -191,7 +195,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#recommendations" class="nav-link">Recommendations</a>
+            <li class="nav-item" data-bs-level="2"><a href="#recommendation" class="nav-link">Recommendation</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -203,104 +207,122 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="ionic-liquids">Ionic Liquids</h1>
-<p>JCOSMO provides native support for <strong>ionic liquids (ILs)</strong>.<br />
-An ionic liquid is treated as a combination of a <strong>cation</strong> and an <strong>anion</strong>, and can be handled either:</p>
-<ul>
-<li>As separate ions (explicit multicomponent mixture), or  </li>
-<li>As a single <strong>pseudo-compound</strong> written in bracket notation.</li>
-</ul>
+<p>JCOSMO provides native support for <strong>ionic liquids (ILs)</strong>.</p>
+<p>In normal use, ionic liquids should be defined as a <strong>single pseudo-compound (ion pair)</strong> using bracket notation, for example:</p>
+<div class="highlight"><pre><span></span><code>[BMIM][BF4]
+</code></pre></div>
+<p>This is the <strong>recommended and default approach</strong>.</p>
+<p>Working with individual ions is possible, but is intended only for advanced electrolyte modeling.</p>
 <hr />
-<h2 id="nomenclature">Nomenclature</h2>
-<p>In JCOSMO, ionic liquids follow the standard bracket notation:</p>
+<h2 id="recommended-approach-ion-pair-pseudo-compound">Recommended Approach: Ion Pair (Pseudo-Compound)</h2>
+<p>In JCOSMO, ionic liquids are normally handled as neutral ion pairs using the bracket notation:</p>
 <div class="highlight"><pre><span></span><code>[ CATION ][ ANION ]
 </code></pre></div>
 <p>Example:</p>
 <div class="highlight"><pre><span></span><code>[BMIM][BF4]
 </code></pre></div>
-<p>Internally, JCOSMO searches the database using the charged species:</p>
+<p>Internally, JCOSMO:</p>
 <ul>
-<li><code>BMIM+1</code></li>
-<li><code>BF4-1</code></li>
+<li>Searches the database for <code>BMIM+1</code></li>
+<li>Searches the database for <code>BF4-1</code></li>
+<li>Validates charge balance</li>
+<li>Automatically constructs the neutral pseudo-compound</li>
 </ul>
-<p>If both species exist, the ionic liquid pseudo-compound is created and added to the selected compounds list.</p>
+<p>The resulting ionic liquid behaves as a <strong>single compound</strong> in the mixture.</p>
+<p>This approach:</p>
+<ul>
+<li>Ensures automatic electroneutrality</li>
+<li>Prevents charge imbalance errors</li>
+<li>Keeps the mixture definition simple</li>
+<li>Is appropriate for most IL–solvent systems</li>
+</ul>
 <hr />
-<h2 id="adding-an-ionic-liquid-via-the-graphical-interface">Adding an Ionic Liquid via the Graphical Interface</h2>
-<p>In the JCOSMO user interface:</p>
+<h2 id="adding-an-ionic-liquid-graphical-interface">Adding an Ionic Liquid (Graphical Interface)</h2>
+<p>To add an ionic liquid:</p>
 <ol>
 <li>Click <strong>&ldquo;Add Salt&hellip;&rdquo;</strong></li>
-<li>A dialog appears listing available cations and anions</li>
-<li>Select the desired pair</li>
+<li>Select the desired cation</li>
+<li>Select the desired anion</li>
 <li>Click <strong>Accept</strong></li>
 </ol>
-<p>The ionic liquid will be added automatically to the selected compounds list.</p>
-<p>Internally, JCOSMO retrieves the corresponding charged species from the database and builds the pseudo-compound representation.</p>
+<p>JCOSMO automatically creates the pseudo-compound and adds it to the selected compounds list.</p>
+<p>This method avoids naming errors and is strongly recommended.</p>
 <hr />
 <h2 id="direct-name-entry">Direct Name Entry</h2>
-<p>Users may also type the full pseudo-compound name directly:</p>
+<p>Instead of using <strong>Add Salt&hellip;</strong>, you may type the full ion pair directly:</p>
 <div class="highlight"><pre><span></span><code>[BMIM][BF4]
 </code></pre></div>
-<p>If the corresponding ions exist in the database, JCOSMO will recognize and construct the ionic liquid automatically.</p>
+<p>If both ions exist in the database, JCOSMO will construct the pseudo-compound automatically.</p>
 <hr />
-<h2 id="working-with-ions-vs-pseudo-compound">Working with Ions vs. Pseudo-Compound</h2>
-<p>JCOSMO allows two modeling approaches:</p>
-<h3 id="1-explicit-ion-representation">1. Explicit Ion Representation</h3>
-<p>You may add:</p>
+<h2 id="multivalent-ions">Multivalent Ions</h2>
+<p>If charges are not +1 and −1, stoichiometry is reflected explicitly in the name.</p>
+<p>Example:</p>
+<ul>
+<li><code>DEA+1</code></li>
+<li><code>CO3-2</code></li>
+</ul>
+<p>The ionic liquid becomes:</p>
+<div class="highlight"><pre><span></span><code>[DEA]2[CO3]
+</code></pre></div>
+<p>JCOSMO automatically enforces charge neutrality when constructing pseudo-compounds.</p>
+<hr />
+<h2 id="advanced-use-only-explicit-ion-representation">Advanced Use Only: Explicit Ion Representation</h2>
+<p>It is possible to add the ions separately:</p>
 <ul>
 <li><code>BMIM+1</code></li>
 <li><code>BF4-1</code></li>
 </ul>
-<p>The system becomes a <strong>multicomponent mixture</strong>, where each ion is treated as an independent species.</p>
-<p>This approach is useful for:
-- Electrolyte systems
-- Ion-specific analysis
-- Mixtures with additional salts</p>
-<hr />
-<h3 id="2-ionic-liquid-as-a-pseudo-compound">2. Ionic Liquid as a Pseudo-Compound</h3>
-<p>You may instead use:</p>
-<div class="highlight"><pre><span></span><code>[BMIM][BF4]
+<p>In this case, the system becomes a <strong>multicomponent ionic mixture</strong>.</p>
+<blockquote>
+<p>⚠️ <strong>Important — Manual Electroneutrality Required</strong></p>
+<p>When working with explicit ions, the user must manually ensure that the total mixture charge is zero:</p>
+<div class="highlight"><pre><span></span><code>Σ (zi · xi) = 0
 </code></pre></div>
-<p>In this case:</p>
+<p>where:</p>
 <ul>
-<li>The IL behaves as a single neutral compound</li>
-<li>The mixture remains simpler (fewer components)</li>
-<li>Suitable for typical IL–solvent systems</li>
+<li><code>zi</code> is the ionic charge  </li>
+<li><code>xi</code> is the mole fraction  </li>
 </ul>
-<p>This is generally the preferred approach when treating the ionic liquid as a molecular entity.</p>
+<p>JCOSMO does <strong>not</strong> automatically enforce electroneutrality in explicit-ion mode.</p>
+<p>This makes the explicit-ion approach significantly more error-prone.</p>
+</blockquote>
+<p>For standard ionic liquid–solvent systems, the pseudo-compound notation (e.g., <code>[BMIM][BF4]</code>) should always be preferred.</p>
 <hr />
-<h2 id="multivalent-ions">Multivalent Ions</h2>
-<p>If the valence is not +1 and −1, the stoichiometry is reflected explicitly in the name.</p>
-<p>Example:</p>
-<p>If the anion has charge −2:</p>
+<h2 id="abbreviated-names-for-ions">Abbreviated Names for Ions</h2>
+<p>JCOSMO uses standardized abbreviated names for ionic liquid species.</p>
+<p>Common cations:</p>
 <ul>
-<li><code>CO3-2</code></li>
+<li><code>EMIM</code> — 1-ethyl-3-methylimidazolium  </li>
+<li><code>BMIM</code> — 1-butyl-3-methylimidazolium  </li>
+<li><code>HMIM</code> — 1-hexyl-3-methylimidazolium  </li>
 </ul>
-<p>and the cation has charge +1:</p>
+<p>Common anions:</p>
 <ul>
-<li><code>DEA+1</code></li>
+<li><code>BF4</code> — tetrafluoroborate  </li>
+<li><code>PF6</code> — hexafluorophosphate  </li>
+<li><code>BTI</code> — bis(trifluoromethylsulfonyl)imide  </li>
+<li><code>DCA</code> — dicyanamide  </li>
 </ul>
-<p>The ionic liquid name becomes:</p>
-<div class="highlight"><pre><span></span><code>[DEA]2[CO3]
-</code></pre></div>
-<p>This indicates that two cations are required to balance one divalent anion.</p>
-<p>JCOSMO automatically enforces charge neutrality when constructing the pseudo-compound.</p>
+<p>The internal database stores the charged forms (e.g., <code>BMIM+1</code>, <code>BF4-1</code>), but users should normally work with the neutral ion pair notation.</p>
 <hr />
 <h2 id="database-behavior">Database Behavior</h2>
-<p>When adding an ionic liquid:</p>
+<p>When an ionic liquid is defined as a pseudo-compound:</p>
 <ul>
-<li>JCOSMO searches the database for the charged species</li>
-<li>Validates charge balance</li>
-<li>Builds the pseudo-compound representation</li>
-<li>Adds it to the selected compounds list</li>
+<li>JCOSMO searches for the charged species</li>
+<li>Verifies charge balance</li>
+<li>Constructs the neutral ion pair</li>
+<li>Adds it to the mixture as a single compound</li>
 </ul>
-<p>If one of the ions is missing from the database, the ionic liquid cannot be constructed.</p>
+<p>If one of the required ions is missing from the database, the ionic liquid cannot be constructed.</p>
 <hr />
-<h2 id="recommendations">Recommendations</h2>
+<h2 id="recommendation">Recommendation</h2>
+<p>For nearly all ionic liquid applications:</p>
 <ul>
-<li>Use the <strong>&ldquo;Add Salt&hellip;&rdquo;</strong> dialog whenever possible to avoid naming mistakes.</li>
-<li>Use the pseudo-compound notation for standard IL-solvent systems.</li>
-<li>Use explicit ions for electrolyte or ion-specific studies.</li>
-<li>Ensure that the database contains the required charged species before defining a new IL.</li>
-</ul></div>
+<li>Use the <strong>ion pair pseudo-compound notation</strong></li>
+<li>Prefer the <strong>&ldquo;Add Salt&hellip;&rdquo;</strong> dialog</li>
+<li>Avoid explicit-ion mode unless performing electrolyte-specific modeling</li>
+</ul>
+<p>The pseudo-compound approach is safer, simpler, and less prone to modeling errors.</p></div>
             </div>
         </div>
 
