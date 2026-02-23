@@ -164,12 +164,112 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#python-interface-pyjcosmo" class="nav-link">Python interface (pyjcosmo)</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#installation" class="nav-link">Installation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#prerequisites" class="nav-link">Prerequisites</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#quick-start" class="nav-link">Quick Start</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p><strong>This page is currently under development and will be available soon. Stay tuned for updates!</strong></p></div>
+<h1 id="python-interface-pyjcosmo">Python interface (pyjcosmo)</h1>
+<p><strong>pyjcosmo</strong> is the official Python wrapper for JCOSMO.<br />
+It provides a clean and Pythonic interface to the JCOSMO Java gateway, automatically handling data type conversions so users can work with standard Python lists and floats instead of Java arrays.</p>
+<hr />
+<h2 id="overview">Overview</h2>
+<p><code>pyjcosmo</code> enables:</p>
+<ul>
+<li>Direct interaction with JCOSMO from Python</li>
+<li>Automatic Py4J data conversion</li>
+<li>Access to activity coefficients and excess properties</li>
+<li>Database search utilities for compound screening</li>
+</ul>
+<blockquote>
+<p><strong>Important:</strong><br />
+<code>pyjcosmo</code> is a wrapper only.<br />
+The JCOSMO software must be installed separately and running with the Py4J gateway enabled.</p>
+</blockquote>
+<hr />
+<h2 id="installation">Installation</h2>
+<p>Install from PyPI:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>pyjcosmo
+</code></pre></div>
+<hr />
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before using <code>pyjcosmo</code>, ensure:</p>
+<ul>
+<li>JCOSMO is installed</li>
+<li>The JCOSMO Java application is running</li>
+<li>The Py4J Gateway is enabled (default port: <code>25333</code>)</li>
+</ul>
+<p>If the gateway is not running, the wrapper will not be able to connect.</p>
+<hr />
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="1-list-available-models">1. List Available Models</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pyjcosmo</span>
+
+<span class="n">jc</span> <span class="o">=</span> <span class="n">pyjcosmo</span><span class="o">.</span><span class="n">JCosmoWrapper</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jc</span><span class="o">.</span><span class="n">list_models</span><span class="p">())</span>
+</code></pre></div>
+<hr />
+<h3 id="2-compute-activity-coefficients-and-excess-properties">2. Compute Activity Coefficients and Excess Properties</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pyjcosmo</span><span class="w"> </span><span class="kn">import</span> <span class="n">JCosmoWrapper</span>
+
+<span class="n">jc</span> <span class="o">=</span> <span class="n">JCosmoWrapper</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">jc</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s1">&#39;CS25&#39;</span><span class="p">)</span>
+
+<span class="c1"># Set compounds and thermodynamic state</span>
+<span class="n">model</span><span class="o">.</span><span class="n">set_compounds</span><span class="p">([</span><span class="s1">&#39;ACETONE&#39;</span><span class="p">,</span> <span class="s1">&#39;CHLOROFORM&#39;</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">set_temperature</span><span class="p">(</span><span class="mf">330.15</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">set_composition</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+
+<span class="c1"># Retrieve properties</span>
+<span class="n">ln_gamma</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_gamma_ln</span><span class="p">()</span>
+<span class="n">he_rt</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_excess_enthalpy</span><span class="p">()</span>
+<span class="n">ge_rt</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_excess_gibbs</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lnGamma: </span><span class="si">{</span><span class="n">ln_gamma</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hE/RT: </span><span class="si">{</span><span class="n">he_rt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;gE/RT: </span><span class="si">{</span><span class="n">ge_rt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h3 id="3-compound-discovery-screening">3. Compound Discovery (Screening)</h3>
+<p>Search the JCOSMO database by compound name or ion charges.</p>
+<p>Example: find all +1 cations.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pyjcosmo</span><span class="w"> </span><span class="kn">import</span> <span class="n">JCosmoWrapper</span>
+
+<span class="n">jc</span> <span class="o">=</span> <span class="n">JCosmoWrapper</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">jc</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s1">&#39;CS25&#39;</span><span class="p">)</span>
+
+<span class="n">cations</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">find_compounds</span><span class="p">(</span><span class="s1">&#39;+1&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">cations</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found cation: </span><span class="si">{</span><span class="n">cat</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>This functionality is particularly useful for:</p>
+<ul>
+<li>Ionic liquid screening</li>
+<li>Electrolyte system exploration</li>
+<li>Targeted compound searches</li>
+</ul></div>
             </div>
         </div>
 
