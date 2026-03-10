@@ -1,6 +1,6 @@
 # Vapor-Liquid Equilibrium (VLE)
 This section is largely based on the work of Koretsky (2012)[@Koretsky2012] and Smith et al. (2007)[@Smith2007], which constitute the main theoretical basis for the VLE description presented here. Additional references are cited when relevant to specific aspects or extensions of their approach.
-## Theory concepts
+## Theory Concepts
 The separation of a mixture into a liquid phase and a vapor phase is of great importance and utility for the chemical, petrochemical, natural gas, and other industries. The separation process is founded in the phase equilibrium, which describes the conditions under which different phases of a pure substance or a mixture can coexist in thermodynamic equilibrium.
 
 An equilibrium system is often represented for two phases, as shown in the figure below. This system is divided into phases \(\alpha\) and \(\beta\), which for VLE represent a liquid phase and a vapor phase. For the system to be in equilibrium, it is essential that its thermodynamic variables remain constant with respect to both time and position, without the presence of a driving force to induce changes.
@@ -165,7 +165,7 @@ The next step is to compute the VLE. First, select the VLE tab in the upper-righ
   <img src="../img/jcosmo-vle-settings.png" alt="VLE Settings" width="1000">
 </p>
 
-The comparison of experimental data with the calculated results is also available. This requires creating a .txt file following the template shown below. The hash symbol (#) is used for comments. Initially write the first and second components, from left to right, with the exact same name as found in the interface. Then, add a header with temperature (T), pressure (P), molar liquid composition (X), and molar vapor composition (Y).  If the letter W is used instead of X, mass fractions are assumed for the liquid phase—this is especially useful for polymers.  Right after the property, include its respective unit. Other temperature units can be used, but never use the degree symbol (°) or it will cause errors. Same for pressure, several units can be used – atm, mmHg, bar, psi, BTU. If data for one of the phases is missing, entering -1 will indicate its absence.
+The comparison of experimental data with the calculated results is also available. This requires creating a .txt file following the template shown below. The hash symbol (#) is used for comments. Initially write the first and second components, from left to right, with the exact same name as found in the interface. If underscores (_) are used in the compound names, they will automatically be converted to spaces when the data are read. Then, add a header with temperature (T), pressure (P), molar liquid composition (X), and molar vapor composition (Y).  If the letter W is used instead of X, mass fractions are assumed for the liquid phase—this is especially useful for polymers.  Right after the property, include its respective unit. Other temperature units can be used, but never use the degree symbol (°) or it will cause errors. Same for pressure, several units can be used – atm, mmHg, bar, psi, BTU. If data for one of the phases is missing, entering -1 will indicate its absence.
 
 ```
 # Solimo, H. N.; Gomez Marigliano, A. C.
