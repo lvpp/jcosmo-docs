@@ -137,15 +137,17 @@ After building the .txt file, you can simply load it into the program by clickin
 
 The ternary option is currently only available using the "Experiment..." option. The `.txt` file must follow a specific structure so that the program can correctly read the experimental data. The head must contain the names of the three components, written from left to right. The names must match exactly those used in the interface database. After the component names, a header line must be provided containing the thermodynamic variables and compositions in the following order: T [temperature_unit]  P [temperature_unit]  X1  X2  Y1  Y2. In this header, T represents the temperature followed by its unit and P represents the pressure followed by its unit, similar to the binary systems examples. X1 and X2 correspond to the compositions of components 1 and 2 in the \(\alpha\) phase, respectively, while Y1 and Y2 correspond to the compositions of components 1 and 2 in the \(\beta\) phase. The composition of the third component is not explicitly included in the file and is automatically calculated as 1 − x1 − x2 and 1 − y1 − y2. Mass fractions may also be used instead of mole fractions. In this case, replace X1 and X2 with W1 and W2, and replace Y1 and Y2 with WY1 and WY2. When these labels are used, the compositions are interpreted as mass fractions. Examples of valid ternary experimental data files are shown below:
 ```
-# Letcher, T. M.; Bricknell, B. C.; Sewry, J. D.; Radloff, S. E.
-# Liquid-Liquid Equilibria for Mixtures of an Alkanol + Hept-1-ene + Water at 25 .degree.C
-# J. Chem. Eng. Data, 1994, 39, 320-323
-2-PROPANOL 1-HEPTENE WATER
-T K P kPa X1 X2 Y1 Y2
-298	101.3	0.197	0.009	0.19	0.764
-298	101.3	0.300	0.032	0.291	0.616
-298	101.3	0.382	0.092	0.342	0.518
-298	101.3	0.412	0.185	0.372	0.45
+#Adam Skrzecz, David G. Shaw, Andrzej Maczynski. IUPAC-NIST Solubility Data Series 69. Ternary Alcohol–Hydrocarbon–Water Systems. 
+#Journal of Physical and Chemical Reference Data.
+#DOI: 10.1063/1.556052
+METHANOL BENZENE WATER
+T K P atm X1 X2 Y1 Y2
+303.2	1 0.0133 0.9846 0.0303 0.0006
+303.2	1 0.0345 0.9592 0.1088 0.0008
+303.2	1 0.0595 0.9301 0.2712 0.0040
+303.2	1 0.1104 0.8756 0.5049 0.0311
+303.2	1 0.1328 0.8495 0.5734 0.0742
+303.2	1 0.2297 0.7305 0.5949 0.1499
 ```
 
 ```
