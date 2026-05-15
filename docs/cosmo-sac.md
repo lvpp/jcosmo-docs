@@ -22,6 +22,16 @@ Molecular geometries were first optimized in the gas phase, followed by a single
 The **def2-SVPD** basis set was chosen as a balance between accuracy and computational cost, offering improved polarization treatment and broader elemental coverage compared to the TZVP basis set used previously.
 For larger molecules, the **def2-SVP** basis set was adopted to reduce computational demand, with negligible loss of accuracy in the resulting sigma-profiles.
 
+### Electrostatic contribution
+
+In CS25, the electrostatic contribution is simply given by:
+
+$$
+u^\text{el}_{mn} = \alpha' \sigma_m \sigma_n
+$$
+
+This formulation aligns with the reference state of a noninteracting fluid [@Soares2023]. In contrast, the classical equation utilizes \( \alpha' (\sigma_m + \sigma_n)^2 \), which takes an ideally screened surface as its reference.
+
 ### Multiple Hydrogen Bond Types
 
 In this parametrization, different types of *strong* hydrogen bonds (HBs) are explicitly considered.
@@ -36,6 +46,21 @@ Some special cases apply to nitrogen-containing groups:
 - When bonded to two atoms (e.g., in pyridine), it is treated as an *ether*-type acceptor.
 
 Besides being part of one of the categories listed before. Only surface area fractions with a charge density above the HB cutoff are treated as capable of forming *strong* hydrogen bonds. The standard electrostatic contribution already accounts for the general hydrogen-bonding interaction, but segments exceeding the cutoff receive an **additional, strong HB contribution**. This extra term represents situations with particularly strong hydrogen bonds, typically associated with shorter interaction distances.
+
+In CS25, the hydrogen-bonding contribution is given by a direct extension of the electrostatic contribution:
+
+$$
+u^{\text{hb}}_{mn} =
+\begin{cases}
+c_{\text{hb}}\,\alpha' \sigma_m \sigma_n,
+& \text{if } \sigma_{\text{acc}} < -\sigma_{\text{hb}} \ \text{and}\ \sigma_{\text{don}} > \sigma_{\text{hb}}, \\[6pt]
+0, & \text{otherwise}.
+\end{cases}
+$$
+
+Thus, for hydrogen bonding, the model abandons the traditional energy formulation based on charge excess \( (\sigma - \sigma_\text{hb}) \). Instead, it treats the HB threshold \( \sigma_\text{hb} \)solely as a classification criterion. If a donor-acceptor pair meets the threshold requirements, the energy is calculated as a scaled extension of the electrostatic interaction. 
+
+In this way, values for \( c_\text{hb} \) are dimensionless positive scaling parameters, typically smaller than 1. This formulation ensures that the hydrogen bond strength remains proportional to the polarization \( \sigma_{acc} \cdot \sigma_{don} \) of the interacting segments, effectively capturing the short-range orbital overlap superimposed on the general electrostatic attraction.
 
 ### Dispersion Contribution
 
