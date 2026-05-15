@@ -30,7 +30,7 @@ $$
 u^\text{el}_{mn} = \alpha' \sigma_m \sigma_n
 $$
 
-This formulation aligns with the reference state of a noninteracting fluid [@Soares2023]. In contrast, the classical equation utilizes \( \alpha' (\sigma_m + \sigma_n)^2 \), which takes an ideally screened surface as its reference.
+This formulation aligns with the reference state of a noninteracting fluid [@Soares2023]. In contrast, the classical equation utilizes \( \alpha'/2 (\sigma_m + \sigma_n)^2 \), which takes an ideally screened surface as its reference.
 
 ### Multiple Hydrogen Bond Types
 
