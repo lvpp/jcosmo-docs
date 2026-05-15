@@ -198,6 +198,14 @@ The level of theory employed is <strong>B3LYP/def2-SVPD</strong>.
 Molecular geometries were first optimized in the gas phase, followed by a single-point calculation with the <strong>COSMO</strong> solvation model to generate the sigma-profiles<sup id="fnref:Soares2025NWChemCOSMO"><a class="footnote-ref" href="#fn:Soares2025NWChemCOSMO">2</a></sup>.</p>
 <p>The <strong>def2-SVPD</strong> basis set was chosen as a balance between accuracy and computational cost, offering improved polarization treatment and broader elemental coverage compared to the TZVP basis set used previously.
 For larger molecules, the <strong>def2-SVP</strong> basis set was adopted to reduce computational demand, with negligible loss of accuracy in the resulting sigma-profiles.</p>
+<h3 id="electrostatic-contribution">Electrostatic contribution</h3>
+<p>In CS25, the electrostatic contribution is simply given by:</p>
+<p>
+<script type="math/tex; mode=display">
+u^\text{el}_{mn} = \alpha' \sigma_m \sigma_n
+</script>
+</p>
+<p>This formulation aligns with the reference state of a noninteracting fluid <sup id="fnref:Soares2023"><a class="footnote-ref" href="#fn:Soares2023">3</a></sup>. In contrast, the classical equation utilizes <script type="math/tex"> \alpha' (\sigma_m + \sigma_n)^2 </script>, which takes an ideally screened surface as its reference.</p>
 <h3 id="multiple-hydrogen-bond-types">Multiple Hydrogen Bond Types</h3>
 <p>In this parametrization, different types of <em>strong</em> hydrogen bonds (HBs) are explicitly considered.</p>
 <p>Two types of strong HB donors are defined: one corresponding to water molecules and another representing hydrogens bonded to electronegative atoms such as N, O, F, Cl, Br, or I.
@@ -209,30 +217,43 @@ Some special cases apply to nitrogen-containing groups:</p>
 <li>When bonded to two atoms (e.g., in pyridine), it is treated as an <em>ether</em>-type acceptor.</li>
 </ul>
 <p>Besides being part of one of the categories listed before. Only surface area fractions with a charge density above the HB cutoff are treated as capable of forming <em>strong</em> hydrogen bonds. The standard electrostatic contribution already accounts for the general hydrogen-bonding interaction, but segments exceeding the cutoff receive an <strong>additional, strong HB contribution</strong>. This extra term represents situations with particularly strong hydrogen bonds, typically associated with shorter interaction distances.</p>
+<p>In CS25, the hydrogen-bonding contribution is given by a direct extension of the electrostatic contribution:</p>
+<p>
+<script type="math/tex; mode=display">
+u^{\text{hb}}_{mn} =
+\begin{cases}
+c_{\text{hb}}\,\alpha' \sigma_m \sigma_n,
+& \text{if } \sigma_{\text{acc}} < -\sigma_{\text{hb}} \ \text{and}\ \sigma_{\text{don}} > \sigma_{\text{hb}}, \\[6pt]
+0, & \text{otherwise}.
+\end{cases}
+</script>
+</p>
+<p>Thus, for hydrogen bonding, the model abandons the traditional energy formulation based on charge excess <script type="math/tex"> (\sigma - \sigma_\text{hb}) </script>. Instead, it treats the HB threshold <script type="math/tex"> \sigma_\text{hb} </script>solely as a classification criterion. If a donor-acceptor pair meets the threshold requirements, the energy is calculated as a scaled extension of the electrostatic interaction. </p>
+<p>In this way, values for <script type="math/tex"> c_\text{hb} </script> are dimensionless positive scaling parameters, typically smaller than 1. This formulation ensures that the hydrogen bond strength remains proportional to the polarization <script type="math/tex"> \sigma_{acc} \cdot \sigma_{don} </script> of the interacting segments, effectively capturing the short-range orbital overlap superimposed on the general electrostatic attraction.</p>
 <h3 id="dispersion-contribution">Dispersion Contribution</h3>
-<p>The original COSMO-SAC model typically disregarded dispersion interactions<sup id="fnref:Lin2002"><a class="footnote-ref" href="#fn:Lin2002">3</a></sup>, assuming that their effects would cancel out in excess properties.
+<p>The original COSMO-SAC model typically disregarded dispersion interactions<sup id="fnref:Lin2002"><a class="footnote-ref" href="#fn:Lin2002">4</a></sup>, assuming that their effects would cancel out in excess properties.
 In <strong>CS25</strong>, a dedicated dispersion contribution is included for each pair of atoms.
 This is achieved by storing, along with the surface charge density (sigma-profile), the <strong>atom type</strong> associated with each surface segment.</p>
 <p>Although the resulting dispersion term is generally small, it provides a subtle yet meaningful correction that improves the description of nearly athermal mixtures, systems dominated by weak interactions, and particularly <strong>fluorinated/hydrocarbon mixtures</strong>, where dispersion effects play a more significant role.</p>
 <h3 id="combinatorial-contribution">Combinatorial contribution</h3>
-<p>A modified Flory-Huggins (FH) equation is used for the combinatorial contribution<sup id="fnref:Kikic1980"><a class="footnote-ref" href="#fn:Kikic1980">4</a></sup>:
+<p>A modified Flory-Huggins (FH) equation is used for the combinatorial contribution<sup id="fnref:Kikic1980"><a class="footnote-ref" href="#fn:Kikic1980">5</a></sup>:
 <script type="math/tex; mode=display">
 \ln\ \gamma^{\rm{comb}}_{i} = \ln \frac{\Phi_i'}{x_i} + 1 - \frac{\Phi_i'}{x_i}
 </script>
 where <script type="math/tex">\Phi_i' \equiv x_i r_i^p / \sum_j x_j r_j^p</script> is the modified volume fraction, <script type="math/tex">r_i</script> is the molecular volume of compound <script type="math/tex">i</script> obtained from the COSMO calculations, <script type="math/tex">x_i</script> is the mole fraction of component <script type="math/tex">i</script>,
-and <script type="math/tex">p</script> is an empirical exponent<sup id="fnref:Donohue1975"><a class="footnote-ref" href="#fn:Donohue1975">5</a></sup>.</p>
-<p>This is in contrast to the typical Staverman-Guggenheim (SG) term with a normalized area<sup id="fnref:lin2002"><a class="footnote-ref" href="#fn:lin2002">6</a></sup><sup id="fnref:Soares2011"><a class="footnote-ref" href="#fn:Soares2011">7</a></sup>.
-The reason for using FH is because the potential inconsistencies with the SG formula<sup id="fnref:krooshof2024gibbs"><a class="footnote-ref" href="#fn:krooshof2024gibbs">8</a></sup>.</p>
+and <script type="math/tex">p</script> is an empirical exponent<sup id="fnref:Donohue1975"><a class="footnote-ref" href="#fn:Donohue1975">6</a></sup>.</p>
+<p>This is in contrast to the typical Staverman-Guggenheim (SG) term with a normalized area<sup id="fnref:lin2002"><a class="footnote-ref" href="#fn:lin2002">7</a></sup><sup id="fnref:Soares2011"><a class="footnote-ref" href="#fn:Soares2011">8</a></sup>.
+The reason for using FH is because the potential inconsistencies with the SG formula<sup id="fnref:krooshof2024gibbs"><a class="footnote-ref" href="#fn:krooshof2024gibbs">9</a></sup>.</p>
 <p>When the exponent <script type="math/tex"> p = 1 </script>, the expression reduces to the original FH form.
-This classical formula is known to overestimate the combinatorial contribution, effectively providing an upper limit<sup id="fnref2:Donohue1975"><a class="footnote-ref" href="#fn:Donohue1975">5</a></sup>.
-In <strong>CS25</strong>, an exponent of <script type="math/tex"> p = \tfrac{2}{3} </script> is used, based on comparisons with experimental data for aliphatic hydrocarbons<sup id="fnref2:Kikic1980"><a class="footnote-ref" href="#fn:Kikic1980">4</a></sup>.</p>
+This classical formula is known to overestimate the combinatorial contribution, effectively providing an upper limit<sup id="fnref2:Donohue1975"><a class="footnote-ref" href="#fn:Donohue1975">6</a></sup>.
+In <strong>CS25</strong>, an exponent of <script type="math/tex"> p = \tfrac{2}{3} </script> is used, based on comparisons with experimental data for aliphatic hydrocarbons<sup id="fnref2:Kikic1980"><a class="footnote-ref" href="#fn:Kikic1980">5</a></sup>.</p>
 <h2 id="cosmo-sac-hb2">COSMO-SAC-HB2</h2>
 <p>The <strong>LVPP-modified COSMO-SAC</strong> model with multiple hydrogen-bond (HB) energy types, improving the description of systems where different donor and acceptor strengths play a significant role.
 Three parametrizations are available, depending on the quantum chemistry package and level of theory used to generate the sigma-profiles:</p>
 <ul>
-<li><strong>COSMO-SAC-HB2 (GAMESS)</strong> <sup id="fnref:Ferrarini2018"><a class="footnote-ref" href="#fn:Ferrarini2018">9</a></sup>: based on sigma-profiles computed with <strong>GAMESS</strong> using the <strong>HF/TZVP</strong> level of theory.  </li>
-<li><strong>COSMO-SAC-HB2 (FINE)</strong> <sup id="fnref:deSouza2025"><a class="footnote-ref" href="#fn:deSouza2025">10</a></sup>: based on <strong>TURBOMOLE</strong> calculations employing a fine-grid marching tetrahedron cavity and the <strong>BP/TZVPD</strong> level of theory.  </li>
-<li><strong>COSMO-SAC-HB2 (BP-TZVP)</strong> <sup id="fnref2:deSouza2025"><a class="footnote-ref" href="#fn:deSouza2025">10</a></sup>: based on <strong>TURBOMOLE</strong> calculations using the <strong>BP/TZVP</strong> level of theory.  </li>
+<li><strong>COSMO-SAC-HB2 (GAMESS)</strong> <sup id="fnref:Ferrarini2018"><a class="footnote-ref" href="#fn:Ferrarini2018">10</a></sup>: based on sigma-profiles computed with <strong>GAMESS</strong> using the <strong>HF/TZVP</strong> level of theory.  </li>
+<li><strong>COSMO-SAC-HB2 (FINE)</strong> <sup id="fnref:deSouza2025"><a class="footnote-ref" href="#fn:deSouza2025">11</a></sup>: based on <strong>TURBOMOLE</strong> calculations employing a fine-grid marching tetrahedron cavity and the <strong>BP/TZVPD</strong> level of theory.  </li>
+<li><strong>COSMO-SAC-HB2 (BP-TZVP)</strong> <sup id="fnref2:deSouza2025"><a class="footnote-ref" href="#fn:deSouza2025">11</a></sup>: based on <strong>TURBOMOLE</strong> calculations using the <strong>BP/TZVP</strong> level of theory.  </li>
 </ul>
 <p>All variants in this section use <strong>FH</strong> as the combinatorial contribution (<script type="math/tex">p = 1</script> in the modified FH formula), and none includes a dispersive contribution.</p>
 <div class="footnote">
@@ -244,29 +265,32 @@ Three parametrizations are available, depending on the quantum chemistry package
 <li id="fn:Soares2025NWChemCOSMO">
 <p>Rafael de P. Soares, Daniel Mejía-Rodriguez, and Edoardo Aprà. Recent improvements to the NWChem COSMO module. <em>Journal of Chemical Theory and Computation</em>, November 2025. URL: <a href="https://doi.org/10.1021/acs.jctc.5c01368">https://doi.org/10.1021/acs.jctc.5c01368</a>, <a href="https://doi.org/10.1021/acs.jctc.5c01368">doi:10.1021/acs.jctc.5c01368</a>.&#160;<a class="footnote-backref" href="#fnref:Soares2025NWChemCOSMO" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
+<li id="fn:Soares2023">
+<p>Rafael de P. Soares and Paula B. Staudt. Beyond activity coefficients with pairwise interacting surface (COSMO-type) models. <em>Fluid Phase Equilib.</em>, 564(April 2022):113611, 2023. <a href="https://doi.org/10.1016/j.fluid.2022.113611">doi:10.1016/j.fluid.2022.113611</a>.&#160;<a class="footnote-backref" href="#fnref:Soares2023" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
 <li id="fn:Lin2002">
-<p>Shiang-Tai Lin and Stanley I. Sandler. A Priori Phase Equilibrium Prediction from a Segment Contribution Solvation Model. <em>Ind. &amp; Eng. Chem. Res.</em>, 41(5):899–913, 2002. <a href="https://doi.org/10.1021/ie001047w">doi:10.1021/ie001047w</a>.&#160;<a class="footnote-backref" href="#fnref:Lin2002" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+<p>Shiang-Tai Lin and Stanley I. Sandler. A Priori Phase Equilibrium Prediction from a Segment Contribution Solvation Model. <em>Ind. &amp; Eng. Chem. Res.</em>, 41(5):899–913, 2002. <a href="https://doi.org/10.1021/ie001047w">doi:10.1021/ie001047w</a>.&#160;<a class="footnote-backref" href="#fnref:Lin2002" title="Jump back to footnote 4 in the text">&#8617;</a></p>
 </li>
 <li id="fn:Kikic1980">
-<p>I. Kikic, P. Alessi, P. Rasmussen, and A. Fredenslund. On the combinatorial part of the UNIFAC and UNIQUAC models. <em>The Canadian Journal of Chemical Engineering</em>, 58(2):253–258, apr 1980. <a href="https://doi.org/10.1002/cjce.5450580218">doi:10.1002/cjce.5450580218</a>.&#160;<a class="footnote-backref" href="#fnref:Kikic1980" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Kikic1980" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+<p>I. Kikic, P. Alessi, P. Rasmussen, and A. Fredenslund. On the combinatorial part of the UNIFAC and UNIQUAC models. <em>The Canadian Journal of Chemical Engineering</em>, 58(2):253–258, apr 1980. <a href="https://doi.org/10.1002/cjce.5450580218">doi:10.1002/cjce.5450580218</a>.&#160;<a class="footnote-backref" href="#fnref:Kikic1980" title="Jump back to footnote 5 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Kikic1980" title="Jump back to footnote 5 in the text">&#8617;</a></p>
 </li>
 <li id="fn:Donohue1975">
-<p>Marc D. Donohue and John M Prausnitz. Combinatorial Entropy of Mixing Molecules that Differ in Size and Shape. A Simple Approximation for Binary and Multicomponent Mixtures. <em>Canadian Journal of Chemistry</em>, 53(11):1586–1592, jun 1975. <a href="https://doi.org/10.1139/v75-224">doi:10.1139/v75-224</a>.&#160;<a class="footnote-backref" href="#fnref:Donohue1975" title="Jump back to footnote 5 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Donohue1975" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+<p>Marc D. Donohue and John M Prausnitz. Combinatorial Entropy of Mixing Molecules that Differ in Size and Shape. A Simple Approximation for Binary and Multicomponent Mixtures. <em>Canadian Journal of Chemistry</em>, 53(11):1586–1592, jun 1975. <a href="https://doi.org/10.1139/v75-224">doi:10.1139/v75-224</a>.&#160;<a class="footnote-backref" href="#fnref:Donohue1975" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:Donohue1975" title="Jump back to footnote 6 in the text">&#8617;</a></p>
 </li>
 <li id="fn:lin2002">
-<p>Shiang-Tai Lin and Stanley I. Sandler. A Priori Phase Equilibrium Prediction from a Segment Contribution Solvation Model. <em>Ind. &amp; Eng. Chem. Res.</em>, 41(5):899–913, 2002. <a href="https://doi.org/10.1021/ie001047w">doi:10.1021/ie001047w</a>.&#160;<a class="footnote-backref" href="#fnref:lin2002" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+<p>Shiang-Tai Lin and Stanley I. Sandler. A Priori Phase Equilibrium Prediction from a Segment Contribution Solvation Model. <em>Ind. &amp; Eng. Chem. Res.</em>, 41(5):899–913, 2002. <a href="https://doi.org/10.1021/ie001047w">doi:10.1021/ie001047w</a>.&#160;<a class="footnote-backref" href="#fnref:lin2002" title="Jump back to footnote 7 in the text">&#8617;</a></p>
 </li>
 <li id="fn:Soares2011">
-<p>Rafael de P. Soares. The Combinatorial Term for COSMO-Based Activity Coefficient Models. <em>Industrial &amp; Engineering Chemistry Research</em>, 50(5):3060–3063, mar 2011. <a href="https://doi.org/10.1021/ie102087p">doi:10.1021/ie102087p</a>.&#160;<a class="footnote-backref" href="#fnref:Soares2011" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+<p>Rafael de P. Soares. The Combinatorial Term for COSMO-Based Activity Coefficient Models. <em>Industrial &amp; Engineering Chemistry Research</em>, 50(5):3060–3063, mar 2011. <a href="https://doi.org/10.1021/ie102087p">doi:10.1021/ie102087p</a>.&#160;<a class="footnote-backref" href="#fnref:Soares2011" title="Jump back to footnote 8 in the text">&#8617;</a></p>
 </li>
 <li id="fn:krooshof2024gibbs">
-<p>Gerard J P Krooshof and Gijsbertus de With. Gibbs probability entropy and its implication to combinatorial entropy models. <em>Fluid Ph. Equilib.</em>, 584:114146, 2024. <a href="https://doi.org/https://doi.org/10.1016/j.fluid.2024.114146">doi:https://doi.org/10.1016/j.fluid.2024.114146</a>.&#160;<a class="footnote-backref" href="#fnref:krooshof2024gibbs" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+<p>Gerard J P Krooshof and Gijsbertus de With. Gibbs probability entropy and its implication to combinatorial entropy models. <em>Fluid Ph. Equilib.</em>, 584:114146, 2024. <a href="https://doi.org/https://doi.org/10.1016/j.fluid.2024.114146">doi:https://doi.org/10.1016/j.fluid.2024.114146</a>.&#160;<a class="footnote-backref" href="#fnref:krooshof2024gibbs" title="Jump back to footnote 9 in the text">&#8617;</a></p>
 </li>
 <li id="fn:Ferrarini2018">
-<p>F. Ferrarini, G. B. Flores, A. R. Muniz, and R. P. Soares. An open and extensible sigma-profile database for cosmo-based models. <em>AIChE J.</em>, 64(9):3443&ndash;3455, 2018. <a href="https://doi.org/10.1002/aic.16194">doi:10.1002/aic.16194</a>.&#160;<a class="footnote-backref" href="#fnref:Ferrarini2018" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+<p>F. Ferrarini, G. B. Flores, A. R. Muniz, and R. P. Soares. An open and extensible sigma-profile database for cosmo-based models. <em>AIChE J.</em>, 64(9):3443&ndash;3455, 2018. <a href="https://doi.org/10.1002/aic.16194">doi:10.1002/aic.16194</a>.&#160;<a class="footnote-backref" href="#fnref:Ferrarini2018" title="Jump back to footnote 10 in the text">&#8617;</a></p>
 </li>
 <li id="fn:deSouza2025">
-<p>Edgar T. de Souza Jr., Murilo L. Alcantara, Paula B. Staudt, João A. P. Coutinho, and Rafael de P. Soares. Development of a COSMO-SAC parametrization with advanced QM method TZVPD-FINE. <em>Industrial &amp; Engineering Chemistry Research</em>, 64(29):14700–14711, 2025. URL: <a href="https://doi.org/10.1021/acs.iecr.5c01146">https://doi.org/10.1021/acs.iecr.5c01146</a>, <a href="https://doi.org/10.1021/acs.iecr.5c01146">doi:10.1021/acs.iecr.5c01146</a>.&#160;<a class="footnote-backref" href="#fnref:deSouza2025" title="Jump back to footnote 10 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:deSouza2025" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+<p>Edgar T. de Souza Jr., Murilo L. Alcantara, Paula B. Staudt, João A. P. Coutinho, and Rafael de P. Soares. Development of a COSMO-SAC parametrization with advanced QM method TZVPD-FINE. <em>Industrial &amp; Engineering Chemistry Research</em>, 64(29):14700–14711, 2025. URL: <a href="https://doi.org/10.1021/acs.iecr.5c01146">https://doi.org/10.1021/acs.iecr.5c01146</a>, <a href="https://doi.org/10.1021/acs.iecr.5c01146">doi:10.1021/acs.iecr.5c01146</a>.&#160;<a class="footnote-backref" href="#fnref:deSouza2025" title="Jump back to footnote 11 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:deSouza2025" title="Jump back to footnote 11 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div></div>
