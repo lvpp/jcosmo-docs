@@ -167,7 +167,7 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#vapor-liquid-equilibrium-vle" class="nav-link">Vapor-Liquid Equilibrium (VLE)</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#theory-concepts" class="nav-link">Theory concepts</a>
+            <li class="nav-item" data-bs-level="2"><a href="#theory-concepts" class="nav-link">Theory Concepts</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -188,7 +188,7 @@
 
 <h1 id="vapor-liquid-equilibrium-vle">Vapor-Liquid Equilibrium (VLE)</h1>
 <p>This section is largely based on the work of Koretsky (2012)<sup id="fnref:Koretsky2012"><a class="footnote-ref" href="#fn:Koretsky2012">1</a></sup> and Smith et al. (2007)<sup id="fnref:Smith2007"><a class="footnote-ref" href="#fn:Smith2007">2</a></sup>, which constitute the main theoretical basis for the VLE description presented here. Additional references are cited when relevant to specific aspects or extensions of their approach.</p>
-<h2 id="theory-concepts">Theory concepts</h2>
+<h2 id="theory-concepts">Theory Concepts</h2>
 <p>The separation of a mixture into a liquid phase and a vapor phase is of great importance and utility for the chemical, petrochemical, natural gas, and other industries. The separation process is founded in the phase equilibrium, which describes the conditions under which different phases of a pure substance or a mixture can coexist in thermodynamic equilibrium.</p>
 <p>An equilibrium system is often represented for two phases, as shown in the figure below. This system is divided into phases <script type="math/tex">\alpha</script> and <script type="math/tex">\beta</script>, which for VLE represent a liquid phase and a vapor phase. For the system to be in equilibrium, it is essential that its thermodynamic variables remain constant with respect to both time and position, without the presence of a driving force to induce changes.</p>
 <figure style="text-align: center;">
@@ -324,7 +324,7 @@ As discussed in the Theory concepts section, there are two main modeling approac
   <img src="../img/jcosmo-vle-settings.png" alt="VLE Settings" width="1000">
 </p>
 
-<p>The comparison of experimental data with the calculated results is also available. This requires creating a .txt file following the template shown below. The hash symbol (#) is used for comments. Initially write the first and second components, from left to right, with the exact same name as found in the interface. Then, add a header with temperature (T), pressure (P), molar liquid composition (X), and molar vapor composition (Y).  If the letter W is used instead of X, mass fractions are assumed for the liquid phase—this is especially useful for polymers.  Right after the property, include its respective unit. Other temperature units can be used, but never use the degree symbol (°) or it will cause errors. Same for pressure, several units can be used – atm, mmHg, bar, psi, BTU. If data for one of the phases is missing, entering -1 will indicate its absence.</p>
+<p>The comparison of experimental data with the calculated results is also available. This requires creating a .txt file following the template shown below. The hash symbol (#) is used for comments. Initially write the first and second components, from left to right, with the exact same name as found in the interface. If underscores (_) are used in the compound names, they will automatically be converted to spaces when the data are read. Then, add a header with temperature (T), pressure (P), molar liquid composition (X), and molar vapor composition (Y).  If the letter W is used instead of X, mass fractions are assumed for the liquid phase—this is especially useful for polymers.  Right after the property, include its respective unit. Other temperature units can be used, but never use the degree symbol (°) or it will cause errors. Same for pressure, several units can be used – atm, mmHg, bar, psi, BTU. If data for one of the phases is missing, entering -1 will indicate its absence.</p>
 <div class="highlight"><pre><span></span><code># Solimo, H. N.; Gomez Marigliano, A. C.
 # Escess Properties and Vapor-Liquid Equilibrium 
 # Data for the Chloroform + Tetrahydrofuran Binary 

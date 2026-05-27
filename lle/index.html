@@ -164,12 +164,219 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#liquidliquid-equilibrium-lle" class="nav-link">Liquid–Liquid Equilibrium (LLE)</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#theory-concepts" class="nav-link">Theory Concepts</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#algorithm" class="nav-link">Algorithm</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#practical-example" class="nav-link">Practical Example</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p><strong>This page is currently under development and will be available soon. Stay tuned for updates!</strong></p></div>
+<h1 id="liquidliquid-equilibrium-lle">Liquid–Liquid Equilibrium (LLE)</h1>
+<p>This section is largely based on the textbooks of Koretsky (2012)<sup id="fnref:Koretsky2012"><a class="footnote-ref" href="#fn:Koretsky2012">1</a></sup> and Smith et al. (2007)<sup id="fnref:Smith2007"><a class="footnote-ref" href="#fn:Smith2007">2</a></sup>, which constitute the primary theoretical basis for the LLE description presented here. Additional references are cited when relevant to specific aspects or extensions of their approach.</p>
+<h2 id="theory-concepts">Theory Concepts</h2>
+<p>Liquid–Liquid Equilibrium (LLE) refers to the thermodynamic condition in which two or more liquid phases coexist at equilibrium. This phenomenon occurs in mixtures composed of partially miscible components, where interactions between unlike molecules are weaker than those between like molecules. Under such conditions, a homogeneous liquid mixture may become unstable and split into two distinct liquid phases with different compositions. Understanding LLE is essential for the design and optimization of liquid–liquid extraction processes that employ selective solvents to separate chemical species.</p>
+<p>Phase separation into two liquid phases occurs when the total Gibbs free energy of the system decreases by forming phases of different compositions rather than remaining as a single homogeneous mixture. When this occurs, each phase becomes enriched in one or more components of the mixture. For convenience, the two liquid phases are typically denoted as phase <script type="math/tex">\alpha</script> and phase <script type="math/tex">\beta</script>, each having its own equilibrium composition.</p>
+<figure style="text-align: center;">
+  <img src="../img/jcosmo-lle-phase-equilibria.png" alt="Phase Equilibrium" width="500">
+  <figcaption>Illustration of LLE formation with temperature variation.</figcaption>
+</figure>
+
+<p>The thermodynamic condition for equilibrium between phases requires that the fugacity of each component be equal in all phases. For a component <script type="math/tex">i</script> distributed between two liquid phases <script type="math/tex">\alpha</script> and <script type="math/tex">\beta</script>, the equilibrium condition can be expressed as:</p>
+<p>
+<script type="math/tex; mode=display">
+\hat{f}_i^{\alpha} = \hat{f}_i^{\beta}
+</script>
+</p>
+<p>where <script type="math/tex">\hat{f}_i^{\alpha}</script> and <script type="math/tex">\hat{f}_i^{\beta}</script> represent the fugacity of component <script type="math/tex">i</script> in phases <script type="math/tex">\alpha</script> and <script type="math/tex">\beta</script>, respectively. In many practical LLE applications, pressures are relatively low to moderate, allowing the use of the Lewis–Randall reference state. Under this assumption, the fugacity of a component in a liquid mixture can be expressed in terms of activity coefficients, leading to the relation:</p>
+<p>
+<script type="math/tex; mode=display">
+x_i^{\alpha}\gamma_i^{\alpha} f_i^{\circ}
+=
+x_i^{\beta}\gamma_i^{\beta} f_i^{\circ}
+</script>
+</p>
+<p>where <script type="math/tex">x_i</script> denotes the mole fraction of component <script type="math/tex">i</script>, <script type="math/tex">\gamma_i</script> is the activity coefficient of component <script type="math/tex">i</script>, and <script type="math/tex">f_i^{\circ}</script> is the fugacity of the pure component at the system temperature and pressure. Because temperature and pressure are identical in both phases, the pure-component fugacity cancels out, resulting in the commonly used equilibrium expression:</p>
+<p>
+<script type="math/tex; mode=display">
+x_i^{\alpha}\gamma_i^{\alpha}
+=
+x_i^{\beta}\gamma_i^{\beta}
+</script>
+</p>
+<p>For a binary mixture composed of components <script type="math/tex">a</script> and <script type="math/tex">b</script>, this condition generates a system of equations that determines the equilibrium compositions of the two phases, together with the constraint that the mole fractions in each phase must sum to unity.</p>
+<p>Accurate calculation of LLE requires reliable models to represent the activity coefficients of the mixture. Since partially miscible liquid systems typically exhibit strong deviations from ideality, empirical or semi-empirical excess Gibbs energy models are commonly employed. Among the most widely used models are the Non-Random Two-Liquid (NRTL) model <sup id="fnref:Renon1968"><a class="footnote-ref" href="#fn:Renon1968">3</a></sup>, the UNIQUAC model <sup id="fnref:Abrams1975"><a class="footnote-ref" href="#fn:Abrams1975">4</a></sup>, the UNIFAC model <sup id="fnref:Fredenslund1975"><a class="footnote-ref" href="#fn:Fredenslund1975">5</a></sup>, and the COSMO-SAC model <sup id="fnref:Lin2002"><a class="footnote-ref" href="#fn:Lin2002">6</a></sup>. The parameters of these models are usually obtained by fitting experimental liquid–liquid equilibrium data, enabling the prediction of phase compositions over a range of temperatures and compositions. An exception is the COSMO-SAC model, which uses only universal parameters, often estimated from IDAC data <sup id="fnref:Ferrarini2018"><a class="footnote-ref" href="#fn:Ferrarini2018">7</a></sup>. For more information about activity-coefficient models, see the Theory section of this documentation.</p>
+<p>In systems where liquid–liquid equilibrium occurs at elevated pressures, the activity-coefficient formulation is no longer sufficient to accurately describe phase behavior. In such cases, the equilibrium condition is expressed using fugacity coefficients derived from equations of state. The formulation can be written in a form analogous to the previous equations, where activity coefficients are replaced by fugacity coefficients:</p>
+<p>
+<script type="math/tex; mode=display">
+\phi_i^{\alpha} x_i^{\alpha}
+=
+\phi_i^{\beta} x_i^{\beta}
+</script>
+</p>
+<p>where <script type="math/tex">\phi_i</script> denotes the fugacity coefficient of component <script type="math/tex">i</script>. Fugacity coefficients are typically calculated using cubic equations of state such as the Peng–Robinson <sup id="fnref:Peng1976"><a class="footnote-ref" href="#fn:Peng1976">8</a></sup>, Redlich–Kwong <sup id="fnref:Redlich1949"><a class="footnote-ref" href="#fn:Redlich1949">9</a></sup>, Soave–Redlich–Kwong <sup id="fnref:Soave1972"><a class="footnote-ref" href="#fn:Soave1972">10</a></sup>, or the COSMO-SAC-Phi equation of state <sup id="fnref:Soares2019CSP"><a class="footnote-ref" href="#fn:Soares2019CSP">11</a></sup>. In many practical applications, equations of state are combined with activity models to describe highly non-ideal liquid mixtures. This combination is commonly implemented through mixing rules that relate the excess Gibbs energy to equation-of-state parameters, with the Huron–Vidal mixing rule <sup id="fnref:Huron1979"><a class="footnote-ref" href="#fn:Huron1979">12</a></sup> being a frequently used example. The Theory section of this documentation provides more detailed information about equations of state and mixing rules.</p>
+<p>The results of LLE calculations are often represented using temperature–composition diagrams at constant pressure. These diagrams, commonly referred to as liquid–liquid solubility diagrams, illustrate the regions of single-phase and two-phase behavior for a given binary system. The boundary separating the single-phase and two-phase regions is known as the binodal curve. Within the two-phase region, pairs of compositions that coexist at equilibrium are connected by tie lines. These diagrams may exhibit characteristic critical temperatures known as the upper critical solution temperature (UCST) and the lower critical solution temperature (LCST). Above the UCST or below the LCST, the mixture becomes completely miscible in all proportions. Different binary mixtures may exhibit distinct diagram topologies, including closed miscibility gaps or systems possessing only one of these critical temperatures. The figure below shows examples of diagram types that can be obtained.</p>
+<figure style="text-align: center;">
+  <img src="../img/jcosmo-lle-diagram.png" alt="Phase Equilibrium" width="500">
+  <figcaption>Four diagram types of liquid–liquid solubility at constant pressure.</figcaption>
+</figure>
+
+<p>The stability of a homogeneous liquid mixture can also be analyzed through the curvature of the Gibbs free energy of mixing. A single liquid phase becomes unstable when the second derivative of the molar Gibbs free energy with respect to composition is negative at constant temperature and pressure. Mathematically, this condition can be written as:</p>
+<p>
+<script type="math/tex; mode=display">
+\left(\frac{\partial^2 g}{\partial x^2}\right)_{T,P} < 0
+</script>
+</p>
+<p>The molar Gibbs free energy of a mixture can be expressed as the sum of an ideal contribution and an excess Gibbs energy term:</p>
+<p>
+<script type="math/tex; mode=display">
+g = \sum x_i g_i + RT \sum x_i \ln x_i + g^{E}
+</script>
+</p>
+<p>where <script type="math/tex">g^{E}</script> represents the excess Gibbs free energy of the mixture. The region defined by the instability condition corresponds to the spinodal region of the phase diagram. Between the binodal and spinodal curves lies a metastable region in which the mixture can remain as a single phase but may separate into two phases upon sufficient perturbation.</p>
+<p>In summary, liquid–liquid equilibrium describes the coexistence of multiple liquid phases in partially miscible systems and plays a fundamental role in many separation processes. The thermodynamic description of this phenomenon is based on the equality of component fugacities between phases and is typically implemented through activity-coefficient models or equations of state, depending on the pressure conditions. These theoretical concepts form the basis for the computational modeling of LLE and for predicting the compositions of coexisting liquid phases in multicomponent mixtures.</p>
+<h2 id="algorithm">Algorithm</h2>
+<p>This section is currently under development and will be available soon. Stay tuned for updates!</p>
+<h2 id="practical-example">Practical Example</h2>
+<p>The main model should be selected in the dropdown list shown in the figure below. The model&rsquo;s default options are displayed under the references links, with values of the universal parameters and different options of combinatorial terms.</p>
+<p align="center">
+  <img src="../img/jcosmo-vle-model-selection.png" alt="Model Selection" width="1000">
+</p>
+
+<p>JCOSMO currently supports binary and ternary LLE systems. However, the Mixture tab allows users to view activity coefficients for mixtures with n compounds. This data can be extracted via a Python script, and phase equilibria can then be solved externally. Further details are described in the Python Interface section.</p>
+<p>For a binary system, you can directly search for the two compounds and add them to the system, as illustrated in the figure below. The search engine uses compound names; if the desired compound is not found, try using alternative synonyms. The first selected compound is represented by the subscript <strong>1</strong>, and the second by <strong>2</strong> in all calculated properties.</p>
+<p align="center">
+  <img src="../img/jcosmo-vle-compound-selection.png" alt="Compound Selection" width="1000">
+</p>
+
+<p>Before starting the LLE calculations, press the &ldquo;Edit&hellip;&rdquo; button and carefully review the properties of each compound.  If critical properties are missing, they should be added if a cubic equation of state is going to be used. After making the necessary changes, confirm by clicking the &ldquo;OK&rdquo; button. The figure below illustrates the process of editing compounds and their properties:</p>
+<p align="center">
+  <img src="../img/jcosmo-lle-edit-properties.png" alt="Edit Properties" width="1000">
+</p>
+
+<p>The next step is to compute the LLE. First, select the LLE tab in the upper-right corner of the JCOSMO window. The field on the right corresponds to the temperature range, and can be adjusted by the user. The temperature must be provided in Kelvin. When the cursor is placed over any of these fields, a tooltip will appear indicating the required property and its unit. The &ldquo;Use SCMR&rdquo; option enables the user to apply this mixing rule, which combines an activity coefficient model with an equation of state. Currently, only the SRK-MC equation of state is available for this option. For more information, refer to the &ldquo;Cubic Equations and Mixing Rules&rdquo; section under the Theory tab. The next dropdown menus are used to select more models to compare with the main model. Ensure that all required properties are included for each model. Finally, press the &ldquo;Recalc&rdquo; button to compute the LLE. The figure below illustrates this process in the JCOSMO GUI. If you want to save the chart you can press the &ldquo;Export to PDF&rdquo; button, which will save a PDF file in the &hellip;\jcosmo3\pdf directory.  Alternatively, you can right click with the mouse and copy the chart. The &ldquo;Copy to clipboard&rdquo; option will save the calculations, which can be pasted in an Excel file. The caption box location can be changed in the dropdown menu at the bottom of the window. For more details about binary charts and all options, see the &ldquo;Binary Mixture Charts&rdquo; section under Use cases in this documentation.</p>
+<p align="center">
+  <img src="../img/jcosmo-lle-settings.png" alt="LLE Settings" width="1000">
+</p>
+
+<p>The comparison of experimental data with the calculated results is also available. This requires creating a .txt file following the template shown below. The hash symbol (#) is used for comments. Initially write the first and second components, from left to right, with the exact same name as found in the interface. If underscores (_) are used in the compound names, they will automatically be converted to spaces when the data are read. Then, add a header with temperature (T), pressure (P), molar composition of the first component in the <script type="math/tex">\alpha</script> phase (X1_ALPHA), and molar composition of the second component in the <script type="math/tex">\beta</script> phase (X2_BETA). The composition of component 2 in the <script type="math/tex">\beta</script> phase is optional. If it is not provided, the missing values will automatically be assigned as -1. Mass fractions are also supported; simply replace the letter X with W.  Right after the property, include its respective unit. Other temperature units can be used, but never use the degree symbol (°) or it will cause errors. Same for pressure, several units can be used – atm, mmHg, bar, psi, BTU. If data for one of the phases is missing, entering -1 will indicate its absence. To simplify data input, the suffix (_100) can also be used, indicating that the composition values are multiplied by 100, which avoids the unnecessary repetition of trailing zeros.</p>
+<div class="highlight"><pre><span></span><code># Maczynski et al.- UPAC-NIST Solubility Data Series. 81... Part 3
+#
+#
+1-HEXENE WATER
+T K P kPa   X1_ALPHA    W2_BETA
+293.2   101.3   0.0000100   0.0016
+298.2   101.3   0.0000118   -1
+303.2   101.3   -1          0.00223
+310.9   206.8   0.0000120   -1
+366.5   318.4   0.0000240   0.01015
+420.4   1247.3  -1          0.04329
+422.0   101.3   0.0000850   -1
+477.6   101.3   0.0004400   -1
+494.3   101.3   0.0007300   -1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code># Stephenson - Mutual Solubilities: Water-Ketones, Water-Ethers, and Water-Gasoline-Alcohols
+#
+DIETHYL_KETONE WATER
+T C P kPa   W1_ALPHA_100    W2_BETA
+0    101.3  7.68    1.57
+9.7  101.3  6.25    1.77
+19.3 101.3  5.3     2
+30.6 101.3  4.24    2.51
+40.3 101.3  3.86    2.49
+50   101.3  3.62    2.81
+60.1 101.3  3.43    2.98
+70.1 101.3  3.3     2.99
+80.2 101.3  3.16    3.69
+</code></pre></div>
+<p>After building the .txt file, you can simply load it into the program by clicking the &ldquo;Experiment&hellip;&rdquo; button on the LLE tab, as shown below:</p>
+<p align="center">
+  <img src="../img/jcosmo-lle-load-experiment.png" alt="Load VLE Experiment" width="1000">
+</p>
+
+<p>The ternary option is currently only available using the &ldquo;Experiment&hellip;&rdquo; option. The <code>.txt</code> file must follow a specific structure so that the program can correctly read the experimental data. The head must contain the names of the three components, written from left to right. The names must match exactly those used in the interface database. After the component names, a header line must be provided containing the thermodynamic variables and compositions in the following order: T [temperature_unit]  P [temperature_unit]  X1  X2  Y1  Y2. In this header, T represents the temperature followed by its unit and P represents the pressure followed by its unit, similar to the binary systems examples. X1 and X2 correspond to the compositions of components 1 and 2 in the <script type="math/tex">\alpha</script> phase, respectively, while Y1 and Y2 correspond to the compositions of components 1 and 2 in the <script type="math/tex">\beta</script> phase. The composition of the third component is not explicitly included in the file and is automatically calculated as 1 − x1 − x2 and 1 − y1 − y2. Mass fractions may also be used instead of mole fractions. In this case, replace X1 and X2 with W1 and W2, and replace Y1 and Y2 with WY1 and WY2. When these labels are used, the compositions are interpreted as mass fractions. Examples of valid ternary experimental data files are shown below:
+<div class="highlight"><pre><span></span><code>#Adam Skrzecz, David G. Shaw, Andrzej Maczynski. IUPAC-NIST Solubility Data Series 69. Ternary Alcohol–Hydrocarbon–Water Systems. 
+#Journal of Physical and Chemical Reference Data.
+#DOI: 10.1063/1.556052
+METHANOL BENZENE WATER
+T K P atm X1 X2 Y1 Y2
+303.2   1 0.0133 0.9846 0.0303 0.0006
+303.2   1 0.0345 0.9592 0.1088 0.0008
+303.2   1 0.0595 0.9301 0.2712 0.0040
+303.2   1 0.1104 0.8756 0.5049 0.0311
+303.2   1 0.1328 0.8495 0.5734 0.0742
+303.2   1 0.2297 0.7305 0.5949 0.1499
+</code></pre></div></p>
+<p><div class="highlight"><pre><span></span><code>#  S. MohammadReza Seyedein Ghannad, Mohammad Nader Lotfollah, Ali Haghighi Asl, DOI: 10.1016/j.jct.2011.01.011
+N-FORMYLMORPHOLINE BENZENE CYCLOHEXANE
+T K P atm W1 W2 WY1 WY2
+313.15  1   0.1561  0.0644  0.9321  0.0404
+313.15  1   0.1897  0.1202  0.8845  0.0783
+313.15  1   0.2773  0.1906  0.8276  0.1251
+313.15  1   0.3266  0.2558  0.7768  0.1701
+313.15  1   0.3451  0.2983  0.7208  0.2131
+313.15  1   0.3809  0.3177  0.6888  0.2411
+</code></pre></div>
+The following figure shows an example of a ternary plot obtained from the first .txt example. The chart can be used in the same way as the binary chart described earlier.</p>
+<p align="center">
+  <img src="../img/jcosmo-lle-ternary-phase-equilibria.png" alt="Load VLE Experiment" width="1000">
+</p>
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:Koretsky2012">
+<p>Milo D. Koretsky. <em>Engineering and Chemical Thermodynamics</em>. Wiley, Hoboken, 2nd edition, 2012. ISBN 9781118549742.&#160;<a class="footnote-backref" href="#fnref:Koretsky2012" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Smith2007">
+<p>J. M. Smith, H. C. Van Ness, and M. M. Abbott. <em>Introdução à Termodinâmica da Engenharia Química</em>. LTC, Rio de Janeiro, 7ª edition, 2007. ISBN 9788521615538. Tradução da sétima edição em inglês.&#160;<a class="footnote-backref" href="#fnref:Smith2007" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Renon1968">
+<p>Henri Renon and JM Prausnitz. Local compositions in thermodynamic excess functions for liquid mixtures. <em>AIChE J.</em>, 14(1):135–144, 1968. <a href="https://doi.org/10.1002/aic.690140124">doi:10.1002/aic.690140124</a>.&#160;<a class="footnote-backref" href="#fnref:Renon1968" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Abrams1975">
+<p>Denis S. Abrams and John M Prausnitz. Statistical thermodynamics of liquid mixtures: A new expression for the excess Gibbs energy of partly or completely miscible systems. <em>AIChE J.</em>, 21(1):116–128, jan 1975. <a href="https://doi.org/10.1002/aic.690210115">doi:10.1002/aic.690210115</a>.&#160;<a class="footnote-backref" href="#fnref:Abrams1975" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Fredenslund1975">
+<p>Aage Fredenslund, Russell L. Jones, and John M. Prausnitz. Group-contribution estimation of activity coefficients in nonideal liquid mixtures. <em>AIChE J.</em>, 21(6):1086–1099, 1975. <a href="https://doi.org/10.1002/aic.690210607">doi:10.1002/aic.690210607</a>.&#160;<a class="footnote-backref" href="#fnref:Fredenslund1975" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Lin2002">
+<p>Shiang-Tai Lin and Stanley I. Sandler. A Priori Phase Equilibrium Prediction from a Segment Contribution Solvation Model. <em>Ind. &amp; Eng. Chem. Res.</em>, 41(5):899–913, 2002. <a href="https://doi.org/10.1021/ie001047w">doi:10.1021/ie001047w</a>.&#160;<a class="footnote-backref" href="#fnref:Lin2002" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Ferrarini2018">
+<p>F. Ferrarini, G. B. Flores, A. R. Muniz, and R. P. Soares. An open and extensible sigma-profile database for cosmo-based models. <em>AIChE J.</em>, 64(9):3443&ndash;3455, 2018. <a href="https://doi.org/10.1002/aic.16194">doi:10.1002/aic.16194</a>.&#160;<a class="footnote-backref" href="#fnref:Ferrarini2018" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Peng1976">
+<p>Ding-Yu Peng and Donald B. Robinson. A New Two-Constant Equation of State. <em>Industrial &amp; Engineering Chemistry Fundamentals</em>, 15(1):59–64, feb 1976. <a href="https://doi.org/10.1021/i160057a011">doi:10.1021/i160057a011</a>.&#160;<a class="footnote-backref" href="#fnref:Peng1976" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Redlich1949">
+<p>Otto Redlich and J. N. S. Kwong. On the Thermodynamics of Solutions. V. An Equation of State. Fugacities of Gaseous Solutions. <em>Chemical Reviews</em>, 44(1):233–244, feb 1949. <a href="https://doi.org/10.1021/cr60137a013">doi:10.1021/cr60137a013</a>.&#160;<a class="footnote-backref" href="#fnref:Redlich1949" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Soave1972">
+<p>Giorgio Soave. Equilibrium constants from a modified Redlich-Kwong equation of state. <em>Chemical Engineering Science</em>, 27(6):1197–1203, jun 1972. <a href="https://doi.org/10.1016/0009-2509(72)80096-4">doi:10.1016/0009-2509(72)80096-4</a>.&#160;<a class="footnote-backref" href="#fnref:Soave1972" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Soares2019CSP">
+<p>Rafael de P. Soares, Lucas F. Baladão, and Paula B. Staudt. A pairwise surface contact equation of state: COSMO-SAC-Phi. <em>Fluid Phase Equilibria</em>, 488:13–26, 2019. <a href="https://doi.org/10.1016/j.fluid.2019.01.015">doi:10.1016/j.fluid.2019.01.015</a>.&#160;<a class="footnote-backref" href="#fnref:Soares2019CSP" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:Huron1979">
+<p>Marie-José Huron and Jean Vidal. New mixing rules in simple equations of state for representing vapour-liquid equilibria of strongly non-ideal mixtures. <em>Fluid Phase Equilibria</em>, 3(4):255–271, jan 1979. <a href="https://doi.org/10.1016/0378-3812(79)80001-1">doi:10.1016/0378-3812(79)80001-1</a>.&#160;<a class="footnote-backref" href="#fnref:Huron1979" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
             </div>
         </div>
 
