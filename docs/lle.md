@@ -1,5 +1,5 @@
 # Liquid–Liquid Equilibrium (LLE)
-This section is largely based on the work of Koretsky (2012)[@Koretsky2012] and Smith et al. (2007)[@Smith2007], which constitute the primary theoretical basis for the LLE description presented here. Additional references are cited when relevant to specific aspects or extensions of their approach.
+This section is largely based on the textbooks of Koretsky (2012)[@Koretsky2012] and Smith et al. (2007)[@Smith2007], which constitute the primary theoretical basis for the LLE description presented here. Additional references are cited when relevant to specific aspects or extensions of their approach.
 
 ## Theory Concepts
 Liquid–Liquid Equilibrium (LLE) refers to the thermodynamic condition in which two or more liquid phases coexist at equilibrium. This phenomenon occurs in mixtures composed of partially miscible components, where interactions between unlike molecules are weaker than those between like molecules. Under such conditions, a homogeneous liquid mixture may become unstable and split into two distinct liquid phases with different compositions. Understanding LLE is essential for the design and optimization of liquid–liquid extraction processes that employ selective solvents to separate chemical species.
